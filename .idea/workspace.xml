@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9792fa76-09ad-4dac-883b-6eda3d03fe66" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/skkujava/JavaProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/skkujava/JavaProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/skkujava/SinglePlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/skkujava/SinglePlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/skkujava/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/skkujava/Boss.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/skkujava/Boss.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="57">
-              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+              <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -278,7 +276,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/skkujava/Boss.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
-          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+          <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
         </state>
       </provider>
     </entry>
