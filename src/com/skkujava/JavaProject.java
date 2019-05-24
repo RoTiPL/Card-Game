@@ -12,13 +12,14 @@ public class JavaProject {
         System.out.println("4. Exit Game");
 
         Scanner input = new Scanner(System.in);
-
+        Game game;
         String userInput = input.next();
         do {
             if (userInput.trim().equals("1")) {
-
+                game = new SinglePlay();
+                ((SinglePlay) game).Play();
             } else if (userInput.trim().equals("2")) {
-
+                game = new DoublePlay();
             } else if (userInput.trim().equals("3")) {
 
             } else if (userInput.trim().equals("4")) {
@@ -29,5 +30,7 @@ public class JavaProject {
 
             userInput = input.next();
         }while(true);
+
+
     }
 }

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9792fa76-09ad-4dac-883b-6eda3d03fe66" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/skkujava/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/skkujava/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/skkujava/JavaProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/skkujava/JavaProject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/skkujava/SinglePlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/skkujava/SinglePlay.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/skkujava/JavaProject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+            <state relative-caret-position="317">
+              <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/skkujava/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+            <state relative-caret-position="152">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -54,17 +54,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/skkujava/SinglePlay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="361">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/skkujava/DoublePlay.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/skkujava/Boss.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="57">
+              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -78,6 +78,14 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>(Player)p1</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>player</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -88,12 +96,12 @@
         <option value="$PROJECT_DIR$/src/com/company/JavaGame.java" />
         <option value="$PROJECT_DIR$/src/com/skkujava/JavaGame.java" />
         <option value="$PROJECT_DIR$/src/com/skkujava/DoublePlay.java" />
-        <option value="$PROJECT_DIR$/src/com/skkujava/Boss.java" />
-        <option value="$PROJECT_DIR$/src/com/skkujava/JavaProject.java" />
         <option value="$PROJECT_DIR$/src/com/skkujava/Card.java" />
         <option value="$PROJECT_DIR$/src/com/skkujava/Game.java" />
-        <option value="$PROJECT_DIR$/src/com/skkujava/SinglePlay.java" />
         <option value="$PROJECT_DIR$/src/com/skkujava/Player.java" />
+        <option value="$PROJECT_DIR$/src/com/skkujava/JavaProject.java" />
+        <option value="$PROJECT_DIR$/src/com/skkujava/SinglePlay.java" />
+        <option value="$PROJECT_DIR$/src/com/skkujava/Boss.java" />
       </list>
     </option>
   </component>
@@ -225,17 +233,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/skkujava/JavaProject.java">
+    <entry file="file://$PROJECT_DIR$/src/com/skkujava/DoublePlay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="76">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/skkujava/Boss.java">
+    <entry file="file://$PROJECT_DIR$/src/com/skkujava/JavaProject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        <state relative-caret-position="317">
+          <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -246,14 +254,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/skkujava/DoublePlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/skkujava/SinglePlay.java">
+    <entry file="file://$PROJECT_DIR$/src/com/skkujava/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
@@ -267,10 +268,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/skkujava/Player.java">
+    <entry file="file://$PROJECT_DIR$/src/com/skkujava/SinglePlay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        <state relative-caret-position="361">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/skkujava/Boss.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
         </state>
       </provider>
     </entry>
