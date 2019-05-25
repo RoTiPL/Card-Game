@@ -88,7 +88,7 @@ public class SinglePlay extends Game {
 
                     System.out.println("다음 카드를 제거하시겠습니까? (Y/N)");
                     System.out.printf("%-7s│%s\n", card.name, card.cardDescription());
-                    
+
                     do{
                         userInput = scanner.next();
                         if(userInput.equals("Y")){

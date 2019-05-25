@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9792fa76-09ad-4dac-883b-6eda3d03fe66" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/skkujava/SinglePlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/skkujava/SinglePlay.java" afterDir="false" />
-    </list>
+    <list default="true" id="9792fa76-09ad-4dac-883b-6eda3d03fe66" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/skkujava/SinglePlay.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="208">
-              <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
+              <caret line="90" selection-start-line="90" selection-end-line="90" />
               <folding>
                 <element signature="e#366#367#0" expanded="true" />
                 <element signature="e#387#388#0" expanded="true" />
@@ -235,7 +233,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="261" y="86" width="1103" height="878" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20095694" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -357,7 +354,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/skkujava/SinglePlay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
-          <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
           <folding>
             <element signature="e#366#367#0" expanded="true" />
             <element signature="e#387#388#0" expanded="true" />
