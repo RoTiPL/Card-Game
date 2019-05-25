@@ -13,7 +13,7 @@ public class SinglePlay extends Game {
         floor = 0;
         p1 = new Player();
         player = (Player)p1;
-        p2 = Boss.CreateBoss(floor);
+        p2 = Boss.CreateBoss(player, floor);
         boss = (Boss)p2;
         random = new Random();
     }
@@ -32,7 +32,7 @@ public class SinglePlay extends Game {
         if(false){
             TurnEnd();
             ++floor;
-            p2 = Boss.CreateBoss(floor);
+            p2 = Boss.CreateBoss(player, floor);
             boss = (Boss)p2;
             GetReward();
         }
@@ -42,6 +42,14 @@ public class SinglePlay extends Game {
     private void TurnEnd(){
         player.grave.addAll(player.hand);
         player.hand.clear();
+
+        // 턴이 끝날 때 보스에게 독이 걸려 있으면 독데미지 주기
+        if(boss.isPoisoned()) {
+            boss.TakePoisonDamage();
+        }
+        if(boss.getHp() <= 0) {
+            // Game CLear 시키기
+        }
     }
 
     private void DrawCard(){
@@ -106,7 +114,7 @@ public class SinglePlay extends Game {
 
                 break;
             } else if (userInput.trim().equals("3")) {
-                player.setHp(player.getMaxhp());
+                player.setHp(player.getMaxHp());
                 break;
             } else if (userInput.trim().equals("4")) {
                 Card card;
@@ -151,6 +159,6 @@ public class SinglePlay extends Game {
             userInput = scanner.next();
         }while(true);
 
-        player.setHp(player.getMaxhp()/3 + player.getHp());
+        player.setHp(player.getMaxHp()/3 + player.getHp());
     }
 }

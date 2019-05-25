@@ -5,20 +5,27 @@ import java.util.ArrayList;
 public class Player extends HumanObject {
     ArrayList<Card> deck, hand, grave;
 
-    public int getHp() {
-        return hp;
+    private int maxMana;
+    private int mana;
+    private int drawCount;
+    private int dexterity;
+
+    public Player() {
+        setMaxMana(3);
+        setMana(getMaxMana());
+        setArmor(0);
+        setStrength(0);
+        setDexterity(0);
+        setPoisoned(false);
+        setPoisonDamage(0);
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
+    public int getMaxMana() {
+        return maxMana;
     }
 
-    public int getMaxhp() {
-        return maxhp;
-    }
-
-    public void setMaxhp(int maxhp) {
-        this.maxhp = maxhp;
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
     }
 
     public int getMana() {
@@ -29,15 +36,24 @@ public class Player extends HumanObject {
         this.mana = mana;
     }
 
-    public int getMaxmana() {
-        return maxmana;
+    public int getDrawCount() {
+        return drawCount;
     }
 
-    public void setMaxmana(int maxmana) {
-        this.maxmana = maxmana;
+    public void setDrawCount(int drawCount) {
+        this.drawCount = drawCount;
     }
 
-    private int hp, maxhp, mana, maxmana;
+    public int getDexterity() {
+        return dexterity;
+    }
 
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+    }
 
+    public void completeFloor() {
+        // Thief: none
+        // Warrior: hp +7
+    }
 }
