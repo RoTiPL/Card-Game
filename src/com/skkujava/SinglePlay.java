@@ -23,22 +23,28 @@ class SinglePlay extends Game {
         System.out.printf("Floor %d\n\n", floor);
         do {
             System.out.printf("%-15s%s\n%-4s%-11s%-4s%s\n", "Player", "Boss", "HP : ", player.getHp() + "/" + player.getMaxHp(), "HP : ", boss.getHp() + "/" + boss.getMaxHp());
-            System.out.printf("%-8s%-7s%-8s%-7s\n", "Armor :", player.getArmor(), boss.getArmor());
+            System.out.printf("%-8s%-7s%-8s%-7s\n", "Armor :", player.getArmor(), "Armor :", boss.getArmor());
+            System.out.printf("%-7s%s\n", "Mana :", player.getMana() + "/" + player.getMaxMana());
+
         }while(true);
         //TODO
     }
 
     private void PlayCard(int index){
         Card card = player.hand.get(index);
-        card.action(player, p2);
-        player.hand.remove(index);
-        player.grave.add(card);
+        if(player.getMana() >= card.cost) {
+            card.action(player, p2);
+            player.setMana(player.getMana() - card.cost);
+            player.hand.remove(index);
+            player.grave.add(card);
 
-        //boss gethp == 0이면 다음 floor로 옮기기
-        if(boss.getHp() <= 0){
-            TurnEnd();
+            if (boss.getHp() <= 0) {
+                TurnEnd();
+            }
         }
-
+        else{
+            System.out.println("마나가 부족합니다");
+        }
     }
 
     private void TurnEnd(){
@@ -48,6 +54,9 @@ class SinglePlay extends Game {
         // 턴이 끝날 때 보스에게 독이 걸려 있으면 독데미지 주기
         if(boss.isPoisoned()) {
             boss.TakePoisonDamage();
+        }
+        if(player.isPoisoned()){
+            player.TakePoisonDamage();
         }
         if(boss.getHp() <= 0) {
             // Game CLear 시키기
