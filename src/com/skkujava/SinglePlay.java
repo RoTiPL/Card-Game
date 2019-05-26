@@ -116,7 +116,7 @@ class SinglePlay extends Game {
     }
 
     private void DrawCard(){
-        for(int i = 0; i<5; i++){
+        for(int i = 0; i < player.getDrawCount(); i++){
             if(player.deck.size() == 0){
                 while(player.grave.size() != 0) {
                     int randInt = random.nextInt(player.grave.size());
