@@ -1152,7 +1152,7 @@ class Acrobatics extends Card {
     }
 }
 
-class Backfilp extends Card {
+class Backflip extends Card {
     int block = 5;
 
     void init() {
