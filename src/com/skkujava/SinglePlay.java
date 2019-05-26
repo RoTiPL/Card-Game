@@ -2,7 +2,6 @@ package com.skkujava;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 class SinglePlay extends Game {
     private Random random;
