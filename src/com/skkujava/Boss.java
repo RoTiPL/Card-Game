@@ -1,7 +1,7 @@
 package com.skkujava;
 import java.util.Random;
 
-public class Boss extends HumanObject{
+abstract class Boss extends HumanObject{
 
     Player player;
     int floor;
@@ -9,7 +9,7 @@ public class Boss extends HumanObject{
     public static Boss CreateBoss(Player player, int floor) {
 
         Random random = new Random();
-        Boss boss = new Boss();
+        Boss boss = null;
         int num = random.nextInt(3);
         switch(num) {
             case 0:
@@ -24,6 +24,8 @@ public class Boss extends HumanObject{
         }
         return boss;
     }
+
+    abstract void Action();
 }
 
 class Poisoner extends Boss {

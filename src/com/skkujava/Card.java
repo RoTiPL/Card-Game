@@ -1,6 +1,6 @@
 package com.skkujava;
 
-abstract public class Card {
+abstract public class Card implements Cloneable{
     String name; // 카드의 이름
     int cost; // 카드를 사용하기 위한 비용
     String card_type; // 카드의 타입 설정
@@ -9,6 +9,10 @@ abstract public class Card {
     abstract void action(Player player, HumanObject enemy); // 플레이어와 적 간의 상호작용을 나타내는 메소드
     abstract void reinforce(); // 카드를 강화시키기 위한 메소드
     abstract String cardDescription(); // 카드의 설명
+
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
+    }
 }
 // https://slay-the-spire.fandom.com/wiki/Ironclad_Cards 참조
 // 31 Cards.
@@ -28,6 +32,17 @@ class Block extends Card {
     void reinforce() {
         block = 8;
         reinforced = true;
+    }
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -54,6 +69,16 @@ class Strike extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
     @Override
     String cardDescription() {
         return "Deal " + damage + "damage.";
@@ -78,6 +103,16 @@ class Anger extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
     String cardDescription() {
         return "Deal " + damage + "damage.\n" + "Add a copy of this card to your discard pile.";
     }
@@ -100,6 +135,16 @@ class Armaments extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
     String cardDescription() {
         if (reinforced) {
             return "Gain " + block + "Block.\n" + "Upgrade a card in your hand for the rest of combat.";
@@ -128,6 +173,16 @@ class Body_Slam extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
     String cardDescription() {
         return "Deal damage equal to your Block.";
     }
@@ -151,6 +206,16 @@ class Clash extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
     String cardDescription() {
         return "Can only bo played if every card in your hand is an Attack.\n" + "Deal " + damage + "damage.";
     }
@@ -174,6 +239,16 @@ class Cleave extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
     String cardDescription() {
         return "Deal " + damage + "damage to ALL enemies.";
     }
@@ -197,6 +272,17 @@ class Flex extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Gain " + strength + "Strength.\n" + "At the end of your turn, lose " + strength + "Strength.";
     }
@@ -218,6 +304,17 @@ class Headbutt extends Card {
     void reinforce() {
         damage = 12;
         reinforced = true;
+    }
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -244,6 +341,17 @@ class Heavy_Blade extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Deal " + damage + "damage.\n" + "Strength affects this card " + add_damage + "times.";
     }
@@ -268,6 +376,17 @@ class Iron_Wave extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Gain " + block + "Block.\n" + "Deal " + damage + "damage.";
     }
@@ -289,6 +408,17 @@ class Perfected_Strike extends Card {
     void reinforce() {
         add_damage = 3;
         reinforced = true;
+    }
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -315,6 +445,17 @@ class Pommel_Strike extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Deal " + damage + "damage.\n" + "Draw " + draw + "card(s)";
     }
@@ -336,6 +477,17 @@ class Shrug_It_Off extends Card {
     void reinforce() {
         block = 11;
         reinforced = true;
+    }
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -361,6 +513,17 @@ class Twin_Strike extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Deal " + damage + "damage twice.\n";
     }
@@ -382,6 +545,17 @@ class Warcry extends Card {
     void reinforce() {
         draw = 2;
         reinforced = true;
+    }
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -407,6 +581,17 @@ class Bloodletting extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Lose 3 HP.\n" + "Gain " + energy + "Energy.";
     }
@@ -430,6 +615,17 @@ class Burning_Pact extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Exhaust 1 card.\n" + "Draw " + draw + "cards.";
     }
@@ -449,6 +645,17 @@ class Entrench extends Card {
     void reinforce() {
         this.cost = 1;
         reinforced = true;
+    }
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -476,6 +683,17 @@ class Hemokinesis extends Card {
         reinforced = true;
     }
 
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Lose " + lossHP + "HP.\n" + "Deal " + damage + "damage.";
     }
@@ -499,6 +717,17 @@ class Inflame extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
     String cardDescription() {
         return "Gain " + strength + "Strength.";
     }
@@ -520,6 +749,18 @@ class Metallicize extends Card {
     void reinforce() {
         block = 4;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -546,6 +787,18 @@ class Rampage extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Deal " + damage + "damage.\n" + "Every time this card is played, increase its damage by " + add_damage + "for this combat.";
     }
@@ -567,6 +820,18 @@ class Seeing_Red extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Gain 2 energy.\n" + "Exhaust.";
     }
@@ -586,6 +851,18 @@ class Barricade extends Card {
     void reinforce() {
         this.cost = 2;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -610,6 +887,18 @@ class Bludgeon extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Deal " + damage + "damage.";
     }
@@ -632,6 +921,18 @@ class Demon_Form extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "At the start of each turn, gain " + add_strength + "Strength.";
     }
@@ -650,6 +951,18 @@ class Double_Tap extends Card {
 
     void reinforce() {
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -679,6 +992,18 @@ class Impervious extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Gain " + block + "Block.\n" + "Exhaust";
     }
@@ -697,6 +1022,18 @@ class Limit_Break extends Card {
 
     void reinforce() {
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -726,6 +1063,18 @@ class Offering extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Lose 6 HP.\n" + "Gain 2 energy.\n" + "Draw " + draw + "cards.\n" + "Exhaust.";
     }
@@ -751,6 +1100,18 @@ class Survivor extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Gain " + block + "Block.\n" + "Discard 1 card.";
     }
@@ -772,6 +1133,18 @@ class Acrobatics extends Card {
     void reinforce() {
         draw = 4;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -797,6 +1170,18 @@ class Backfilp extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Gain " + block + "Block.\n" + "Draw 2 cards.";
     }
@@ -818,6 +1203,18 @@ class Bane extends Card {
     void reinforce() {
         damage = 10;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -843,6 +1240,18 @@ class Blade_Dance extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Add " + add_shivs + "Shivs into your hand.";
     }
@@ -864,6 +1273,18 @@ class Cloak_And_Dagger extends Card {
     void reinforce() {
         add_shivs = 2;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -889,6 +1310,18 @@ class Dagger_Throw extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Deal " + damage + "damage.\n" + "Draw 1 card.\n" + "Discard 1 card.";
     }
@@ -910,6 +1343,18 @@ class Deadly_Poison extends Card {
     void reinforce() {
         poison = 7;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -935,6 +1380,18 @@ class Deflect extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Gain " + block + "Block.";
     }
@@ -958,6 +1415,18 @@ class Flying_Knee extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Deal " + damage + "damage.\n" + "Next turn gain 1 Energy.";
     }
@@ -979,6 +1448,18 @@ class Outmaneuver extends Card {
     void reinforce() {
         add_energy = 3;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1006,6 +1487,18 @@ class Poisoned_Stab extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Deal " + damage + "damage.\n" + "Apply " + poison + "Poison.";
     }
@@ -1027,6 +1520,18 @@ class Prepared extends Card {
     void reinforce() {
         draw = 2;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1052,6 +1557,18 @@ class Quick_Slash extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Deal " + damage + "damage.\n" + "Draw 1 card.";
     }
@@ -1073,6 +1590,18 @@ class Sneaky_Strike extends Card {
     void reinforce() {
         damage = 14;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1098,6 +1627,18 @@ class Accuracy extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Shivs deal " + add_damage + "additional damage.";
     }
@@ -1116,6 +1657,18 @@ class Calculated_Gamble extends Card {
 
     void reinforce() {
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1142,6 +1695,18 @@ class Catalyst extends Card {
 
     void reinforce() {
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1173,6 +1738,18 @@ class Choke extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Deal 12 damage.\n" + "Whenever you play a card this turn, the enemy loses " + add_damage + "HP.";
     }
@@ -1195,6 +1772,18 @@ class Concentrate extends Card {
     void reinforce() {
         dis_card = 2;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1222,6 +1811,18 @@ class Dash extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Gain " + block + "Block.\n" + "Deal " + damage + "damage.";
     }
@@ -1243,6 +1844,18 @@ class Escape_Plan extends Card {
     void reinforce() {
         block = 5;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1268,6 +1881,18 @@ class Footwork extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Gain " + dexterity + "Dexterity.";
     }
@@ -1286,6 +1911,18 @@ class Infinite_Blades extends Card {
 
     void reinforce() {
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1316,6 +1953,18 @@ class Noxious_Fumes extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "At the start of your turn, apply " + poison + "Poison to enemy";
     }
@@ -1337,6 +1986,18 @@ class Skewer extends Card {
     void reinforce() {
         damage = 10;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1362,6 +2023,18 @@ class Adrenaline extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Gain " + energy + "Energy\n" + "Draw 2 cards.\n" + "Exhaust.";
     }
@@ -1380,6 +2053,18 @@ class After_Image extends Card {
 
     void reinforce() {
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1409,6 +2094,18 @@ class Bullet_Time extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "You cannot draw additional cards this turn. Reduce the cost of cards in your hand to 0 this turn.";
     }
@@ -1430,6 +2127,18 @@ class Burst extends Card {
     void reinforce() {
         skill = 2;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1455,6 +2164,18 @@ class Doppelganger extends Card {
 
     void reinforce() {
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1483,6 +2204,18 @@ class Phantasmal_Killer extends Card {
         reinforced = true;
     }
 
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
+    }
+
     String cardDescription() {
         return "Next turn, your Attacks deal double damage.";
     }
@@ -1502,6 +2235,18 @@ class Tools_of_the_Trade extends Card {
     void reinforce() {
         this.cost = 0;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
@@ -1525,6 +2270,18 @@ class Shiv extends Card {
     void reinforce() {
         damage = 6;
         reinforced = true;
+    }
+
+
+    public Object clone(){
+        Card object;
+        try{
+            object = (Card)super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            throw new InternalError();
+        }
+        return object;
     }
 
     String cardDescription() {
