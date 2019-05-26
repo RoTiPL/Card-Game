@@ -22,9 +22,22 @@ class SinglePlay extends Game {
     void Play(){
         System.out.printf("Floor %d\n\n", floor);
         do {
-            System.out.printf("%-15s%s\n%-4s%-11s%-4s%s\n", "Player", "Boss", "HP : ", player.getHp() + "/" + player.getMaxHp(), "HP : ", boss.getHp() + "/" + boss.getMaxHp());
-            System.out.printf("%-8s%-7s%-8s%-7s\n", "Armor :", player.getArmor(), "Armor :", boss.getArmor());
-            System.out.printf("%-7s%s\n", "Mana :", player.getMana() + "/" + player.getMaxMana());
+            System.out.printf("%-15s%s\n%-4s%-11s%-4s%s\n",
+                    "Player", "Boss", "HP : ", player.getHp() + "/" + player.getMaxHp(),
+                    "HP : ", boss.getHp() + "/" + boss.getMaxHp());
+            System.out.printf("%-8s%-7s%-8s%-7s\n",
+                    "Armor :", player.getArmor(), "Armor :", boss.getArmor());
+            System.out.printf("%-7s%s\n",
+                    "Mana :", player.getMana() + "/" + player.getMaxMana());
+
+            String debuff;
+            if(player.isPoisoned())
+                debuff = String.format("%-15s", "Poison");
+            else debuff = String.format("%-15s", "");
+            if(boss.isPoisoned())
+                debuff += String.format("%-15s", "Poison");
+
+            System.out.println(debuff);
 
         }while(true);
         //TODO
@@ -128,8 +141,6 @@ class SinglePlay extends Game {
                 }catch (CloneNotSupportedException e){}
 
                 player.grave.add(card);
-
-
 
                 break;
             } else if (userInput.trim().equals("2")) {              //카드 버리기
