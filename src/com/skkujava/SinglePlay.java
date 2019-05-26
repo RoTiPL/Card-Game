@@ -2,6 +2,7 @@ package com.skkujava;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 class SinglePlay extends Game {
     private Random random;
@@ -17,29 +18,56 @@ class SinglePlay extends Game {
         p2 = Boss.CreateBoss(player, floor);
         boss = (Boss)p2;
         random = new Random();
+
+        //TODO: 기본 덱 initialize
     }
 
     void Play(){
         System.out.printf("Floor %d\n\n", floor);
         do {
-            System.out.printf("%-15s%s\n%-4s%-11s%-4s%s\n",
-                    "Player", "Boss", "HP : ", player.getHp() + "/" + player.getMaxHp(),
-                    "HP : ", boss.getHp() + "/" + boss.getMaxHp());
-            System.out.printf("%-8s%-7s%-8s%-7s\n",
-                    "Armor :", player.getArmor(), "Armor :", boss.getArmor());
-            System.out.printf("%-7s%s\n",
-                    "Mana :", player.getMana() + "/" + player.getMaxMana());
+            DrawCard();
+            do {
+                System.out.printf("%-15s%s\n%-4s%-11s%-4s%s\n",
+                        "Player", "Boss", "HP : ", player.getHp() + "/" + player.getMaxHp(),
+                        "HP : ", boss.getHp() + "/" + boss.getMaxHp());
+                System.out.printf("%-8s%-7s%-8s%-7s\n",
+                        "Armor :", player.getArmor(), "Armor :", boss.getArmor());
+                System.out.printf("%-7s%s\n",
+                        "Mana :", player.getMana() + "/" + player.getMaxMana());
 
-            String debuff;
-            if(player.isPoisoned())
-                debuff = String.format("%-15s", "Poison");
-            else debuff = String.format("%-15s", "");
-            if(boss.isPoisoned())
-                debuff += String.format("%-15s", "Poison");
+                String debuff;
+                if (player.isPoisoned())
+                    debuff = String.format("%-15s", "Poison");
+                else debuff = String.format("%-15s", "");
+                if (boss.isPoisoned())
+                    debuff += String.format("%-15s", "Poison");
 
-            System.out.println(debuff);
+                System.out.println(debuff);
+                System.out.println("사용할 카드를 입력해 주세요, 0을 입력 시 턴을 종료합니다");
+                for(int i=0; i<player.hand.size(); i++){
+                    System.out.printf("%d : Cost %d │%-15s%s",
+                            i+1, player.hand.get(i).cost, player.hand.get(i).name, player.hand.get(i).cardDescription());
+                }
+                int input;
+                do {
+                    input = scanner.nextInt();
 
-        }while(true);
+                    if(input == 0)break;
+                    else if (input < 0 || input > player.hand.size()){
+                        System.out.println("Invalid input! Please enter again");
+                    }
+                    else if(player.getMana() < player.hand.get(input - 1).cost){
+                        System.out.println("마나가 부족합니다.");
+                    }
+                    else break;
+                } while(true);
+
+                if(input == 0)break;
+
+                PlayCard(--input);
+            } while (true);
+            if(TurnEnd() == 1) break;
+        } while(true);
         //TODO
     }
 
@@ -60,7 +88,7 @@ class SinglePlay extends Game {
         }
     }
 
-    private void TurnEnd(){
+    private int TurnEnd(){
         player.grave.addAll(player.hand);
         player.hand.clear();
 
@@ -72,15 +100,20 @@ class SinglePlay extends Game {
             player.TakePoisonDamage();
         }
         if(boss.getHp() <= 0) {
-            // Game CLear 시키기
+            // Game Clear 시키기
             ++floor;
             p2 = Boss.CreateBoss(player, floor);
             boss = (Boss)p2;
             player.completeFloor();
             GetReward();
+            return 2;
         }
 
         boss.Action();
+        if(player.getHp() <= 0){
+            return 1;
+        }
+        return 0;
     }
 
     private void DrawCard(){
