@@ -5,7 +5,6 @@ abstract public class Card implements Cloneable{
     int cost; // 카드를 사용하기 위한 비용
     String card_type; // 카드의 타입 설정
     boolean reinforced = false; // 카드가 강화되었는지 확인
-    abstract void init(); // 카드의 기초 설정
     abstract void action(Player player, HumanObject enemy); // 플레이어와 적 간의 상호작용을 나타내는 메소드
     abstract void reinforce(); // 카드를 강화시키기 위한 메소드
     abstract String cardDescription(); // 카드의 설명
@@ -17,9 +16,9 @@ abstract public class Card implements Cloneable{
 // https://slay-the-spire.fandom.com/wiki/Ironclad_Cards 참조
 // 31 Cards.
 class Block extends Card {
-    int block = 5;
+    private int block = 5;
 
-    void init() {
+    Block() {
         this.name = "Block";
         this.cost = 1;
         this.card_type = "Skill";
@@ -51,9 +50,9 @@ class Block extends Card {
 }
 
 class Strike extends Card {
-    int damage = 6;
+    private int damage = 6;
 
-    void init(){
+    Strike(){
         this.name = "Strike";
         this.cost = 1;
         this.card_type = "Attack";
@@ -88,7 +87,7 @@ class Strike extends Card {
 class Anger extends Card {
     int damage = 6;
 
-    void init() {
+    Anger() {
         this.name = "Anger";
         this.cost = 0;
         this.card_type = "Attack";
@@ -121,7 +120,7 @@ class Anger extends Card {
 class Armaments extends Card {
     int block = 5;
 
-    void init() {
+    Armaments() {
         this.name = "Armaments";
         this.cost = 1;
         this.card_type = "Skill";
@@ -158,7 +157,7 @@ class Armaments extends Card {
 class Body_Slam extends Card {
     int damage;
 
-    void init() {
+    Body_Slam() {
         this.name = "Body Slam";
         this.cost = 1;
         this.card_type = "Attack";
@@ -191,7 +190,7 @@ class Body_Slam extends Card {
 class Clash extends Card {
     int damage = 14;
 
-    void init() {
+    Clash() {
         this.name = "Clash";
         this.cost = 0;
         this.card_type = "Attack";
@@ -224,7 +223,7 @@ class Clash extends Card {
 class Cleave extends Card {
     int damage = 8;
 
-    void init() {
+    Cleave() {
         this.name = "Cleave";
         this.cost = 1;
         this.card_type = "Attack";
@@ -257,7 +256,7 @@ class Cleave extends Card {
 class Flex extends Card {
     int strength = 2;
 
-    void init() {
+    Flex() {
         this.name = "Flex";
         this.cost = 0;
         this.card_type = "Skill";
@@ -291,7 +290,7 @@ class Flex extends Card {
 class Headbutt extends Card {
     int damage = 9;
 
-    void init() {
+    Headbutt() {
         this.name = "Headbutt";
         this.cost = 1;
         this.card_type = "Attack";
@@ -326,7 +325,7 @@ class Heavy_Blade extends Card {
     int damage = 14;
     int add_damage = 3;
 
-    void init() {
+    Heavy_Blade() {
         this.name = "Heavy Blade";
         this.cost = 2;
         this.card_type = "Attack";
@@ -360,7 +359,7 @@ class Heavy_Blade extends Card {
 class Iron_Wave extends Card {
     int damage = 5;
     int block = 5;
-    void init() {
+    Iron_Wave() {
         this.name = "Iron Wave";
         this.cost = 1;
         this.card_type = "Attack";
@@ -395,7 +394,7 @@ class Iron_Wave extends Card {
 class Perfected_Strike extends Card {
     int damage = 6;
     int add_damage = 2;
-    void init() {
+    Perfected_Strike() {
         this.name = "Perfected Strike";
         this.cost = 2;
         this.card_type = "Attack";
@@ -429,7 +428,7 @@ class Perfected_Strike extends Card {
 class Pommel_Strike extends Card {
     int damage = 9;
     int draw = 1;
-    void init() {
+    Pommel_Strike() {
         this.name = "Pommel Strike";
         this.cost = 1;
         this.card_type = "Attack";
@@ -464,7 +463,7 @@ class Pommel_Strike extends Card {
 class Shrug_It_Off extends Card {
     int block = 8;
 
-    void init() {
+    Shrug_It_Off() {
         this.name = "Shrug_It_Off";
         this.cost = 1;
         this.card_type = "Skill";
@@ -498,7 +497,7 @@ class Shrug_It_Off extends Card {
 class Twin_Strike extends Card {
     int damage = 5;
 
-    void init() {
+    Twin_Strike() {
         this.name = "Twin Strike";
         this.cost = 1;
         this.card_type = "Attack";
@@ -532,7 +531,7 @@ class Twin_Strike extends Card {
 class Warcry extends Card {
     int draw = 1;
 
-    void init() {
+    Warcry() {
         this.name = "Warcry";
         this.cost = 0;
         this.card_type = "Skill";
@@ -566,7 +565,7 @@ class Warcry extends Card {
 class Bloodletting extends Card {
     int energy = 1;
 
-    void init() {
+    Bloodletting() {
         this.name = "Bloodletting";
         this.cost = 0;
         this.card_type = "Skill";
@@ -600,7 +599,7 @@ class Bloodletting extends Card {
 class Burning_Pact extends Card {
     int draw = 2;
 
-    void init() {
+    Burning_Pact() {
         this.name = "Burning Pact";
         this.cost = 1;
         this.card_type = "Skill";
@@ -632,7 +631,7 @@ class Burning_Pact extends Card {
 }
 
 class Entrench extends Card {
-    void init() {
+    Entrench() {
         this.name = "Entrench";
         this.cost = 2;
         this.card_type = "Skill";
@@ -667,7 +666,7 @@ class Hemokinesis extends Card {
     int lossHP = 3;
     int damage = 14;
 
-    void init() {
+    Hemokinesis() {
         this.name = "Hemokinesis";
         this.cost = 1;
         this.card_type = "Attack";
@@ -702,7 +701,7 @@ class Hemokinesis extends Card {
 class Inflame extends Card {
     int strength = 2;
 
-    void init() {
+    Inflame() {
         this.name = "Inflame";
         this.cost = 1;
         this.card_type = "Power";
@@ -736,7 +735,7 @@ class Inflame extends Card {
 class Metallicize extends Card {
     int block = 3;
 
-    void init() {
+    Metallicize() {
         this.name = "Metallicize";
         this.cost = 1;
         this.card_type = "Power";
@@ -772,7 +771,7 @@ class Rampage extends Card {
     int damage = 8;
     int add_damage = 5;
 
-    void init() {
+    Rampage() {
         this.name = "Rampage";
         this.cost = 1;
         this.card_type = "Attack";
@@ -805,7 +804,7 @@ class Rampage extends Card {
 }
 
 class Seeing_Red extends Card {
-    void init() {
+    Seeing_Red() {
         this.name = "Seeing Red";
         this.cost = 1;
         this.card_type = "Skill";
@@ -838,7 +837,7 @@ class Seeing_Red extends Card {
 }
 
 class Barricade extends Card {
-    void init() {
+    Barricade() {
         this.name = "Barricade";
         this.cost = 3;
         this.card_type = "Power";
@@ -872,7 +871,7 @@ class Barricade extends Card {
 
 class Bludgeon extends Card {
     int damage = 32;
-    void init() {
+    Bludgeon() {
         this.name = "Bludgeon";
         this.cost = 3;
         this.card_type = "Attack";
@@ -906,7 +905,7 @@ class Bludgeon extends Card {
 
 class Demon_Form extends Card {
     int add_strength = 2;
-    void init() {
+    Demon_Form() {
         this.name = "Demon Form";
         this.cost = 3;
         this.card_type = "Power";
@@ -939,7 +938,7 @@ class Demon_Form extends Card {
 }
 
 class Double_Tap extends Card {
-    void init() {
+    Double_Tap() {
         this.name = "Double Tap";
         this.cost = 1;
         this.card_type = "Skill";
@@ -977,7 +976,7 @@ class Double_Tap extends Card {
 
 class Impervious extends Card {
     int block = 30;
-    void init() {
+    Impervious() {
         this.name = "Impervious";
         this.cost = 2;
         this.card_type = "Skill";
@@ -1010,7 +1009,7 @@ class Impervious extends Card {
 }
 
 class Limit_Break extends Card {
-    void init() {
+    Limit_Break() {
         this.name = "Limit Break";
         this.cost = 1;
         this.card_type = "Skill";
@@ -1048,7 +1047,7 @@ class Limit_Break extends Card {
 
 class Offering extends Card {
     int draw = 3;
-    void init() {
+    Offering() {
         this.name = "Offering";
         this.cost = 0;
         this.card_type = "Skill";
@@ -1085,7 +1084,7 @@ class Offering extends Card {
 class Survivor extends Card {
     int block = 8;
 
-    void init() {
+    Survivor() {
         this.name = "Survivor";
         this.cost = 1;
         this.card_type = "Skill";
@@ -1120,7 +1119,7 @@ class Survivor extends Card {
 class Acrobatics extends Card {
     int draw = 3;
 
-    void init() {
+    Acrobatics() {
         this.name = "Acrobatics";
         this.cost = 1;
         this.card_type = "Skill";
@@ -1155,7 +1154,7 @@ class Acrobatics extends Card {
 class Backflip extends Card {
     int block = 5;
 
-    void init() {
+    Backflip() {
         this.name = "Backfilp";
         this.cost = 1;
         this.card_type = "Skill";
@@ -1190,7 +1189,7 @@ class Backflip extends Card {
 class Bane extends Card {
     int damage = 7;
 
-    void init() {
+    Bane() {
         this.name = "Bane";
         this.cost = 1;
         this.card_type = "Attack";
@@ -1225,7 +1224,7 @@ class Bane extends Card {
 class Blade_Dance extends Card {
     int add_shivs = 2;
 
-    void init() {
+    Blade_Dance() {
         this.name = "Blade Dance";
         this.cost = 1;
         this.card_type = "Skill";
@@ -1260,7 +1259,7 @@ class Blade_Dance extends Card {
 class Cloak_And_Dagger extends Card {
     int add_shivs = 1;
 
-    void init() {
+    Cloak_And_Dagger() {
         this.name = "Cloak And Dagger";
         this.cost = 1;
         this.card_type = "Skill";
@@ -1295,7 +1294,7 @@ class Cloak_And_Dagger extends Card {
 class Dagger_Throw extends Card {
     int damage = 9;
 
-    void init() {
+    Dagger_Throw() {
         this.name = "Dagger Throw";
         this.cost = 1;
         this.card_type = "Attack";
@@ -1330,7 +1329,7 @@ class Dagger_Throw extends Card {
 class Deadly_Poison extends Card {
     int poison = 5;
 
-    void init() {
+    Deadly_Poison() {
         this.name = "Deadly Poison";
         this.cost = 1;
         this.card_type = "Skill";
@@ -1365,7 +1364,7 @@ class Deadly_Poison extends Card {
 class Deflect extends Card {
     int block = 4;
 
-    void init() {
+    Deflect() {
         this.name = "Deflect";
         this.cost = 0;
         this.card_type = "Skill";
@@ -1400,7 +1399,7 @@ class Deflect extends Card {
 class Flying_Knee extends Card {
     int damage = 8;
 
-    void init() {
+    Flying_Knee() {
         this.name = "Flying Knee";
         this.cost = 1;
         this.card_type = "Attack";
@@ -1435,7 +1434,7 @@ class Flying_Knee extends Card {
 class Outmaneuver extends Card {
     int add_energy = 2;
 
-    void init() {
+    Outmaneuver() {
         this.name = "Outmaneuver";
         this.cost = 1;
         this.card_type = "Skill";
@@ -1471,7 +1470,7 @@ class Poisoned_Stab extends Card {
     int damage = 6;
     int poison = 3;
 
-    void init() {
+    Poisoned_Stab() {
         this.name = "Poisoned Stab";
         this.cost = 1;
         this.card_type = "Attack";
@@ -1507,7 +1506,7 @@ class Poisoned_Stab extends Card {
 class Prepared extends Card {
     int draw = 1;
 
-    void init() {
+    Prepared() {
         this.name = "Prepared";
         this.cost = 0;
         this.card_type = "Skill";
@@ -1542,7 +1541,7 @@ class Prepared extends Card {
 class Quick_Slash extends Card {
     int damage = 8;
 
-    void init() {
+    Quick_Slash() {
         this.name = "Quick Slash";
         this.cost = 1;
         this.card_type = "Attack";
@@ -1577,7 +1576,7 @@ class Quick_Slash extends Card {
 class Sneaky_Strike extends Card {
     int damage = 10;
 
-    void init() {
+    Sneaky_Strike() {
         this.name = "Sneaky Strike";
         this.cost = 2;
         this.card_type = "Attack";
@@ -1612,7 +1611,7 @@ class Sneaky_Strike extends Card {
 class Accuracy extends Card {
     int add_damage = 3;
 
-    void init() {
+    Accuracy() {
         this.name = "Accuracy";
         this.cost = 1;
         this.card_type = "Power";
@@ -1645,7 +1644,7 @@ class Accuracy extends Card {
 }
 
 class Calculated_Gamble extends Card {
-    void init() {
+    Calculated_Gamble() {
         this.name = "Calculted Gamble";
         this.cost = 0;
         this.card_type = "Skill";
@@ -1683,7 +1682,7 @@ class Calculated_Gamble extends Card {
 
 class Catalyst extends Card {
 
-    void init() {
+    Catalyst() {
         this.name = "Catalyst";
         this.cost = 1;
         this.card_type = "Skill";
@@ -1723,7 +1722,7 @@ class Choke extends Card {
     int damage = 12;
     int add_damage = 3;
 
-    void init() {
+    Choke() {
         this.name = "Choke";
         this.cost = 2;
         this.card_type = "Attack";
@@ -1759,7 +1758,7 @@ class Concentrate extends Card {
     int energy = 2;
     int dis_card = 3;
 
-    void init() {
+    Concentrate() {
         this.name = "Concentrate";
         this.cost = 0;
         this.card_type = "Skill";
@@ -1795,7 +1794,7 @@ class Dash extends Card {
     int damage = 10;
     int block = 10;
 
-    void init() {
+    Dash() {
         this.name = "Dash";
         this.cost = 2;
         this.card_type = "Attack";
@@ -1831,7 +1830,7 @@ class Dash extends Card {
 class Escape_Plan extends Card {
     int block = 3;
 
-    void init() {
+    Escape_Plan() {
         this.name = "Escape Plan";
         this.cost = 0;
         this.card_type = "Skill";
@@ -1866,7 +1865,7 @@ class Escape_Plan extends Card {
 class Footwork extends Card {
     int dexterity = 2;
 
-    void init() {
+    Footwork() {
         this.name = "Footwork";
         this.cost = 1;
         this.card_type = "Power";
@@ -1899,7 +1898,7 @@ class Footwork extends Card {
 }
 
 class Infinite_Blades extends Card {
-    void init() {
+    Infinite_Blades() {
         this.name = "Infinite Blades";
         this.cost = 1;
         this.card_type = "Power";
@@ -1938,7 +1937,7 @@ class Infinite_Blades extends Card {
 class Noxious_Fumes extends Card {
     int poison = 2;
 
-    void init() {
+    Noxious_Fumes() {
         this.name = "Noxious Fumes";
         this.cost = 1;
         this.card_type = "Power";
@@ -1973,7 +1972,7 @@ class Noxious_Fumes extends Card {
 class Skewer extends Card {
     int damage = 7;
 
-    void init() {
+    Skewer() {
         this.name = "Skewer";
         this.cost = -1;
         this.card_type = "Attack";
@@ -2008,7 +2007,7 @@ class Skewer extends Card {
 class Adrenaline extends Card {
     int energy = 1;
 
-    void init() {
+    Adrenaline() {
         this.name = "Adrenaline";
         this.cost = 0;
         this.card_type = "Skill";
@@ -2041,7 +2040,7 @@ class Adrenaline extends Card {
 }
 
 class After_Image extends Card {
-    void init() {
+    After_Image() {
         this.name = "After Image";
         this.cost = 1;
         this.card_type = "Power";
@@ -2079,7 +2078,7 @@ class After_Image extends Card {
 }
 
 class Bullet_Time extends Card {
-    void init() {
+    Bullet_Time() {
         this.name = "Bullet_Time";
         this.cost = 3;
         this.card_type = "Skill";
@@ -2114,7 +2113,7 @@ class Bullet_Time extends Card {
 class Burst extends Card {
     int skill = 1;
 
-    void init() {
+    Burst() {
         this.name = "Burst";
         this.cost = 1;
         this.card_type = "Skill";
@@ -2152,7 +2151,7 @@ class Burst extends Card {
 }
 
 class Doppelganger extends Card {
-    void init() {
+    Doppelganger() {
         this.name = "Doppelganger";
         this.cost = -1;
         this.card_type = "Skill";
@@ -2189,7 +2188,7 @@ class Doppelganger extends Card {
 }
 
 class Phantasmal_Killer extends Card {
-    void init() {
+    Phantasmal_Killer() {
         this.name = "Phantasmal Killer";
         this.cost = 2;
         this.card_type = "Skill";
@@ -2222,7 +2221,7 @@ class Phantasmal_Killer extends Card {
 }
 
 class Tools_of_the_Trade extends Card {
-    void init() {
+    Tools_of_the_Trade() {
         this.name = "Tools of the Trade";
         this.cost = 1;
         this.card_type = "Power";
@@ -2257,7 +2256,7 @@ class Tools_of_the_Trade extends Card {
 class Shiv extends Card {
     int damage = 4;
 
-    void init() {
+    Shiv() {
         this.name = "Shiv";
         this.cost = 0;
         this.card_type = "Attack";
