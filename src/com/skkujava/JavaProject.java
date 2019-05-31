@@ -6,15 +6,14 @@ public class JavaProject {
 
     public static void main(String[] args) {
 	// write your code here
-
+        System.out.println("1. Single Play");
+        System.out.println("2. Multi Play");
+        System.out.println("3. Ranking");
+        System.out.println("4. Exit Game");
         Scanner input = new Scanner(System.in);
         Game game;
         String userInput = input.next();
         do {
-            System.out.println("1. Single Play");
-            System.out.println("2. Multi Play");
-            System.out.println("3. Ranking");
-            System.out.println("4. Exit Game");
 
             if (userInput.trim().equals("1")) {
                 game = new SinglePlay();
@@ -28,7 +27,10 @@ public class JavaProject {
             } else {
                 System.out.println("Invalid input! Please re-input!");
             }
-
+            System.out.println("1. Single Play");
+            System.out.println("2. Multi Play");
+            System.out.println("3. Ranking");
+            System.out.println("4. Exit Game");
             userInput = input.next();
         }while(true);
 

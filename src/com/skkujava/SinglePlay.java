@@ -47,7 +47,7 @@ class SinglePlay extends Game {
 
                 System.out.printf("Floor %d\n\n", floor);
 
-                System.out.printf("%-15s%s\n%-4s%-11s%-4s%s\n",
+                System.out.printf("%-15s%s\n%-4s%-10s%-4s%s\n",
                         "Player", "Boss", "HP : ", player.getHp() + "/" + player.getMaxHp(),
                         "HP : ", boss.getHp() + "/" + boss.getMaxHp());
                 System.out.printf("%-8s%-7s%-8s%-7s\n",
@@ -65,7 +65,7 @@ class SinglePlay extends Game {
                 System.out.println(debuff);
                 System.out.println("사용할 카드를 입력해 주세요, 0을 입력 시 턴을 종료합니다");
                 for(int i=0; i<player.hand.size(); i++){
-                    System.out.printf("%d : Cost %d │%-15s%s\n",
+                    System.out.printf("%d : Cost %d │ %-15s │ %s\n",
                             i+1, player.hand.get(i).cost, player.hand.get(i).name, player.hand.get(i).cardDescription());
                 }
                 int input;
@@ -86,6 +86,7 @@ class SinglePlay extends Game {
 
                 if(PlayCard(player, boss, --input) == 1){
                     TurnEnd();
+                    break;
                 }
             } while (true);
             if(TurnEnd() == 1) break;
@@ -99,13 +100,18 @@ class SinglePlay extends Game {
 
 
     private int TurnEnd(){
+        boss.setArmor(0);
         int res = super.TurnEnd(player, boss);
         if(res == 1) {
             // Game Clear 시키기
+            player.grave.addAll(player.deck);
+            player.deck.clear();
             ++floor;
             boss = Boss.CreateBoss(player, floor);
             player.completeFloor();
             GetReward();
+            player.setArmor(0);
+            player.setMana(player.getMaxMana());
             return 2;
         }
         else if(res == 2){
@@ -115,6 +121,8 @@ class SinglePlay extends Game {
         if(player.getHp() <= 0){
             return 1;
         }
+        player.setArmor(0);
+        player.setMana(player.getMaxMana());
         return 0;
     }
 
@@ -144,7 +152,6 @@ class SinglePlay extends Game {
 
                 }
                 System.out.println("추가할 카드를 선택하세요");
-                //TODO: 카드 추가하기
                 int inp;
                 do {
                     inp = scanner.nextInt();

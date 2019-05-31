@@ -25,7 +25,7 @@ class Block extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setArmor(player.getArmor() + block);
     }
 
     void reinforce() {
@@ -45,7 +45,7 @@ class Block extends Card {
     }
 
     String cardDescription() {
-        return "Gain " + block + "block.";
+        return "Gain " + block + " block.";
     }
 }
 
@@ -59,7 +59,7 @@ class Strike extends Card {
     }
 
     void action(Player player, HumanObject enemy) {
-
+        enemy.TakeDamage(damage);
     }
 
     @Override
@@ -80,7 +80,7 @@ class Strike extends Card {
     }
     @Override
     String cardDescription() {
-        return "Deal " + damage + "damage.";
+        return "Deal " + damage + " damage.";
     }
 }
 
@@ -113,7 +113,7 @@ class Anger extends Card {
         return object;
     }
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Add a copy of this card to your discard pile.";
+        return "Deal " + damage + " damage.\n                              " + "Add a copy of this card to your discard pile.";
     }
 }
 
@@ -146,10 +146,10 @@ class Armaments extends Card {
     }
     String cardDescription() {
         if (reinforced) {
-            return "Gain " + block + "Block.\n" + "Upgrade a card in your hand for the rest of combat.";
+            return "Gain " + block + "Block.\n                              " + "Upgrade a card in your hand for the rest of combat.";
         }
         else {
-            return "Gain " + block + "Block.\n" + "Upgrade ALL cards in your hand for the rest of combat.";
+            return "Gain " + block + "Block.\n                              " + "Upgrade ALL cards in your hand for the rest of combat.";
         }
     }
 }
@@ -216,7 +216,7 @@ class Clash extends Card {
         return object;
     }
     String cardDescription() {
-        return "Can only bo played if every card in your hand is an Attack.\n" + "Deal " + damage + "damage.";
+        return "Can only bo played if every card in your hand is an Attack.\n                              " + "Deal " + damage + "damage.";
     }
 }
 
@@ -283,7 +283,7 @@ class Flex extends Card {
     }
 
     String cardDescription() {
-        return "Gain " + strength + "Strength.\n" + "At the end of your turn, lose " + strength + "Strength.";
+        return "Gain " + strength + "Strength.\n                              " + "At the end of your turn, lose " + strength + "Strength.";
     }
 }
 
@@ -317,7 +317,7 @@ class Headbutt extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Place a card from your discard pile on top of your draw pile.";
+        return "Deal " + damage + "damage.\n                              " + "Place a card from your discard pile on top of your draw pile.";
     }
 }
 
@@ -352,7 +352,7 @@ class Heavy_Blade extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Strength affects this card " + add_damage + "times.";
+        return "Deal " + damage + "damage.\n                              " + "Strength affects this card " + add_damage + "times.";
     }
 }
 
@@ -387,7 +387,7 @@ class Iron_Wave extends Card {
     }
 
     String cardDescription() {
-        return "Gain " + block + "Block.\n" + "Deal " + damage + "damage.";
+        return "Gain " + block + "Block.\n                              " + "Deal " + damage + "damage.";
     }
 }
 
@@ -421,7 +421,7 @@ class Perfected_Strike extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Deals an additional " + add_damage + "damage for ALL of your cards containing \"Strike\"";
+        return "Deal " + damage + "damage.\n                              " + "Deals an additional " + add_damage + "damage for ALL of your cards containing \"Strike\"";
     }
 }
 
@@ -456,7 +456,7 @@ class Pommel_Strike extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Draw " + draw + "card(s)";
+        return "Deal " + damage + "damage.\n                              " + "Draw " + draw + "card(s)";
     }
 }
 
@@ -490,7 +490,7 @@ class Shrug_It_Off extends Card {
     }
 
     String cardDescription() {
-        return "Gain " + block + "block.\n" + "Draw 1 card.";
+        return "Gain " + block + "block.\n                              " + "Draw 1 card.";
     }
 }
 
@@ -524,7 +524,7 @@ class Twin_Strike extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage twice.\n";
+        return "Deal " + damage + "damage twice.\n                              ";
     }
 }
 
@@ -558,7 +558,7 @@ class Warcry extends Card {
     }
 
     String cardDescription() {
-        return "Draw " + draw + "card(s).\n" + "Place a card from your hand on top of your draw pile.\n" + "Exhaust.";
+        return "Draw " + draw + "card(s).\n                              " + "Place a card from your hand on top of your draw pile.\n                              " + "Exhaust.";
     }
 }
 
@@ -592,7 +592,7 @@ class Bloodletting extends Card {
     }
 
     String cardDescription() {
-        return "Lose 3 HP.\n" + "Gain " + energy + "Energy.";
+        return "Lose 3 HP.\n                              " + "Gain " + energy + "Energy.";
     }
 }
 
@@ -626,7 +626,7 @@ class Burning_Pact extends Card {
     }
 
     String cardDescription() {
-        return "Exhaust 1 card.\n" + "Draw " + draw + "cards.";
+        return "Exhaust 1 card.\n                              " + "Draw " + draw + "cards.";
     }
 }
 
@@ -694,7 +694,7 @@ class Hemokinesis extends Card {
     }
 
     String cardDescription() {
-        return "Lose " + lossHP + "HP.\n" + "Deal " + damage + "damage.";
+        return "Lose " + lossHP + "HP.\n                              " + "Deal " + damage + "damage.";
     }
 }
 
@@ -799,7 +799,7 @@ class Rampage extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Every time this card is played, increase its damage by " + add_damage + "for this combat.";
+        return "Deal " + damage + "damage.\n                              " + "Every time this card is played, increase its damage by " + add_damage + "for this combat.";
     }
 }
 
@@ -832,7 +832,7 @@ class Seeing_Red extends Card {
     }
 
     String cardDescription() {
-        return "Gain 2 energy.\n" + "Exhaust.";
+        return "Gain 2 energy.\n                              " + "Exhaust.";
     }
 }
 
@@ -1004,7 +1004,7 @@ class Impervious extends Card {
     }
 
     String cardDescription() {
-        return "Gain " + block + "Block.\n" + "Exhaust";
+        return "Gain " + block + "Block.\n                              " + "Exhaust";
     }
 }
 
@@ -1040,7 +1040,7 @@ class Limit_Break extends Card {
             return "Double your Strength.";
         }
         else {
-            return "Double your Strength.\n" + "Exhaust.";
+            return "Double your Strength.\n                              " + "Exhaust.";
         }
     }
 }
@@ -1075,7 +1075,7 @@ class Offering extends Card {
     }
 
     String cardDescription() {
-        return "Lose 6 HP.\n" + "Gain 2 energy.\n" + "Draw " + draw + "cards.\n" + "Exhaust.";
+        return "Lose 6 HP.\n                              " + "Gain 2 energy.\n                              " + "Draw " + draw + "cards.\n                              " + "Exhaust.";
     }
 }
 
@@ -1112,7 +1112,7 @@ class Survivor extends Card {
     }
 
     String cardDescription() {
-        return "Gain " + block + "Block.\n" + "Discard 1 card.";
+        return "Gain " + block + "Block.\n                              " + "Discard 1 card.";
     }
 }
 
@@ -1147,7 +1147,7 @@ class Acrobatics extends Card {
     }
 
     String cardDescription() {
-        return "Draw " + draw + "cards.\n" + "Discard 1 card.";
+        return "Draw " + draw + "cards.\n                              " + "Discard 1 card.";
     }
 }
 
@@ -1182,7 +1182,7 @@ class Backflip extends Card {
     }
 
     String cardDescription() {
-        return "Gain " + block + "Block.\n" + "Draw 2 cards.";
+        return "Gain " + block + "Block.\n                              " + "Draw 2 cards.";
     }
 }
 
@@ -1217,7 +1217,7 @@ class Bane extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "If the enemy is Poisoned, deal " + damage + "damage again.";
+        return "Deal " + damage + "damage.\n                              " + "If the enemy is Poisoned, deal " + damage + "damage again.";
     }
 }
 
@@ -1287,7 +1287,7 @@ class Cloak_And_Dagger extends Card {
     }
 
     String cardDescription() {
-        return "Gain 6 Block.\n" + "Add " + add_shivs + "Shiv(s) into your hand.";
+        return "Gain 6 Block.\n                              " + "Add " + add_shivs + "Shiv(s) into your hand.";
     }
 }
 
@@ -1322,7 +1322,7 @@ class Dagger_Throw extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Draw 1 card.\n" + "Discard 1 card.";
+        return "Deal " + damage + "damage.\n                              " + "Draw 1 card.\n                              " + "Discard 1 card.";
     }
 }
 
@@ -1427,7 +1427,7 @@ class Flying_Knee extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Next turn gain 1 Energy.";
+        return "Deal " + damage + "damage.\n                              " + "Next turn gain 1 Energy.";
     }
 }
 
@@ -1499,7 +1499,7 @@ class Poisoned_Stab extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Apply " + poison + "Poison.";
+        return "Deal " + damage + "damage.\n                              " + "Apply " + poison + "Poison.";
     }
 }
 
@@ -1534,7 +1534,7 @@ class Prepared extends Card {
     }
 
     String cardDescription() {
-        return "Draw " + draw + "card(s).\n" + "Discard " + draw + "card(s).";
+        return "Draw " + draw + "card(s).\n                              " + "Discard " + draw + "card(s).";
     }
 }
 
@@ -1569,7 +1569,7 @@ class Quick_Slash extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Draw 1 card.";
+        return "Deal " + damage + "damage.\n                              " + "Draw 1 card.";
     }
 }
 
@@ -1604,7 +1604,7 @@ class Sneaky_Strike extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "If you have discarded a card this turn, gain 2 Energy.";
+        return "Deal " + damage + "damage.\n                              " + "If you have discarded a card this turn, gain 2 Energy.";
     }
 }
 
@@ -1672,7 +1672,7 @@ class Calculated_Gamble extends Card {
 
     String cardDescription() {
         if (!reinforced) {
-            return "Discard your hand, then draw that many cards.\n" + "Exhaust.";
+            return "Discard your hand, then draw that many cards.\n                              " + "Exhaust.";
         }
         else {
             return "Discard your hand, then draw that many cards.";
@@ -1710,7 +1710,7 @@ class Catalyst extends Card {
 
     String cardDescription() {
         if (!reinforced) {
-            return "Double an enemy's Poison.\n" + "Exhaust.";
+            return "Double an enemy's Poison.\n                              " + "Exhaust.";
         }
         else {
             return "Triple an enemy's Poison.";
@@ -1750,7 +1750,7 @@ class Choke extends Card {
     }
 
     String cardDescription() {
-        return "Deal 12 damage.\n" + "Whenever you play a card this turn, the enemy loses " + add_damage + "HP.";
+        return "Deal 12 damage.\n                              " + "Whenever you play a card this turn, the enemy loses " + add_damage + "HP.";
     }
 }
 
@@ -1786,7 +1786,7 @@ class Concentrate extends Card {
     }
 
     String cardDescription() {
-        return "Discard " + dis_card + "cards.\n" + "Gain 2 Energy.";
+        return "Discard " + dis_card + "cards.\n                              " + "Gain 2 Energy.";
     }
 }
 
@@ -1823,7 +1823,7 @@ class Dash extends Card {
     }
 
     String cardDescription() {
-        return "Gain " + block + "Block.\n" + "Deal " + damage + "damage.";
+        return "Gain " + block + "Block.\n                              " + "Deal " + damage + "damage.";
     }
 }
 
@@ -1858,7 +1858,7 @@ class Escape_Plan extends Card {
     }
 
     String cardDescription() {
-        return "Draw 1 card.\n" + "If you darw a Skill, gain " + block + "Block.";
+        return "Draw 1 card.\n                              " + "If you darw a Skill, gain " + block + "Block.";
     }
 }
 
@@ -1926,7 +1926,7 @@ class Infinite_Blades extends Card {
 
     String cardDescription() {
         if (reinforced) {
-            return "At the start of your turn, add a Shiv into your hand\n" + "Innate";
+            return "At the start of your turn, add a Shiv into your hand\n                              " + "Innate";
         }
         else {
             return "At the start of your turn, add a Shiv into your hand";
@@ -2035,7 +2035,7 @@ class Adrenaline extends Card {
     }
 
     String cardDescription() {
-        return "Gain " + energy + "Energy\n" + "Draw 2 cards.\n" + "Exhaust.";
+        return "Gain " + energy + "Energy\n                              " + "Draw 2 cards.\n                              " + "Exhaust.";
     }
 }
 
@@ -2068,7 +2068,7 @@ class After_Image extends Card {
 
     String cardDescription() {
         if (reinforced) {
-            return "Whenever you play a card, gain 1 Block.\n" + "Innate.";
+            return "Whenever you play a card, gain 1 Block.\n                              " + "Innate.";
         }
         else {
             return "Whenever you play a card, gain 1 Block.";
@@ -2284,6 +2284,6 @@ class Shiv extends Card {
     }
 
     String cardDescription() {
-        return "Deal " + damage + "damage.\n" + "Exhaust.";
+        return "Deal " + damage + "damage.\n                              " + "Exhaust.";
     }
 }
