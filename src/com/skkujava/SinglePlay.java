@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 class SinglePlay extends Game {
-    private Random random;
     private Player player;
     private Boss boss;
 
@@ -101,7 +100,7 @@ class SinglePlay extends Game {
 
     private int TurnEnd(){
         boss.setArmor(0);
-        int res = super.TurnEnd(player, boss);
+        int res = super.TurnEnd(player, boss, true);
         if(res == 1) {
             // Game Clear 시키기
             player.grave.addAll(player.deck);
@@ -135,40 +134,7 @@ class SinglePlay extends Game {
         String userInput = scanner.next();
         do {
             if (userInput.trim().equals("1")) {                 //카드 덱에 추가
-
-                ArrayList<Card> collection;
-                if(player instanceof Warrior)collection = CardCollection.warriorCollection;
-                else if(player instanceof Thief)collection = CardCollection.thiefCollection;
-                else {
-                    System.out.println("Error: Unknown Class");
-                    System.exit(1);
-                    return;
-                }
-                int rand[] = new int[3];
-                for(int i=0; i<rand.length; i++){
-                    rand[i] = random.nextInt(collection.size());
-
-                    System.out.printf("%d: %-7s│%s", i + 1, collection.get(rand[i]).name, collection.get(rand[i]).cardDescription());
-
-                }
-                System.out.println("추가할 카드를 선택하세요");
-                int inp;
-                do {
-                    inp = scanner.nextInt();
-                    if (inp <= 0 || inp > rand.length) {
-                        System.out.println("Invalid input! Please re-input!");
-                    } else break;
-                } while (true);
-
-                Card card = collection.get(rand[inp-1]);
-                try {
-                    Card newCard = (Card)card.clone();
-                    collection.remove(rand[inp-1]);
-                    collection.add(rand[inp-1], newCard);
-                }catch (CloneNotSupportedException e){}
-
-                player.grave.add(card);
-
+                AddRandomCardToPlayer(player, 3);
                 break;
             } else if (userInput.trim().equals("2")) {              //카드 버리기
                 Card card;
@@ -222,7 +188,6 @@ class SinglePlay extends Game {
                     }
                 }
                 do {
-
                     System.out.println("강화할 카드를 선택하세요");
 
                     for (int i = 0; i < player.grave.size(); ++i) {
@@ -246,7 +211,6 @@ class SinglePlay extends Game {
                         return;
                     }
                     clone.reinforce();
-                    //TODO: make clone
                     System.out.println("다음 카드를 강화하시겠습니까? (Y/N)");
                     System.out.printf("%-7s│%s\n%-15s\n%-7s│%s\n", card.name, card.cardDescription(), "↓", clone.name, clone.cardDescription());
 
@@ -262,6 +226,8 @@ class SinglePlay extends Game {
                             System.out.println("Invalid input! Please re-input!");
                         }
                     } while(true);
+
+                    player.grave.addAll(temp);
                 }while(flag);
             } else {
                 System.out.println("Invalid input! Please re-input!");
@@ -270,6 +236,6 @@ class SinglePlay extends Game {
             userInput = scanner.next();
         }while(true);
 
-        player.setHp(player.getMaxHp()/3 + player.getHp());
+        player.setHp((player.getMaxHp()/3 + player.getHp()) > player.getMaxHp() ? player.getMaxHp() : (player.getMaxHp()/3 + player.getHp()));
     }
 }

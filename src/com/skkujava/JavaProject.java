@@ -20,8 +20,9 @@ public class JavaProject {
                 ((SinglePlay) game).Play();
             } else if (userInput.trim().equals("2")) {
                 game = new DoublePlay();
+                ((DoublePlay) game).Play();
             } else if (userInput.trim().equals("3")) {
-
+                //TODO: Ranking
             } else if (userInput.trim().equals("4")) {
                 break;
             } else {
