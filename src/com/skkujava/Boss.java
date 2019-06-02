@@ -5,6 +5,7 @@ abstract class Boss extends HumanObject{
 
     Player player;
     int floor;
+    String name;
 
     public static Boss CreateBoss(Player player, int floor) {
 
@@ -31,6 +32,7 @@ abstract class Boss extends HumanObject{
 class Poisoner extends Boss {
 
     public Poisoner(Player player, int floor) {
+        this.name = "Poisoner";
         this.player = player;
         this.floor = floor;
         setMaxHp(50 + 5 * floor);
@@ -90,6 +92,7 @@ class Poisoner extends Boss {
 class Giant extends Boss {
 
     public Giant(Player player, int floor) {
+        this.name = "Giant";
         this.player = player;
         this.floor = floor;
         setMaxHp(100 + 5 * floor);
@@ -147,6 +150,7 @@ class Giant extends Boss {
 class Slime extends Boss {
 
     public Slime(Player player, int floor) {
+        this.name = "Slime";
         this.player = player;
         this.floor = floor;
         setMaxHp(80);

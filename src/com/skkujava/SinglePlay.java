@@ -31,7 +31,6 @@ class SinglePlay extends Game {
         boss = Boss.CreateBoss(player, floor);
         random = new Random();
 
-        //TODO: 기본 덱 initialize
         for(int i=0; i<5; i++){
             player.deck.add(new Strike());
             player.deck.add(new Block());
@@ -47,7 +46,7 @@ class SinglePlay extends Game {
                 System.out.printf("Floor %d\n\n", floor);
 
                 System.out.printf("%-15s%s\n%-4s%-10s%-4s%s\n",
-                        "Player", "Boss", "HP : ", player.getHp() + "/" + player.getMaxHp(),
+                        "Player", boss.name, "HP : ", player.getHp() + "/" + player.getMaxHp(),
                         "HP : ", boss.getHp() + "/" + boss.getMaxHp());
                 System.out.printf("%-8s%-7s%-8s%-7s\n",
                         "Armor :", player.getArmor(), "Armor :", boss.getArmor());
@@ -62,6 +61,10 @@ class SinglePlay extends Game {
                     debuff += String.format("%-15s", "Poison");
 
                 System.out.println(debuff);
+
+                if(boss.getStrength() > 0){
+                    System.out.printf("%15s%s%d", "", "Strength +", boss.getStrength());
+                }
                 System.out.println("사용할 카드를 입력해 주세요, 0을 입력 시 턴을 종료합니다");
                 for(int i=0; i<player.hand.size(); i++){
                     System.out.printf("%d : Cost %d │ %-15s │ %s\n",
@@ -102,6 +105,9 @@ class SinglePlay extends Game {
 
 
     private int TurnEnd(){
+        if(player.getHp() <= 0){
+            return 1;
+        }
         boss.setArmor(0);
         int res = super.TurnEnd(player, boss, true);
         if(res == 1) {
