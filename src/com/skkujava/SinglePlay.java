@@ -39,12 +39,12 @@ class SinglePlay extends Game {
                     debuff = String.format("%-15s", "Poison");
                 else debuff = String.format("%-15s", "");
                 if (boss.isPoisoned())
-                    debuff += String.format("%-15s", "Poison");
+                            debuff += String.format("%-15s", "Poison");
 
-                System.out.println(debuff);
-                System.out.println("사용할 카드를 입력해 주세요, 0을 입력 시 턴을 종료합니다");
-                for(int i=0; i<player.hand.size(); i++){
-                    System.out.printf("%d : Cost %d │%-15s%s",
+                    System.out.println(debuff);
+                    System.out.println("사용할 카드를 입력해 주세요, 0을 입력 시 턴을 종료합니다");
+                    for(int i=0; i<player.hand.size(); i++) {
+                        System.out.printf("%d : Cost %d │%-15s%s",
                             i+1, player.hand.get(i).cost, player.hand.get(i).name, player.hand.get(i).cardDescription());
                 }
                 int input;
