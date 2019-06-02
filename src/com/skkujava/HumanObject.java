@@ -57,7 +57,13 @@ public abstract class HumanObject {
     }
 
     public void TakeDamage(int damage) {
-        hp -= damage;
+        int temp = armor;
+        armor -= damage;
+        damage -= temp;
+        if(armor < 0) {
+            armor = 0;
+            hp -= damage;
+        }
     }
 
     // 각 턴이 끝날 때 isPoisoned 이면 이 함수 실행

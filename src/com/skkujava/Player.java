@@ -18,6 +18,10 @@ public class Player extends HumanObject {
         setDexterity(0);
         setPoisoned(false);
         setPoisonDamage(0);
+        drawCount = 5;
+        deck = new ArrayList<>();
+        hand = new ArrayList<>();
+        grave = new ArrayList<>();
     }
 
     public int getMaxMana() {
