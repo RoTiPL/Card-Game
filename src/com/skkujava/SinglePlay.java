@@ -93,7 +93,10 @@ class SinglePlay extends Game {
         } while(true);
         //TODO: ranking
 
-
+        System.out.print("랭킹에 등록할 닉네임을 입력해주세요: ");
+        scanner.nextLine();
+        String nickname = scanner.nextLine();
+        Ranking.uploadRanking(nickname, floor);
     }
 
 

@@ -1,6 +1,7 @@
 package com.skkujava;
 
 import java.util.Scanner;
+import java.io.IOException;
 
 public class JavaProject {
 
@@ -22,7 +23,7 @@ public class JavaProject {
                 game = new DoublePlay();
                 ((DoublePlay) game).Play();
             } else if (userInput.trim().equals("3")) {
-                //TODO: Ranking
+                Ranking.showRanking();
             } else if (userInput.trim().equals("4")) {
                 break;
             } else {
