@@ -24,10 +24,10 @@ public class Ranking {
         }
     }
 
-    public static void uploadRanking(String name, int floor) {
+    public static void uploadRanking(String name, int floor, String job) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            String str = name + " " + floor + "\r\n";
+            String str = floor + " " + name + " " + job + "\r\n";
             fw.write(str);
             fw.close();
         } catch (IOException e) {

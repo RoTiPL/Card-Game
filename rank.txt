@@ -1,2 +1,2 @@
-KDH 0
-IMKDH 1
+0 KDH Warrior
+1 IMIM Thief
