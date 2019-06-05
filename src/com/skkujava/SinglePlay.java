@@ -100,6 +100,7 @@ class SinglePlay extends Game {
         scanner.nextLine();
         String nickname = scanner.nextLine();
         Ranking.uploadRanking(nickname, floor, player.name);
+        Ranking.loadRanking();
     }
 
 
