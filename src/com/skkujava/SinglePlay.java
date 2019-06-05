@@ -33,7 +33,7 @@ class SinglePlay extends Game {
 
         for(int i=0; i<5; i++){
             player.deck.add(new Strike());
-            player.deck.add(new Block());
+            player.deck.add(new Defend());
         }
 
     }

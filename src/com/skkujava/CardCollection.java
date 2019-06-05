@@ -7,7 +7,7 @@ public class CardCollection {
     public static final ArrayList<Card> warriorCollection = new ArrayList<>(
             Arrays.asList(
                     new Strike(),
-                    new Block(),
+                    new Defend(),
                     new Anger(),
                     new Armaments(),
                     new Body_Slam(),
@@ -43,7 +43,7 @@ public class CardCollection {
     public static final ArrayList<Card> thiefCollection = new ArrayList<>(
             Arrays.asList(
                     new Strike(),
-                    new Block(),
+                    new Defend(),
                     new Survivor(),
                     new Acrobatics(),
                     new Backflip(),

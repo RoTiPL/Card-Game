@@ -1,6 +1,11 @@
 package com.skkujava;
+import java.util.Scanner;
+import java.util.Random;
 
 abstract public class Card implements Cloneable{
+    Random random;
+    Scanner scanner;
+
     String name; // 카드의 이름
     int cost; // 카드를 사용하기 위한 비용
     String card_type; // 카드의 타입 설정
@@ -15,11 +20,11 @@ abstract public class Card implements Cloneable{
 }
 // https://slay-the-spire.fandom.com/wiki/Ironclad_Cards 참조
 // 31 Cards.
-class Block extends Card {
+class Defend extends Card {
     private int block = 5;
 
-    Block() {
-        this.name = "Block";
+    Defend() {
+        this.name = "Defend";
         this.cost = 1;
         this.card_type = "Skill";
     }
@@ -94,7 +99,8 @@ class Anger extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.TakeDamage(damage);
+        player.grave.add(this);
     }
 
     void reinforce() {
@@ -127,6 +133,18 @@ class Armaments extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        scanner = new Scanner( System.in );
+        player.setArmor(block);
+        if (reinforced){
+            for(int i=0; i<player.hand.size(); i++){
+                player.hand.get(i).reinforced = true;
+            }
+        }
+        else {
+            System.out.println("Input a index of card that will be reinforced.");
+            int index = scanner.nextInt();
+            player.hand.get(index).reinforced = true;
+        }
 
     }
 
@@ -164,7 +182,8 @@ class Body_Slam extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        damage = player.getArmor();
+        enemy.TakeDamage(damage);
     }
 
     void reinforce() {
@@ -197,7 +216,13 @@ class Clash extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        for(int i=0; i<player.hand.size(); i++){
+            if (player.hand.get(i).card_type != "Attack"){
+                return;
+            }
+        }
 
+        enemy.TakeDamage(damage);
     }
 
     void reinforce() {
@@ -216,7 +241,7 @@ class Clash extends Card {
         return object;
     }
     String cardDescription() {
-        return "Can only bo played if every card in your hand is an Attack. " + "Deal " + damage + " damage.";
+        return "Can only be played if every card in your hand is an Attack. " + "Deal " + damage + " damage.";
     }
 }
 
@@ -230,7 +255,7 @@ class Cleave extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.TakeDamage(damage);
     }
 
     void reinforce() {
@@ -249,7 +274,7 @@ class Cleave extends Card {
         return object;
     }
     String cardDescription() {
-        return "Deal " + damage + " damage to ALL enemies.";
+        return "Deal " + damage + " damage to enemy.";
     }
 }
 
@@ -263,7 +288,7 @@ class Flex extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setStrength(player.getStrength() + strength);
     }
 
     void reinforce() {
@@ -297,7 +322,8 @@ class Headbutt extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.TakeDamage(damage);
+        // 보류
     }
 
     void reinforce() {
@@ -332,7 +358,8 @@ class Heavy_Blade extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        damage += player.getStrength() * add_damage;
+        enemy.TakeDamage(damage);
     }
 
     void reinforce() {
@@ -366,7 +393,8 @@ class Iron_Wave extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setArmor(player.getArmor() + block);
+        enemy.TakeDamage(damage);
     }
 
     void reinforce() {
@@ -401,7 +429,23 @@ class Perfected_Strike extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        for(int i=0; i<player.deck.size(); i++){
+            if ( player.deck.get(i).name.contains("Strike") ){
+                damage += add_damage;
+            }
+        }
+        for(int i=0; i<player.hand.size(); i++){
+            if ( player.hand.get(i).name.contains("Strike") ){
+                damage += add_damage;
+            }
+        }
+        for (int i=0; i<player.grave.size(); i++){
+            if ( player.grave.get(i).name.contains("Strike") ){
+                damage += add_damage;
+            }
+        }
 
+        enemy.TakeDamage(damage);
     }
 
     void reinforce() {
@@ -434,8 +478,24 @@ class Pommel_Strike extends Card {
         this.card_type = "Attack";
     }
 
-    void action(Player player, HumanObject enemy){
+    void action(Player player, HumanObject enemy) {
+        enemy.TakeDamage(damage);
 
+        random = new Random();
+        for(int i = 0; i < draw; i++){
+            if(player.deck.size() == 0){
+                while(player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if(player.deck.size() == 0)return;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        }
     }
 
     void reinforce() {
@@ -470,7 +530,21 @@ class Shrug_It_Off extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        player.setArmor( player.getArmor() + block );
 
+        random = new Random();
+        if(player.deck.size() == 0){
+            while(player.grave.size() != 0) {
+                int randInt = random.nextInt(player.grave.size());
+                Card card = player.grave.get(randInt);
+                player.grave.remove(randInt);
+                player.deck.add(card);
+            }
+        }
+        if(player.deck.size() == 0)return;
+        Card card = player.deck.get(0);
+        player.deck.remove(0);
+        player.hand.add(card);
     }
 
     void reinforce() {
@@ -504,7 +578,9 @@ class Twin_Strike extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        for(int i=0; i<2; i++){
+            enemy.TakeDamage(damage);
+        }
     }
 
     void reinforce() {
@@ -538,7 +614,23 @@ class Warcry extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        random = new Random();
+        if(player.deck.size() == 0){
+            while(player.grave.size() != 0) {
+                int randInt = random.nextInt(player.grave.size());
+                Card card = player.grave.get(randInt);
+                player.grave.remove(randInt);
+                player.deck.add(card);
+            }
+        }
+        if(player.deck.size() == 0)return;
+        Card card = player.deck.get(0);
+        player.deck.remove(0);
+        player.hand.add(card);
 
+        scanner = new Scanner( System.in );
+        int index = scanner.nextInt();
+        player.hand.get(index);
     }
 
     void reinforce() {
@@ -572,7 +664,8 @@ class Bloodletting extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setHp( player.getHp() - 3 );
+        player.setMana( player.getMana() + energy );
     }
 
     void reinforce() {
@@ -606,7 +699,26 @@ class Burning_Pact extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        System.out.println("Input a index which will be Exhaust.");
+        scanner = new Scanner(System.in);
+        int index = scanner.nextInt();
+        // Exhaust
 
+        random = new Random();
+        for(int i = 0; i < draw; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) return;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        }
     }
 
     void reinforce() {
@@ -638,7 +750,7 @@ class Entrench extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setArmor( player.getArmor() * 2 );
     }
 
     void reinforce() {
@@ -673,7 +785,8 @@ class Hemokinesis extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setHp( player.getHp() - lossHP );
+        enemy.TakeDamage(damage);
     }
 
     void reinforce() {
@@ -708,7 +821,7 @@ class Inflame extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setStrength( player.getStrength() + strength );
     }
 
     void reinforce() {
@@ -742,7 +855,7 @@ class Metallicize extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        // 보류
     }
 
     void reinforce() {
@@ -778,7 +891,8 @@ class Rampage extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.TakeDamage(damage);
+        damage += add_damage;
     }
 
     void reinforce() {
@@ -811,7 +925,8 @@ class Seeing_Red extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setMana( player.getMana() + 2 );
+        //소멸
     }
 
     void reinforce() {
@@ -844,7 +959,7 @@ class Barricade extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        //보류
     }
 
     void reinforce() {
@@ -878,7 +993,7 @@ class Bludgeon extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.TakeDamage(damage);
     }
 
     void reinforce() {
@@ -945,7 +1060,7 @@ class Double_Tap extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        // 보류
     }
 
     void reinforce() {
@@ -983,7 +1098,8 @@ class Impervious extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setArmor( player.getArmor() + block );
+        //소멸
     }
 
     void reinforce() {
@@ -1016,7 +1132,8 @@ class Limit_Break extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setStrength( player.getStrength() * 2 );
+        //소멸
     }
 
     void reinforce() {
@@ -1054,7 +1171,24 @@ class Offering extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        player.setHp( player.getHp() - 6 );
+        player.setMana( player.getMana() + 2 );
 
+        random = new Random();
+        for(int i = 0; i < draw; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) return;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        }
     }
 
     void reinforce() {
@@ -1091,7 +1225,12 @@ class Survivor extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        player.setArmor( player.getArmor() + block );
 
+        System.out.println("Input a index number of card which will discard.");
+        int index = scanner.nextInt();
+        player.grave.add( player.hand.get(index) );
+        player.hand.remove( index );
     }
 
     void reinforce() {
@@ -1126,7 +1265,26 @@ class Acrobatics extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        random = new Random();
+        for(int i = 0; i < draw; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) return;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        }
 
+        System.out.println("Input a index number of card which will discard.");
+        int index = scanner.nextInt();
+        player.grave.add( player.hand.get(index) );
+        player.hand.remove( index );
     }
 
     void reinforce() {
@@ -1161,7 +1319,23 @@ class Backflip extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        player.setArmor( player.getArmor() + block );
 
+        random = new Random();
+        for(int i = 0; i < 2; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) return;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        }
     }
 
     void reinforce() {
@@ -1196,7 +1370,10 @@ class Bane extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.TakeDamage(damage);
+        if (enemy.getPoisonDamage() > 0){
+            enemy.TakeDamage(damage);
+        }
     }
 
     void reinforce() {
@@ -1231,7 +1408,10 @@ class Blade_Dance extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        Card shiv = new Shiv();
+        for (int i=0; i<add_shivs; i++) {
+            player.hand.add(shiv);
+        }
     }
 
     void reinforce() {
@@ -1266,7 +1446,12 @@ class Cloak_And_Dagger extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        player.setArmor( player.getArmor() + 6 );
 
+        Card shiv = new Shiv();
+        for (int i=0; i<add_shivs; i++) {
+            player.hand.add(shiv);
+        }
     }
 
     void reinforce() {
@@ -1301,7 +1486,28 @@ class Dagger_Throw extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        enemy.TakeDamage(damage);
 
+        random = new Random();
+        for(int i = 0; i < 2; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) return;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        } // Card Draw
+
+        System.out.println("Input a index number of card which will discard.");
+        int index = scanner.nextInt();
+        player.grave.add( player.hand.get(index) );
+        player.hand.remove( index ); // Card Discard
     }
 
     void reinforce() {
@@ -1336,7 +1542,8 @@ class Deadly_Poison extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.setPoisonDamage( enemy.getPoisonDamage() + poison );
+        enemy.setPoisoned(true);
     }
 
     void reinforce() {
@@ -1371,7 +1578,7 @@ class Deflect extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setArmor( player.getArmor() + block );
     }
 
     void reinforce() {
@@ -1477,7 +1684,9 @@ class Poisoned_Stab extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.TakeDamage(damage);
+        enemy.setPoisonDamage(enemy.getPoisonDamage() + poison);
+        enemy.setPoisoned(true);
     }
 
     void reinforce() {
@@ -1513,7 +1722,28 @@ class Prepared extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        random = new Random();
+        for(int i = 0; i < draw; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) return;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        } // Card Draw
 
+        for(int i=0; i<draw; i++){
+            System.out.println("Input a index number of card which will discard.");
+            int index = scanner.nextInt();
+            player.grave.add( player.hand.get(index) );
+            player.hand.remove( index ); // Card Discard
+        }
     }
 
     void reinforce() {
@@ -1548,7 +1778,21 @@ class Quick_Slash extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        enemy.TakeDamage(damage);
 
+        random = new Random();
+        if (player.deck.size() == 0) {
+            while (player.grave.size() != 0) {
+                int randInt = random.nextInt(player.grave.size());
+                Card card = player.grave.get(randInt);
+                player.grave.remove(randInt);
+                player.deck.add(card);
+            }
+        }
+        if (player.deck.size() == 0) return;
+        Card card = player.deck.get(0);
+        player.deck.remove(0);
+        player.hand.add(card);
     }
 
     void reinforce() {
@@ -1583,7 +1827,8 @@ class Sneaky_Strike extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.TakeDamage(damage);
+        // 보류
     }
 
     void reinforce() {
@@ -1618,7 +1863,11 @@ class Accuracy extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        for(int i=0; i<player.deck.size(); i++){
+            if (player.deck.get(i).name == "Shiv"){
+                //
+            }
+        }
     }
 
     void reinforce() {
@@ -1645,13 +1894,31 @@ class Accuracy extends Card {
 
 class Calculated_Gamble extends Card {
     Calculated_Gamble() {
-        this.name = "Calculted Gamble";
+        this.name = "Calculated Gamble";
         this.cost = 0;
         this.card_type = "Skill";
     }
 
     void action(Player player, HumanObject enemy){
+        int numOfcards = player.hand.size() - 1;
 
+        player.grave.addAll(player.hand);
+        player.hand.clear();
+
+        for(int i = 0; i < numOfcards; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) return;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        } // Card Draw
     }
 
     void reinforce() {
@@ -1689,7 +1956,12 @@ class Catalyst extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        if (reinforced) {
+            enemy.setPoisonDamage( enemy.getPoisonDamage() * 3 );
+        }
+        else{
+            enemy.setPoisonDamage( enemy.getPoisonDamage() * 2 );
+        }
     }
 
     void reinforce() {
@@ -1729,7 +2001,8 @@ class Choke extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.TakeDamage(damage);
+        //
     }
 
     void reinforce() {
@@ -1765,7 +2038,14 @@ class Concentrate extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        for(int i=0; i<dis_card; i++){
+            System.out.println("Input a index number of card which will discard.");
+            int index = scanner.nextInt();
+            player.grave.add( player.hand.get(index) );
+            player.hand.remove( index ); // Card Discard
+        }
 
+        player.setMana( player.getMana() + energy );
     }
 
     void reinforce() {
@@ -1801,7 +2081,8 @@ class Dash extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setArmor( player.getArmor() + block );
+        enemy.TakeDamage(damage);
     }
 
     void reinforce() {
@@ -1837,7 +2118,7 @@ class Escape_Plan extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        //
     }
 
     void reinforce() {
@@ -1872,7 +2153,7 @@ class Footwork extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setDexterity( player.getDexterity() + dexterity );
     }
 
     void reinforce() {
@@ -1905,7 +2186,7 @@ class Infinite_Blades extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+//
     }
 
     void reinforce() {
@@ -1944,7 +2225,7 @@ class Noxious_Fumes extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+//
     }
 
     void reinforce() {
@@ -1979,7 +2260,9 @@ class Skewer extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        for (int i=0; i<player.getMana(); i++){
+            enemy.TakeDamage(damage);
+        }
     }
 
     void reinforce() {
@@ -2014,7 +2297,22 @@ class Adrenaline extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        player.setMana( player.getMana() + energy );
 
+        for(int i = 0; i < 2; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) return;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        } // Card Draw
     }
 
     void reinforce() {
@@ -2085,7 +2383,7 @@ class Bullet_Time extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+//
     }
 
     void reinforce() {
@@ -2120,7 +2418,7 @@ class Burst extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+//
     }
 
     void reinforce() {
@@ -2263,7 +2561,7 @@ class Shiv extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        enemy.TakeDamage(damage);
     }
 
     void reinforce() {
