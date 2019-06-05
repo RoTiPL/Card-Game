@@ -68,7 +68,7 @@ public class Game {
         player.setDrawCount(5);
     }
 
-    void AddRandomCardToPlayer(Player player, int size){
+    void AddRandomCardToPlayer(Player player, int size, ArrayList<Card> store){
         ArrayList<Card> collection;
         if(player instanceof Warrior)collection = CardCollection.warriorCollection;
         else if(player instanceof Thief)collection = CardCollection.thiefCollection;
@@ -101,7 +101,7 @@ public class Game {
 
 
         try {
-            player.grave.add((Card)collection.get(rand[inp-1]).clone());
+            store.add((Card)collection.get(rand[inp-1]).clone());
         }catch (CloneNotSupportedException e){
             e.printStackTrace();
         }

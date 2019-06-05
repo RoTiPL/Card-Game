@@ -1,5 +1,6 @@
 package com.skkujava;
 
+import javax.swing.text.Caret;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,10 +9,12 @@ class SinglePlay extends Game {
     private Boss boss;
 
     private int floor;
+    private ArrayList<Card> store;
 
     SinglePlay(){
         floor = 0;
         int temp;
+        store = new ArrayList<>();
         do {
             System.out.println("Select your class.\n1. Warrior\n2. Thief");
             temp = scanner.nextInt();
@@ -32,13 +35,22 @@ class SinglePlay extends Game {
         random = new Random();
 
         for(int i=0; i<5; i++){
-            player.deck.add(new Strike());
-            player.deck.add(new Defend());
+            store.add(new Strike());
+            store.add(new Defend());
         }
-
+        try {
+            for (Card card : store) {
+                player.grave.add((Card)card.clone());
+            }
+        }
+        catch(CloneNotSupportedException e){
+            e.printStackTrace();
+        }
     }
 
     void Play(){
+
+
         do {
             DrawCard(player);
             do {
@@ -71,13 +83,21 @@ class SinglePlay extends Game {
                 System.out.println(debuff);
 
                 String strength = "│";
-                if (player.isPoisoned())
+                if (player.getStrength() > 0)
                     strength += String.format("%35s%-5d", "Strength : ", player.getStrength());
                 else strength += String.format("%40s", "");
-                if (boss.isPoisoned())
+                if (boss.getStrength() > 0)
                     strength += String.format("%51s%-5d%5c", "Strength : ", boss.getStrength(), '│');
                 else strength += String.format("%61c", '│');
                 System.out.println(strength);
+
+                String dexterity = "│";
+                if (player.getDexterity() > 0)
+                    dexterity += String.format("%36s%-4d", "Dexterity : ", player.getStrength());
+                else dexterity += String.format("%40s", "");
+                dexterity += String.format("%61c", '│');
+                System.out.println(dexterity);
+                System.out.println("└────────────────────────────────────────────────────────────────────────────────────────────────────┘");
 
 
                 System.out.println("Input the card number to use. 0: Turn end");
@@ -125,8 +145,6 @@ class SinglePlay extends Game {
         int res = super.TurnEnd(player, boss, true);
         if(res == 1) {
             // Game Clear 시키기
-            player.grave.addAll(player.deck);
-            player.deck.clear();
             ++floor;
             boss = Boss.CreateBoss(player, floor);
             player.completeFloor();
@@ -135,6 +153,16 @@ class SinglePlay extends Game {
             player.setPoisoned(false);
             player.setPoisonDamage(0);
             player.setMana(player.getMaxMana());
+
+            player.hand.clear();
+            player.deck.clear();
+            player.grave.clear();
+            try {
+                for (Card card : store) {
+                    player.grave.add((Card) card.clone());
+                }
+            }
+            catch(CloneNotSupportedException e){e.printStackTrace();}
             return 2;
         }
         else if(res == 2){
@@ -162,25 +190,25 @@ class SinglePlay extends Game {
         String userInput = scanner.next();
         do {
             if (userInput.trim().equals("1")) {                 //카드 덱에 추가
-                AddRandomCardToPlayer(player, 3);
+                AddRandomCardToPlayer(player, 3, store);
                 break;
             } else if (userInput.trim().equals("2")) {              //카드 버리기
                 Card card;
                 do {
                     System.out.println("Select the card to remove.");
-                    for (int i = 0; i < player.grave.size(); i++) {
-                        card = player.grave.get(i);
+                    for (int i = 0; i < store.size(); i++) {
+                        card = store.get(i);
                         System.out.printf("%d: %-7s│%s", i + 1, card.name, card.cardDescription());
                     }
                     int inp;
                     do {
                         inp = scanner.nextInt();
-                        if (inp <= 0 || inp > player.deck.size()) {
+                        if (inp <= 0 || inp > store.size()) {
                             System.out.println("Invalid input! Please re-input!");
                         } else break;
                     } while (true);
 
-                    card = player.grave.get(inp);
+                    card = store.get(inp);
 
                     System.out.println("Are you sure remove this card? (Y/N)");
                     System.out.printf("%-7s│%s\n", card.name, card.cardDescription());
@@ -188,7 +216,7 @@ class SinglePlay extends Game {
                     do{
                         userInput = scanner.next();
                         if(userInput.equals("Y")){
-                            player.grave.remove(inp);
+                            store.remove(inp);
                             flag = false;
                             break;
                         } else if(userInput.equals("N")){
@@ -207,10 +235,10 @@ class SinglePlay extends Game {
             } else if (userInput.trim().equals("4")) {                  //카드 강화
                 Card card;
                 ArrayList<Card> temp = new ArrayList<>();
-                for(int i=0; i<player.grave.size(); ++i){
-                    card = player.grave.get(i);
+                for(int i=0; i<store.size(); ++i){
+                    card = store.get(i);
                     if(card.reinforced){
-                        player.grave.remove(i);
+                        store.remove(i);
                         temp.add(card);
                         --i;
                     }
@@ -218,19 +246,19 @@ class SinglePlay extends Game {
                 do {
                     System.out.println("Select the card to reinforce.");
 
-                    for (int i = 0; i < player.grave.size(); ++i) {
-                        card = player.grave.get(i);
+                    for (int i = 0; i < store.size(); ++i) {
+                        card = store.get(i);
                         System.out.printf("%d: %-7s│%s", i + 1, card.name, card.cardDescription());
                     }
                     int inp;
                     do {
                         inp = scanner.nextInt();
-                        if (inp <= 0 || inp > player.deck.size()) {
+                        if (inp <= 0 || inp > store.size()) {
                             System.out.println("Invalid input! Please re-input!");
                         } else break;
                     } while (true);
 
-                    card = player.grave.get(inp);
+                    card = store.get(inp);
                     Card clone;
                     try {
                         clone = (Card)card.clone();
@@ -255,7 +283,7 @@ class SinglePlay extends Game {
                         }
                     } while(true);
 
-                    player.grave.addAll(temp);
+                    store.addAll(temp);
                 }while(flag);
             } else {
                 System.out.println("Invalid input! Please re-input!");
