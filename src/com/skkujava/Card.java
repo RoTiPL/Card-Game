@@ -65,7 +65,7 @@ class Strike extends Card {
     }
 
     void action(Player player, HumanObject enemy) {
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
     }
 
     @Override
@@ -100,7 +100,7 @@ class Anger extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
         player.grave.add(this);
     }
 
@@ -123,7 +123,7 @@ class Anger extends Card {
         return "Deal " + damage + " damage. " + "Add a copy of this card to your discard pile.";
     }
 }
-/*
+
 class Armaments extends Card {
     int block = 5;
 
@@ -142,7 +142,7 @@ class Armaments extends Card {
             }
         }
         else {
-            System.out.println("Input a index of card which  will be reinforced.");
+            System.out.println("Input a index of card which will be reinforced.");
             int index = scanner.nextInt();
             player.hand.get(index).reinforced = true;
         }
@@ -172,7 +172,7 @@ class Armaments extends Card {
         }
     }
 }
-*/
+
 class Body_Slam extends Card {
     int damage;
 
@@ -184,7 +184,7 @@ class Body_Slam extends Card {
 
     void action(Player player, HumanObject enemy){
         damage = player.getArmor();
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
     }
 
     void reinforce() {
@@ -223,7 +223,7 @@ class Clash extends Card {
             }
         }
 
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
     }
 
     void reinforce() {
@@ -256,7 +256,7 @@ class Cleave extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
     }
 
     void reinforce() {
@@ -398,7 +398,7 @@ class Iron_Wave extends Card {
 
     void action(Player player, HumanObject enemy){
         player.setArmor(player.getArmor() + block);
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
     }
 
     void reinforce() {
@@ -450,7 +450,7 @@ class Perfected_Strike extends Card {
             }
         }
 
-        enemy.TakeDamage(temp);
+        enemy.TakeDamage(temp + player.getStrength());
     }
 
     void reinforce() {
@@ -484,7 +484,7 @@ class Pommel_Strike extends Card {
     }
 
     void action(Player player, HumanObject enemy) {
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
 
         random = new Random();
         for(int i = 0; i < draw; i++){
@@ -496,7 +496,7 @@ class Pommel_Strike extends Card {
                     player.deck.add(card);
                 }
             }
-            if(player.deck.size() == 0)return;
+            if(player.deck.size() == 0)break;
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
@@ -546,10 +546,11 @@ class Shrug_It_Off extends Card {
                 player.deck.add(card);
             }
         }
-        if(player.deck.size() == 0)return;
-        Card card = player.deck.get(0);
-        player.deck.remove(0);
-        player.hand.add(card);
+        if(player.deck.size() != 0) {
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        }
     }
 
     void reinforce() {
@@ -584,7 +585,7 @@ class Twin_Strike extends Card {
 
     void action(Player player, HumanObject enemy){
         for(int i=0; i<2; i++){
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage + player.getStrength());
         }
     }
 
@@ -616,6 +617,7 @@ class Warcry extends Card {
         this.name = "Warcry";
         this.cost = 0;
         this.card_type = "Skill";
+        this.be_exhaust = true;
     }
 
     void action(Player player, HumanObject enemy){
@@ -628,15 +630,16 @@ class Warcry extends Card {
                 player.deck.add(card);
             }
         }
-        if(player.deck.size() == 0)return;
-        Card card = player.deck.get(0);
-        player.deck.remove(0);
-        player.hand.add(card);
+        if(player.deck.size() != 0) {
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        }
 
+        System.out.println("Insert an index of card which replace on the top of draw pile.");
         scanner = new Scanner( System.in );
         int index = scanner.nextInt();
-        player.hand.get(index);
-    //TODO
+        player.deck.add(0, player.hand.get(index));
     }
 
     void reinforce() {
@@ -670,7 +673,7 @@ class Bloodletting extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        player.setHp( player.getHp() - 3 );
+        player.TakeDamage(3);
         player.setMana( player.getMana() + energy );
     }
 
@@ -708,7 +711,7 @@ class Burning_Pact extends Card {
         System.out.println("Input a index which will be Exhaust.");
         scanner = new Scanner(System.in);
         int index = scanner.nextInt();
-        // Exhaust 대신 Discard로 바꿈
+        player.hand.remove(index);
 
         random = new Random();
         for(int i = 0; i < draw; i++) {
@@ -720,7 +723,7 @@ class Burning_Pact extends Card {
                     player.deck.add(card);
                 }
             }
-            if (player.deck.size() == 0) return;
+            if (player.deck.size() == 0) break;
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
@@ -744,7 +747,7 @@ class Burning_Pact extends Card {
     }
 
     String cardDescription() {
-        return "Discard 1 card. " + "Draw " + draw + " cards.";
+        return "Exhaust 1 card. " + "Draw " + draw + " cards.";
     }
 }
 
@@ -792,7 +795,7 @@ class Hemokinesis extends Card {
 
     void action(Player player, HumanObject enemy){
         player.setHp( player.getHp() - lossHP );
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
     }
 
     void reinforce() {
@@ -897,7 +900,7 @@ class Rampage extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
         damage += add_damage;
     }
 
@@ -999,7 +1002,7 @@ class Bludgeon extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
     }
 
     void reinforce() {
@@ -1135,7 +1138,7 @@ class Limit_Break extends Card {
         this.name = "Limit Break";
         this.cost = 1;
         this.card_type = "Skill";
-        this.reinforced = true;
+        this.be_exhaust = true;
     }
 
     void action(Player player, HumanObject enemy){
@@ -1175,6 +1178,7 @@ class Offering extends Card {
         this.name = "Offering";
         this.cost = 0;
         this.card_type = "Skill";
+        this.be_exhaust = true;
     }
 
     void action(Player player, HumanObject enemy){
@@ -1191,7 +1195,7 @@ class Offering extends Card {
                     player.deck.add(card);
                 }
             }
-            if (player.deck.size() == 0) return;
+            if (player.deck.size() == 0) break;
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
@@ -1282,7 +1286,7 @@ class Acrobatics extends Card {
                     player.deck.add(card);
                 }
             }
-            if (player.deck.size() == 0) return;
+            if (player.deck.size() == 0) break;
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
@@ -1338,7 +1342,7 @@ class Backflip extends Card {
                     player.deck.add(card);
                 }
             }
-            if (player.deck.size() == 0) return;
+            if (player.deck.size() == 0) break;
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
@@ -1377,9 +1381,9 @@ class Bane extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
         if (enemy.isPoisoned()){
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage + player.getStrength());
         }
     }
 
@@ -1493,7 +1497,7 @@ class Dagger_Throw extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
 
         random = new Random();
         for(int i = 0; i < 2; i++) {
@@ -1505,7 +1509,7 @@ class Dagger_Throw extends Card {
                     player.deck.add(card);
                 }
             }
-            if (player.deck.size() == 0) return;
+            if (player.deck.size() == 0) break;
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
@@ -1620,7 +1624,7 @@ class Flying_Knee extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
         player.setBonusMana( player.getBonusMana() + 1 );
     }
 
@@ -1692,7 +1696,7 @@ class Poisoned_Stab extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
         enemy.setPoisonDamage(enemy.getPoisonDamage() + poison);
         enemy.setPoisoned(true);
     }
@@ -1740,7 +1744,7 @@ class Prepared extends Card {
                     player.deck.add(card);
                 }
             }
-            if (player.deck.size() == 0) return;
+            if (player.deck.size() == 0) break;
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
@@ -1786,7 +1790,7 @@ class Quick_Slash extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
 
         random = new Random();
         if (player.deck.size() == 0) {
@@ -1797,10 +1801,11 @@ class Quick_Slash extends Card {
                 player.deck.add(card);
             }
         }
-        if (player.deck.size() == 0) return;
-        Card card = player.deck.get(0);
-        player.deck.remove(0);
-        player.hand.add(card);
+        if (player.deck.size() != 0) {
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        }
     }
 
     void reinforce() {
@@ -1923,7 +1928,7 @@ class Calculated_Gamble extends Card {
                     player.deck.add(card);
                 }
             }
-            if (player.deck.size() == 0) return;
+            if (player.deck.size() == 0) break;
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
@@ -2094,7 +2099,7 @@ class Dash extends Card {
 
     void action(Player player, HumanObject enemy){
         player.setArmor( player.getArmor() + block );
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
     }
 
     void reinforce() {
@@ -2139,13 +2144,14 @@ class Escape_Plan extends Card {
                 player.deck.add(card);
             }
         }
-        if (player.deck.size() == 0) return;
-        Card card = player.deck.get(0);
-        player.deck.remove(0);
-        player.hand.add(card);
+        if (player.deck.size() != 0) {
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
 
-        if (card.card_type.equals("Skill")){
-            player.setArmor( player.getArmor() + block );
+            if (card.card_type.equals("Skill")){
+                player.setArmor( player.getArmor() + block );
+            }
         }
     }
 
@@ -2285,7 +2291,7 @@ class Skewer extends Card {
 
     void action(Player player, HumanObject enemy){
         for (int i=0; i<player.getMana(); i++){
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage + player.getStrength());
         }
         player.setMana(0);
     }
@@ -2334,7 +2340,7 @@ class Adrenaline extends Card {
                     player.deck.add(card);
                 }
             }
-            if (player.deck.size() == 0) return;
+            if (player.deck.size() == 0) break;
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
@@ -2593,10 +2599,11 @@ class Shiv extends Card {
         this.name = "Shiv";
         this.cost = 0;
         this.card_type = "Attack";
+        this.be_exhaust = true;
     }
 
     void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(damage + player.getStrength());
     }
 
     void reinforce() {
