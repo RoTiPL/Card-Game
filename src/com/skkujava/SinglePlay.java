@@ -63,7 +63,7 @@ class SinglePlay extends Game {
                 System.out.println(debuff);
 
                 if(boss.getStrength() > 0){
-                    System.out.printf("%15s%s%d", "", "Strength +", boss.getStrength());
+                    System.out.printf("%15s%s%d\n", "", "Strength +", boss.getStrength());
                 }
                 System.out.println("사용할 카드를 입력해 주세요, 0을 입력 시 턴을 종료합니다");
                 for(int i=0; i<player.hand.size(); i++){
@@ -119,19 +119,23 @@ class SinglePlay extends Game {
             player.completeFloor();
             GetReward();
             player.setArmor(0);
+            player.setPoisoned(false);
+            player.setPoisonDamage(0);
             player.setMana(player.getMaxMana());
             return 2;
         }
         else if(res == 2){
             return 1;
         }
-        boss.Action();
-        if(player.getHp() <= 0){
-            return 1;
+        else{
+            boss.Action();
+            if(player.getHp() <= 0){
+                return 1;
+            }
+            player.setArmor(0);
+            player.setMana(player.getMaxMana());
+            return 0;
         }
-        player.setArmor(0);
-        player.setMana(player.getMaxMana());
-        return 0;
     }
 
 
