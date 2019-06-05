@@ -80,4 +80,9 @@ public class Player extends HumanObject {
         // Thief: none
         // Warrior: hp +7
     }
+
+    @Override
+    public String getAsciiArt(int i) {
+        return null;
+    }
 }

@@ -8,6 +8,8 @@ public abstract class HumanObject {
     private boolean isPoisoned;
     private int poisonDamage;
 
+    String[] asciiArt = new String[13];
+
     public int getMaxHp() {
         return maxHp;
     }
@@ -74,4 +76,6 @@ public abstract class HumanObject {
         if(poisonDamage == 0)
             isPoisoned = false;
     }
+
+    public abstract String getAsciiArt(int i);
 }

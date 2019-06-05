@@ -34,6 +34,19 @@ class Poisoner extends Boss {
 
     public Poisoner(Player player, int floor) {
         this.name = "Poisoner";
+        asciiArt[0]  = "        l:         \",!{    :+       ";
+        asciiArt[1]  = "        `>ii_>>:!1]})i   [)         ";
+        asciiArt[2]  = "           >>iI(}ijLJc1+}~.         ";
+        asciiArt[3]  = "           ,!Ilw{YOYvczzLmuf        ";
+        asciiArt[4]  = "           :!IX,XCvnnvvcLQLJ0- ..   ";
+        asciiArt[5]  = "          _j;/i)LcvvzzcJO0Q00dC!    ";
+        asciiArt[6]  = "         ;xf:l]QXczXzzUOOQ0JUZZOZi  ";
+        asciiArt[7]  = "        |vJUUcuuunvzXYYJ0OZLZ/iZ+ {{";
+        asciiArt[8]  = "       ~C~~`?JzxrncXYUXzJO-fI^~^    ";
+        asciiArt[9]  = "     Iz/      (znnvcXJUUXf^     .   ";
+        asciiArt[10] = "    jU,         ?uccJ?~\\f|.    ..   ";
+        asciiArt[11] = " ^j0Y`            !Ii<  {\\{;__i-    ";
+        asciiArt[12] = "  \"+nuxf/\\1{}                       ";
         this.player = player;
         this.floor = floor;
         setMaxHp(50 + 5 * floor);
@@ -82,12 +95,29 @@ class Poisoner extends Boss {
         System.out.println("Poisoner takes guard action!");
         System.out.println("Poisoner got " + armor + " armor.");
     }
+
+    public String getAsciiArt(int i) {
+        return asciiArt[i];
+    }
 }
 
 class Giant extends Boss {
 
     public Giant(Player player, int floor) {
         this.name = "Giant";
+        asciiArt[0]  = " w0Z    f}|n                         ";
+        asciiArt[1]  = " <m0L  QmZkj                         ";
+        asciiArt[2]  = "  JzQLQxUmqpd                        ";
+        asciiArt[3]  = " ^LwZmwdZmmZOCY                      ";
+        asciiArt[4]  = "YWa0mqmqqm0QLCCJ                     ";
+        asciiArt[5]  = "kkbOZZmmQL00O0LCU                    ";
+        asciiArt[6]  = " co0zZZwppZZZOZqpU                   ";
+        asciiArt[7]  = " |#JZZZZmwwwZZZZd~                   ";
+        asciiArt[8]  = "  oOOmYn);ttrbmZZc                   ";
+        asciiArt[9]  = "  zZw0<mwwww}rUQCC          I i+^    ";
+        asciiArt[10] = "  ;bw)        +adj\\)f{>\"-c{\\tC|uf{>[ ";
+        asciiArt[11] = "   ;mw`        Qd,     |{1}_}-{+\\<xt1";
+        asciiArt[12] = " >Cv[{}       U0Ox          <+I i+^  ";
         this.player = player;
         this.floor = floor;
         setMaxHp(100 + 5 * floor);
@@ -136,12 +166,29 @@ class Giant extends Boss {
         System.out.println("You got " + damage + " damage.");
         System.out.println("You got " + damage + " damage.");
     }
+
+    public String getAsciiArt(int i) {
+        return asciiArt[i];
+    }
 }
 
 class Slime extends Boss {
 
     public Slime(Player player, int floor) {
         this.name = "Slime";
+        asciiArt[0]  = "             ..::..                  ";
+        asciiArt[1]  = "         .:========:::.              ";
+        asciiArt[2]  = "        ::.:======::::=.             ";
+        asciiArt[3]  = "      :==========:=======.           ";
+        asciiArt[4]  = "     .====================:          ";
+        asciiArt[5]  = "   .:=======================:        ";
+        asciiArt[6]  = "  .:::======:==:::::========..       ";
+        asciiArt[7]  = ".::..===========:::::===::::====:    ";
+        asciiArt[8]  = "==:::=======:====::==:::::========+  ";
+        asciiArt[9]  = "===:=======:===:::====:::===:==++++:.";
+        asciiArt[10] = " ==========:.:=:::========:::.:::++=.";
+        asciiArt[11] = "  .=++=======++++=:..::========:=++: ";
+        asciiArt[12] = "      ..::::::..    .=:====++===:.   ";
         this.player = player;
         this.floor = floor;
         setMaxHp(80);
@@ -192,5 +239,9 @@ class Slime extends Boss {
         setArmor(getArmor() + armor);
         System.out.println("Slime takes guard action!");
         System.out.println("Slime got " + armor + " armor.");
+    }
+
+    public String getAsciiArt(int i) {
+        return asciiArt[i];
     }
 }
