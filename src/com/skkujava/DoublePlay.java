@@ -59,6 +59,9 @@ public class DoublePlay extends Game {
         do{
             System.out.println("Player 1의 차례입니다.");
             DrawCard(p1);
+            if(p1 instanceof Warrior)
+                p1.setDrawCount(5);
+            else p1.setDrawCount(7);
             do {
                 System.out.printf("%-15s%s\n%-4s%-10s%-4s%s\n",
                         "Player 1", "Player 2", "HP : ", p1.getHp() + "/" + p1.getMaxHp(),
@@ -109,8 +112,15 @@ public class DoublePlay extends Game {
                 break;
             }
 
+            p2.setMana(p2.getMaxMana() + p2.getBonusMana());
+            p2.setArmor(0);
+            p2.setBonusMana(0);
+
             System.out.println("Player 2의 차례입니다.");
             DrawCard(p2);
+            if(p2 instanceof Warrior)
+                p2.setDrawCount(5);
+            else p2.setDrawCount(7);
             do {
                 System.out.printf("%-15s%s\n%-4s%-10s%-4s%s\n",
                         "Player 1", "Player 2", "HP : ", p1.getHp() + "/" + p1.getMaxHp(),
@@ -161,6 +171,10 @@ public class DoublePlay extends Game {
                 flag = true;
                 break;
             }
+
+            p1.setMana(p1.getMaxMana() + p1.getBonusMana());
+            p1.setBonusMana(0);
+            p1.setArmor(0);
         }while(true);
 
         if(flag){
