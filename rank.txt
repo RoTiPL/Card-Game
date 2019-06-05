@@ -3,3 +3,6 @@
 0 SIBAL Thief
 1 HAHA Thief
 0 noooo Warrior
+1 NUFFGIANT Warrior
+0 BRINGMEPOISONER Warrior
+1 ana Warrior
