@@ -42,29 +42,44 @@ class SinglePlay extends Game {
         do {
             DrawCard(player);
             do {
+                // 가로 102(100)
+                // | 공백(5) 캐릭터(38) 공백(14) 캐릭터(38) 공백(5) |
+                System.out.println("┌────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+                System.out.printf("%c%51s%2d%48c\n", '│', "Floor", floor, '│');
+                System.out.printf("%c%30s%48s%23c\n", '│', "Player", boss.name, '│');
+                System.out.printf("%c%29s%5s%41s%5s%21c\n",
+                        '│', "HP : ", player.getHp() + "/" + player.getMaxHp(), "HP : ", boss.getHp() + "/" + boss.getMaxHp(), '│');
 
-                System.out.printf("Floor %d\n\n", floor);
+                System.out.printf("%c%32s%d%45s%d%22c\n",
+                        '│', "Armor : ", player.getArmor(), "Armor : ", boss.getArmor(), '│');
 
-                System.out.printf("%-15s%s\n%-4s%-10s%-4s%s\n",
-                        "Player", boss.name, "HP : ", player.getHp() + "/" + player.getMaxHp(),
-                        "HP : ", boss.getHp() + "/" + boss.getMaxHp());
-                System.out.printf("%-8s%-7s%-8s%-7s\n",
-                        "Armor :", player.getArmor(), "Armor :", boss.getArmor());
-                System.out.printf("%-7s%s\n",
-                        "Mana :", player.getMana() + "/" + player.getMaxMana());
+                System.out.printf("%c%101c\n", '│', '│');
 
-                String debuff;
+                for(int i = 0 ; i < 13; i++) {
+                    System.out.printf("%c%43s%14s%38s%6c\n", '│', player.getAsciiArt(i), "", boss.getAsciiArt(i), '│');
+                }
+
+                System.out.printf("%c%101c\n", '│', '│');
+
+                String debuff = "│";
                 if (player.isPoisoned())
-                    debuff = String.format("Poison %-7d", player.getPoisonDamage());
-                else debuff = String.format("%-15s", "");
+                    debuff += String.format("%33s%-7d", "Poison : ", player.getPoisonDamage());
+                else debuff += String.format("%40s", "");
                 if (boss.isPoisoned())
-                    debuff += String.format("Poison %-7d", boss.getPoisonDamage());
-
+                    debuff += String.format("%49s%-7d%5c", "Poison : ", boss.getPoisonDamage(), '│');
+                else debuff += String.format("%61c", '│');
                 System.out.println(debuff);
 
-                if(boss.getStrength() > 0){
-                    System.out.printf("%15s%s%d\n", "", "Strength +", boss.getStrength());
-                }
+                String strength = "│";
+                if (player.isPoisoned())
+                    strength += String.format("%35s%-5d", "Strength : ", player.getStrength());
+                else strength += String.format("%40s", "");
+                if (boss.isPoisoned())
+                    strength += String.format("%51s%-5d%5c", "Strength : ", boss.getStrength(), '│');
+                else strength += String.format("%61c", '│');
+                System.out.println(strength);
+
+
                 System.out.println("Input the card number to use. 0: Turn end");
                 for(int i=0; i<player.hand.size(); i++){
                     System.out.printf("%d : Cost %d │ %-15s │ %s\n",
