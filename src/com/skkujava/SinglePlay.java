@@ -62,7 +62,7 @@ class SinglePlay extends Game {
                 System.out.printf("%c%29s%5s%41s%5s%21c\n",
                         '│', "HP : ", player.getHp() + "/" + player.getMaxHp(), "HP : ", boss.getHp() + "/" + boss.getMaxHp(), '│');
 
-                System.out.printf("%c%32s%d%45s%d%22c\n",
+                System.out.printf("%c%32s%-2d%45s%d%21c\n",
                         '│', "Armor : ", player.getArmor(), "Armor : ", boss.getArmor(), '│');
 
                 System.out.printf("%c%101c\n", '│', '│');
@@ -198,7 +198,7 @@ class SinglePlay extends Game {
                     System.out.println("Select the card to remove.");
                     for (int i = 0; i < store.size(); i++) {
                         card = store.get(i);
-                        System.out.printf("%d: %-7s│%s", i + 1, card.name, card.cardDescription());
+                        System.out.printf("%d: %-7s│%s\n", i + 1, card.name, card.cardDescription());
                     }
                     int inp;
                     do {
@@ -208,7 +208,7 @@ class SinglePlay extends Game {
                         } else break;
                     } while (true);
 
-                    card = store.get(inp);
+                    card = store.get(--inp);
 
                     System.out.println("Are you sure remove this card? (Y/N)");
                     System.out.printf("%-7s│%s\n", card.name, card.cardDescription());
@@ -248,7 +248,7 @@ class SinglePlay extends Game {
 
                     for (int i = 0; i < store.size(); ++i) {
                         card = store.get(i);
-                        System.out.printf("%d: %-7s│%s", i + 1, card.name, card.cardDescription());
+                        System.out.printf("%d: %-7s│%s\n", i + 1, card.name, card.cardDescription());
                     }
                     int inp;
                     do {
@@ -258,7 +258,7 @@ class SinglePlay extends Game {
                         } else break;
                     } while (true);
 
-                    card = store.get(inp);
+                    card = store.get(--inp);
                     Card clone;
                     try {
                         clone = (Card)card.clone();
