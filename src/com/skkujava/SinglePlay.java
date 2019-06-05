@@ -55,10 +55,10 @@ class SinglePlay extends Game {
 
                 String debuff;
                 if (player.isPoisoned())
-                    debuff = String.format("%-15s", "Poison");
+                    debuff = String.format("Poison -%-7d", player.getPoisonDamage());
                 else debuff = String.format("%-15s", "");
                 if (boss.isPoisoned())
-                    debuff += String.format("%-15s", "Poison");
+                    debuff += String.format("Poison -%-7d", boss.getPoisonDamage());
 
                 System.out.println(debuff);
 
