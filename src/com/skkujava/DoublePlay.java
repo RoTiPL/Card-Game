@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 public class DoublePlay extends Game {
     private Player p1, p2;
-    private ArrayList<Card> store;
     DoublePlay(){
         int temp;
-        store = new ArrayList<>();
         System.out.println("Player 1을 설정합니다.\n직업을 선택해 주세요\n1. Warrior\n2. Thief");
         do{
             temp = scanner.nextInt();
@@ -27,7 +25,7 @@ public class DoublePlay extends Game {
         System.out.println("카드를 골라 주세요. 나오는 5장의 카드 중 한 장을 골라 덱에 넣습니다.");
         for(int i = 1; i <= 10; i++){
             System.out.printf("%d/10\n", i);
-            AddRandomCardToPlayer(p1, 5, store);
+            AddRandomCardToPlayer(p1, 5, p1.grave);
             System.out.println();
         }
         clear();
@@ -50,7 +48,7 @@ public class DoublePlay extends Game {
         System.out.println("카드를 골라 주세요. 나오는 5장의 카드 중 한 장을 골라 덱에 넣습니다.");
         for(int i = 1; i <= 10; i++){
             System.out.printf("%d/10\n", i);
-            AddRandomCardToPlayer(p2, 5, store);
+            AddRandomCardToPlayer(p2, 5, p2.grave);
             System.out.println();
         }
     }
