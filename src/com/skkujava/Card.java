@@ -123,7 +123,7 @@ class Anger extends Card {
         return "Deal " + damage + " damage. " + "Add a copy of this card to your discard pile.";
     }
 }
-
+/*
 class Armaments extends Card {
     int block = 5;
 
@@ -135,7 +135,7 @@ class Armaments extends Card {
 
     void action(Player player, HumanObject enemy){
         scanner = new Scanner( System.in );
-        player.setArmor(block);
+        player.setArmor(block + player.getArmor());
         if (reinforced){
             for(int i=0; i<player.hand.size(); i++){
                 player.hand.get(i).reinforced = true;
@@ -172,7 +172,7 @@ class Armaments extends Card {
         }
     }
 }
-
+*/
 class Body_Slam extends Card {
     int damage;
 
@@ -218,7 +218,7 @@ class Clash extends Card {
 
     void action(Player player, HumanObject enemy){
         for(int i=0; i<player.hand.size(); i++){
-            if (player.hand.get(i).card_type != "Attack"){
+            if (!player.hand.get(i).card_type.equals("Attack")){
                 return;
             }
         }
@@ -280,7 +280,7 @@ class Cleave extends Card {
 }
 
 class Flex extends Card {
-    int strength = 2;
+    int strength = 1;
 
     Flex() {
         this.name = "Flex";
@@ -293,7 +293,7 @@ class Flex extends Card {
     }
 
     void reinforce() {
-        strength = 4;
+        strength = 2;
         reinforced = true;
     }
 
@@ -309,9 +309,11 @@ class Flex extends Card {
     }
 
     String cardDescription() {
-        return "Gain " + strength + " Strength. " + "At the end of your turn, lose " + strength + " Strength.";
+        return "Gain " + strength + " Strength. ";
     }
 }
+
+
 /*
 class Headbutt extends Card {
     int damage = 9;
@@ -359,8 +361,9 @@ class Heavy_Blade extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        damage += player.getStrength() * add_damage;
-        enemy.TakeDamage(damage);
+        int temp = damage;
+        temp += player.getStrength() * add_damage;
+        enemy.TakeDamage(temp);
     }
 
     void reinforce() {
@@ -430,23 +433,24 @@ class Perfected_Strike extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        int temp = damage;
         for(int i=0; i<player.deck.size(); i++){
             if ( player.deck.get(i).name.contains("Strike") ){
-                damage += add_damage;
+                temp += add_damage;
             }
         }
         for(int i=0; i<player.hand.size(); i++){
             if ( player.hand.get(i).name.contains("Strike") ){
-                damage += add_damage;
+                temp += add_damage;
             }
         }
         for (int i=0; i<player.grave.size(); i++){
             if ( player.grave.get(i).name.contains("Strike") ){
-                damage += add_damage;
+                temp += add_damage;
             }
         }
 
-        enemy.TakeDamage(damage);
+        enemy.TakeDamage(temp);
     }
 
     void reinforce() {
@@ -632,6 +636,7 @@ class Warcry extends Card {
         scanner = new Scanner( System.in );
         int index = scanner.nextInt();
         player.hand.get(index);
+    //TODO
     }
 
     void reinforce() {
@@ -703,7 +708,7 @@ class Burning_Pact extends Card {
         System.out.println("Input a index which will be Exhaust.");
         scanner = new Scanner(System.in);
         int index = scanner.nextInt();
-        // Exhaust
+        // Exhaust 대신 Discard로 바꿈
 
         random = new Random();
         for(int i = 0; i < draw; i++) {
@@ -739,7 +744,7 @@ class Burning_Pact extends Card {
     }
 
     String cardDescription() {
-        return "Exhaust 1 card. " + "Draw " + draw + " cards.";
+        return "Discard 1 card. " + "Draw " + draw + " cards.";
     }
 }
 
@@ -1373,7 +1378,7 @@ class Bane extends Card {
 
     void action(Player player, HumanObject enemy){
         enemy.TakeDamage(damage);
-        if (enemy.getPoisonDamage() > 0){
+        if (enemy.isPoisoned()){
             enemy.TakeDamage(damage);
         }
     }
@@ -1615,6 +1620,7 @@ class Flying_Knee extends Card {
     }
 
     void action(Player player, HumanObject enemy){
+        enemy.TakeDamage(damage);
         player.setBonusMana( player.getBonusMana() + 1 );
     }
 
@@ -2138,7 +2144,7 @@ class Escape_Plan extends Card {
         player.deck.remove(0);
         player.hand.add(card);
 
-        if (card.card_type == "Skill"){
+        if (card.card_type.equals("Skill")){
             player.setArmor( player.getArmor() + block );
         }
     }
@@ -2273,7 +2279,7 @@ class Skewer extends Card {
 
     Skewer() {
         this.name = "Skewer";
-        this.cost = -1;
+        this.cost = 0;
         this.card_type = "Attack";
     }
 
@@ -2281,6 +2287,7 @@ class Skewer extends Card {
         for (int i=0; i<player.getMana(); i++){
             enemy.TakeDamage(damage);
         }
+        player.setMana(0);
     }
 
     void reinforce() {
@@ -2312,6 +2319,7 @@ class Adrenaline extends Card {
         this.name = "Adrenaline";
         this.cost = 0;
         this.card_type = "Skill";
+        this.be_exhaust = true;
     }
 
     void action(Player player, HumanObject enemy){
@@ -2392,7 +2400,7 @@ class After_Image extends Card {
 
     }
 }*/
-/*
+
 class Bullet_Time extends Card {
     Bullet_Time() {
         this.name = "Bullet_Time";
@@ -2401,7 +2409,7 @@ class Bullet_Time extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-//
+        player.setSuperpower(5);
     }
 
     void reinforce() {
@@ -2422,9 +2430,9 @@ class Bullet_Time extends Card {
     }
 
     String cardDescription() {
-        return "You cannot draw additional cards this turn. Reduce the cost of cards in your hand to 0 this turn.";
+        return "You can play 5 cards without consuming mana at this turn";
     }
-}*/
+}
 /*
 class Burst extends Card {
     int skill = 1;
@@ -2469,7 +2477,7 @@ class Burst extends Card {
 class Doppelganger extends Card {
     Doppelganger() {
         this.name = "Doppelganger";
-        this.cost = -1;
+        this.cost = 0;
         this.card_type = "Skill";
     }
 
@@ -2483,6 +2491,7 @@ class Doppelganger extends Card {
         }
         player.setDrawCount( player.getDrawCount() + energy);
         player.setBonusMana( player.getBonusMana() + energy);
+        player.setMana(0);
     }
 
     void reinforce() {

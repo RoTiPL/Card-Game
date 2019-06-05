@@ -15,11 +15,16 @@ public class Game {
     int PlayCard(Player player, HumanObject enemy, int index){
         Card card = player.hand.get(index);
         if(player.isSuperpower() || player.getMana() >= card.cost) {
-            player.setMana(player.getMana() - card.cost);
+            if(!player.isSuperpower())
+                player.setMana(player.getMana() - card.cost);
+
+            player.setSuperpower(player.getSuperpower() - 1);
+
             card.action(player, enemy);
             player.hand.remove(index);
-            player.grave.add(card);
-
+            if(!card.be_exhaust) {
+                player.grave.add(card);
+            }
             if (enemy.getHp() <= 0) {
                 return 1;
             }
@@ -39,7 +44,7 @@ public class Game {
         if(player.isPoisoned() && poisonFlag){
             player.TakePoisonDamage();
         }
-        player.setSuperpower(false);
+        player.setSuperpower(0);
         if(enemy.getHp() <= 0)return 1;
         else if(player.getHp() <= 0)return 2;
         return 0;
