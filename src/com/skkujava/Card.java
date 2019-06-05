@@ -10,6 +10,7 @@ abstract public class Card implements Cloneable{
     int cost; // 카드를 사용하기 위한 비용
     String card_type; // 카드의 타입 설정
     boolean reinforced = false; // 카드가 강화되었는지 확인
+    boolean be_exhaust = false; // 소멸되는 카드인지 확인하기
     abstract void action(Player player, HumanObject enemy); // 플레이어와 적 간의 상호작용을 나타내는 메소드
     abstract void reinforce(); // 카드를 강화시키기 위한 메소드
     abstract String cardDescription(); // 카드의 설명
@@ -141,7 +142,7 @@ class Armaments extends Card {
             }
         }
         else {
-            System.out.println("Input a index of card that will be reinforced.");
+            System.out.println("Input a index of card which  will be reinforced.");
             int index = scanner.nextInt();
             player.hand.get(index).reinforced = true;
         }
@@ -311,7 +312,7 @@ class Flex extends Card {
         return "Gain " + strength + " Strength. " + "At the end of your turn, lose " + strength + " Strength.";
     }
 }
-
+/*
 class Headbutt extends Card {
     int damage = 9;
 
@@ -345,7 +346,7 @@ class Headbutt extends Card {
     String cardDescription() {
         return "Deal " + damage + " damage. " + "Place a card from your discard pile on top of your draw pile.";
     }
-}
+}*/
 
 class Heavy_Blade extends Card {
     int damage = 14;
@@ -844,7 +845,7 @@ class Inflame extends Card {
         return "Gain " + strength + " Strength.";
     }
 }
-
+/*
 class Metallicize extends Card {
     int block = 3;
 
@@ -878,7 +879,7 @@ class Metallicize extends Card {
     String cardDescription() {
         return "At the end of your turn, gain " + block + " Block.";
     }
-}
+}*/
 
 class Rampage extends Card {
     int damage = 8;
@@ -922,11 +923,11 @@ class Seeing_Red extends Card {
         this.name = "Seeing Red";
         this.cost = 1;
         this.card_type = "Skill";
+        this.be_exhaust = true;
     }
 
     void action(Player player, HumanObject enemy){
         player.setMana( player.getMana() + 2 );
-        //소멸
     }
 
     void reinforce() {
@@ -950,7 +951,7 @@ class Seeing_Red extends Card {
         return "Gain 2 energy. " + "Exhaust.";
     }
 }
-
+/*
 class Barricade extends Card {
     Barricade() {
         this.name = "Barricade";
@@ -982,7 +983,7 @@ class Barricade extends Card {
     String cardDescription() {
         return "Block no longer expires at the start of your turn.";
     }
-}
+}*/
 
 class Bludgeon extends Card {
     int damage = 32;
@@ -1017,7 +1018,7 @@ class Bludgeon extends Card {
         return "Deal " + damage + " damage.";
     }
 }
-
+/*
 class Demon_Form extends Card {
     int add_strength = 2;
     Demon_Form() {
@@ -1027,7 +1028,7 @@ class Demon_Form extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        //보류
     }
 
     void reinforce() {
@@ -1050,8 +1051,8 @@ class Demon_Form extends Card {
     String cardDescription() {
         return "At the start of each turn, gain " + add_strength + " Strength.";
     }
-}
-
+}*/
+/*
 class Double_Tap extends Card {
     Double_Tap() {
         this.name = "Double Tap";
@@ -1087,7 +1088,7 @@ class Double_Tap extends Card {
             return "This turn, your next Attack is played twice.";
         }
     }
-}
+}*/
 
 class Impervious extends Card {
     int block = 30;
@@ -1095,11 +1096,11 @@ class Impervious extends Card {
         this.name = "Impervious";
         this.cost = 2;
         this.card_type = "Skill";
+        this.be_exhaust = true;
     }
 
     void action(Player player, HumanObject enemy){
         player.setArmor( player.getArmor() + block );
-        //소멸
     }
 
     void reinforce() {
@@ -1129,15 +1130,16 @@ class Limit_Break extends Card {
         this.name = "Limit Break";
         this.cost = 1;
         this.card_type = "Skill";
+        this.reinforced = true;
     }
 
     void action(Player player, HumanObject enemy){
         player.setStrength( player.getStrength() * 2 );
-        //소멸
     }
 
     void reinforce() {
-        reinforced = true;
+        this.reinforced = true;
+        this.be_exhaust = false;
     }
 
 
@@ -1613,7 +1615,7 @@ class Flying_Knee extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setBonusMana( player.getBonusMana() + 1 );
     }
 
     void reinforce() {
@@ -1648,7 +1650,7 @@ class Outmaneuver extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        player.setBonusMana( player.getBonusMana() + add_energy );
     }
 
     void reinforce() {
@@ -1816,7 +1818,7 @@ class Quick_Slash extends Card {
         return "Deal " + damage + " damage. " + "Draw 1 card.";
     }
 }
-
+/*
 class Sneaky_Strike extends Card {
     int damage = 10;
 
@@ -1851,8 +1853,8 @@ class Sneaky_Strike extends Card {
     String cardDescription() {
         return "Deal " + damage + " damage. " + "If you have discarded a card this turn, gain 2 Energy.";
     }
-}
-
+}*/
+/*
 class Accuracy extends Card {
     int add_damage = 3;
 
@@ -1865,7 +1867,7 @@ class Accuracy extends Card {
     void action(Player player, HumanObject enemy){
         for(int i=0; i<player.deck.size(); i++){
             if (player.deck.get(i).name == "Shiv"){
-                //
+
             }
         }
     }
@@ -1890,13 +1892,14 @@ class Accuracy extends Card {
     String cardDescription() {
         return "Shivs deal " + add_damage + " additional damage.";
     }
-}
+}*/
 
 class Calculated_Gamble extends Card {
     Calculated_Gamble() {
         this.name = "Calculated Gamble";
         this.cost = 0;
         this.card_type = "Skill";
+        this.be_exhaust = true;
     }
 
     void action(Player player, HumanObject enemy){
@@ -1922,7 +1925,8 @@ class Calculated_Gamble extends Card {
     }
 
     void reinforce() {
-        reinforced = true;
+        this.reinforced = true;
+        this.be_exhaust = false;
     }
 
 
@@ -1953,6 +1957,7 @@ class Catalyst extends Card {
         this.name = "Catalyst";
         this.cost = 1;
         this.card_type = "Skill";
+        this.be_exhaust = true;
     }
 
     void action(Player player, HumanObject enemy){
@@ -1965,7 +1970,8 @@ class Catalyst extends Card {
     }
 
     void reinforce() {
-        reinforced = true;
+        this.reinforced = true;
+        this.be_exhaust = false;
     }
 
 
@@ -1989,7 +1995,7 @@ class Catalyst extends Card {
         }
     }
 }
-
+/*
 class Choke extends Card {
     int damage = 12;
     int add_damage = 3;
@@ -2025,7 +2031,7 @@ class Choke extends Card {
     String cardDescription() {
         return "Deal 12 damage. " + "Whenever you play a card this turn, the enemy loses " + add_damage + " HP.";
     }
-}
+}*/
 
 class Concentrate extends Card {
     int energy = 2;
@@ -2118,7 +2124,23 @@ class Escape_Plan extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-        //
+        random = new Random();
+        if (player.deck.size() == 0) {
+            while (player.grave.size() != 0) {
+                int randInt = random.nextInt(player.grave.size());
+                Card card = player.grave.get(randInt);
+                player.grave.remove(randInt);
+                player.deck.add(card);
+            }
+        }
+        if (player.deck.size() == 0) return;
+        Card card = player.deck.get(0);
+        player.deck.remove(0);
+        player.hand.add(card);
+
+        if (card.card_type == "Skill"){
+            player.setArmor( player.getArmor() + block );
+        }
     }
 
     void reinforce() {
@@ -2139,7 +2161,7 @@ class Escape_Plan extends Card {
     }
 
     String cardDescription() {
-        return "Draw 1 card. " + "If you darw a Skill, gain " + block + " Block.";
+        return "Draw 1 card. " + "If you draw a Skill, gain " + block + " Block.";
     }
 }
 
@@ -2177,7 +2199,7 @@ class Footwork extends Card {
         return "Gain " + dexterity + " Dexterity.";
     }
 }
-
+/*
 class Infinite_Blades extends Card {
     Infinite_Blades() {
         this.name = "Infinite Blades";
@@ -2186,11 +2208,12 @@ class Infinite_Blades extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-//
+        //
     }
 
     void reinforce() {
-        reinforced = true;
+        this.reinforced = true;
+        this.cost = 0;
     }
 
 
@@ -2206,15 +2229,10 @@ class Infinite_Blades extends Card {
     }
 
     String cardDescription() {
-        if (reinforced) {
-            return "At the start of your turn, add a Shiv into your hand " + "Innate";
-        }
-        else {
-            return "At the start of your turn, add a Shiv into your hand";
-        }
+        return "At the start of your turn, add a Shiv into your hand";
     }
-}
-
+}*/
+/*
 class Noxious_Fumes extends Card {
     int poison = 2;
 
@@ -2248,7 +2266,7 @@ class Noxious_Fumes extends Card {
     String cardDescription() {
         return "At the start of your turn, apply " + poison + " Poison to enemy";
     }
-}
+}*/
 
 class Skewer extends Card {
     int damage = 7;
@@ -2336,7 +2354,7 @@ class Adrenaline extends Card {
         return "Gain " + energy + " Energy " + "Draw 2 cards. " + "Exhaust.";
     }
 }
-
+/*
 class After_Image extends Card {
     After_Image() {
         this.name = "After Image";
@@ -2373,8 +2391,8 @@ class After_Image extends Card {
         }
 
     }
-}
-
+}*/
+/*
 class Bullet_Time extends Card {
     Bullet_Time() {
         this.name = "Bullet_Time";
@@ -2406,8 +2424,8 @@ class Bullet_Time extends Card {
     String cardDescription() {
         return "You cannot draw additional cards this turn. Reduce the cost of cards in your hand to 0 this turn.";
     }
-}
-
+}*/
+/*
 class Burst extends Card {
     int skill = 1;
 
@@ -2446,7 +2464,7 @@ class Burst extends Card {
             return "This turn your next 2 Skills are played twice.";
         }
     }
-}
+}*/
 
 class Doppelganger extends Card {
     Doppelganger() {
@@ -2456,7 +2474,15 @@ class Doppelganger extends Card {
     }
 
     void action(Player player, HumanObject enemy){
-
+        int energy;
+        if (reinforced){
+            energy = player.getMana() + 1;
+        }
+        else {
+            energy = player.getMana();
+        }
+        player.setDrawCount( player.getDrawCount() + energy);
+        player.setBonusMana( player.getBonusMana() + energy);
     }
 
     void reinforce() {
@@ -2484,7 +2510,7 @@ class Doppelganger extends Card {
         }
     }
 }
-
+/*
 class Phantasmal_Killer extends Card {
     Phantasmal_Killer() {
         this.name = "Phantasmal Killer";
@@ -2516,8 +2542,8 @@ class Phantasmal_Killer extends Card {
     String cardDescription() {
         return "Next turn, your Attacks deal double damage.";
     }
-}
-
+}*/
+/*
 class Tools_of_the_Trade extends Card {
     Tools_of_the_Trade() {
         this.name = "Tools of the Trade";
@@ -2549,7 +2575,7 @@ class Tools_of_the_Trade extends Card {
     String cardDescription() {
         return "At the start of your turn, draw 1 card and discard 1 card.";
     }
-}
+}*/
 
 class Shiv extends Card {
     int damage = 4;
