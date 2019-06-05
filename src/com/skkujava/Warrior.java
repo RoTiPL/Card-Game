@@ -3,6 +3,7 @@ package com.skkujava;
 public class Warrior extends Player {
 
     public Warrior() {
+        this.name = "Warrior";
         setMaxHp(80);
         setHp(getMaxHp());
         setDrawCount(5);

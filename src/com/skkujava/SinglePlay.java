@@ -13,7 +13,7 @@ class SinglePlay extends Game {
         floor = 0;
         int temp;
         do {
-            System.out.println("직업을 선택해 주세요\n1. Warrior\n2. Thief");
+            System.out.println("Select your class.\n1. Warrior\n2. Thief");
             temp = scanner.nextInt();
             if (temp == 1){
                 player = new Warrior();
@@ -55,17 +55,17 @@ class SinglePlay extends Game {
 
                 String debuff;
                 if (player.isPoisoned())
-                    debuff = String.format("%-15s", "Poison");
+                    debuff = String.format("Poison %-7d", player.getPoisonDamage());
                 else debuff = String.format("%-15s", "");
                 if (boss.isPoisoned())
-                    debuff += String.format("%-15s", "Poison");
+                    debuff += String.format("Poison %-7d", boss.getPoisonDamage());
 
                 System.out.println(debuff);
 
                 if(boss.getStrength() > 0){
-                    System.out.printf("%15s%s%d", "", "Strength +", boss.getStrength());
+                    System.out.printf("%15s%s%d\n", "", "Strength +", boss.getStrength());
                 }
-                System.out.println("사용할 카드를 입력해 주세요, 0을 입력 시 턴을 종료합니다");
+                System.out.println("Input the card number to use. 0: Turn end");
                 for(int i=0; i<player.hand.size(); i++){
                     System.out.printf("%d : Cost %d │ %-15s │ %s\n",
                             i+1, player.hand.get(i).cost, player.hand.get(i).name, player.hand.get(i).cardDescription());
@@ -79,7 +79,7 @@ class SinglePlay extends Game {
                         System.out.println("Invalid input! Please enter again");
                     }
                     else if(player.getMana() < player.hand.get(input - 1).cost){
-                        System.out.println("마나가 부족합니다.");
+                        System.out.println("Not enough mana.");
                     }
                     else break;
                 } while(true);
@@ -87,7 +87,6 @@ class SinglePlay extends Game {
                 if(input == 0)break;
 
                 if(PlayCard(player, boss, --input) == 1){
-                    TurnEnd();
                     break;
                 }
             } while (true);
@@ -96,13 +95,12 @@ class SinglePlay extends Game {
         } while(true);
         //TODO: ranking
 
-        System.out.print("랭킹에 등록할 닉네임을 입력해주세요: ");
+        System.out.print("Please input your nickname: ");
         scanner.nextLine();
         String nickname = scanner.nextLine();
-        Ranking.uploadRanking(nickname, floor);
+        Ranking.uploadRanking(nickname, floor, player.name);
+        Ranking.loadRanking();
     }
-
-
 
     private int TurnEnd(){
         if(player.getHp() <= 0){
@@ -119,27 +117,33 @@ class SinglePlay extends Game {
             player.completeFloor();
             GetReward();
             player.setArmor(0);
+            player.setPoisoned(false);
+            player.setPoisonDamage(0);
             player.setMana(player.getMaxMana());
             return 2;
         }
         else if(res == 2){
             return 1;
         }
-        boss.Action();
-        if(player.getHp() <= 0){
-            return 1;
+        else{
+            boss.Action();
+            if(player.getHp() <= 0){
+                return 1;
+            }
+            player.setArmor(0);
+            player.setMana(player.getMaxMana() + player.getBonusMana());
+            player.setBonusMana(0);
+            return 0;
         }
-        player.setArmor(0);
-        player.setMana(player.getMaxMana());
-        return 0;
     }
 
 
 
     private void GetReward(){
         boolean flag = true;
-        System.out.println("축하합니다! 현재 층을 클리어하셨습니다.");
-        System.out.println("1: 카드를 한 장 덱에 추가합니다\n2: 덱에서 카드를 한 장 뺍니다\n3: 체력을 모두 회복합니다.(이 보상을 고르지 않아도 1/3의 체력이 회복됩니다.)\n4: 카드를 한 장 강화합니다.");
+        System.out.println("Congratulation! You cleared floor " + floor + "!");
+        System.out.println("1: Add one random card to your deck.\n2: Remove one card from your deck.\n" +
+                "3: Heal perfectly.(You will heal 1/3 of your HP unless you select this one.)\n4: Reinforce one card of your deck.");
         String userInput = scanner.next();
         do {
             if (userInput.trim().equals("1")) {                 //카드 덱에 추가
@@ -148,7 +152,7 @@ class SinglePlay extends Game {
             } else if (userInput.trim().equals("2")) {              //카드 버리기
                 Card card;
                 do {
-                    System.out.println("제거할 카드를 선택하세요");
+                    System.out.println("Select the card to remove.");
                     for (int i = 0; i < player.grave.size(); i++) {
                         card = player.grave.get(i);
                         System.out.printf("%d: %-7s│%s", i + 1, card.name, card.cardDescription());
@@ -163,7 +167,7 @@ class SinglePlay extends Game {
 
                     card = player.grave.get(inp);
 
-                    System.out.println("다음 카드를 제거하시겠습니까? (Y/N)");
+                    System.out.println("Are you sure remove this card? (Y/N)");
                     System.out.printf("%-7s│%s\n", card.name, card.cardDescription());
 
                     do{
@@ -197,7 +201,7 @@ class SinglePlay extends Game {
                     }
                 }
                 do {
-                    System.out.println("강화할 카드를 선택하세요");
+                    System.out.println("Select the card to reinforce.");
 
                     for (int i = 0; i < player.grave.size(); ++i) {
                         card = player.grave.get(i);
@@ -220,7 +224,7 @@ class SinglePlay extends Game {
                         return;
                     }
                     clone.reinforce();
-                    System.out.println("다음 카드를 강화하시겠습니까? (Y/N)");
+                    System.out.println("Are you sure reinforce this card? (Y/N)");
                     System.out.printf("%-7s│%s\n%-15s\n%-7s│%s\n", card.name, card.cardDescription(), "↓", clone.name, clone.cardDescription());
 
                     do{
