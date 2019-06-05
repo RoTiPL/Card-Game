@@ -14,9 +14,9 @@ public class Game {
 
     int PlayCard(Player player, HumanObject enemy, int index){
         Card card = player.hand.get(index);
-        if(player.getMana() >= card.cost) {
-            card.action(player, enemy);
+        if(player.isSuperpower() || player.getMana() >= card.cost) {
             player.setMana(player.getMana() - card.cost);
+            card.action(player, enemy);
             player.hand.remove(index);
             player.grave.add(card);
 
@@ -39,6 +39,7 @@ public class Game {
         if(player.isPoisoned() && poisonFlag){
             player.TakePoisonDamage();
         }
+        player.setSuperpower(false);
         if(enemy.getHp() <= 0)return 1;
         else if(player.getHp() <= 0)return 2;
         return 0;
