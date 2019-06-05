@@ -11,7 +11,8 @@ abstract class Boss extends HumanObject{
 
         Random random = new Random();
         Boss boss = null;
-        int num = random.nextInt(3);
+        // 3으로 고치기
+        int num = random.nextInt(1);
         switch(num) {
             case 0:
                 boss = new Poisoner(player, floor);
@@ -58,10 +59,6 @@ class Poisoner extends Boss {
             case 2:
                 Defend();
                 break;
-        }
-
-        if(player.isPoisoned()) {
-            player.TakePoisonDamage();
         }
     }
 
