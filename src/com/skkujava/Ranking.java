@@ -1,26 +1,43 @@
 package com.skkujava;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Ranking {
     /* TODO
      * 1. 층수로 내림차순 정렬
-     * 2. 현재 "닉네임 층수"로 입력되는데 "닉네임 직업 층수"로 고치기
-     * 3. 2인용?
      */
     private static String filePath = "rank.txt";
+    private static ArrayList<RankInfo> rankinfo = new ArrayList<>();
 
-    public static void showRanking() {
+    public static void loadRanking() {
         try {
+            rankinfo.clear();
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             while(true) {
                 String line = br.readLine();
                 if (line == null) break;
-                System.out.println(line);
+                String[] info = line.split(" ");
+                rankinfo.add(new RankInfo(Integer.parseInt(info[0]), info[1], info[2]));
             }
+            Collections.sort(rankinfo);
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void showRanking() {
+        if(rankinfo.isEmpty()) {
+            System.out.println("There is no ranking information. Please play the game first!");
+            return;
+        }
+        System.out.println(rankinfo.size());
+        System.out.println("========== RANKING ==========");
+        System.out.printf("%-10s%-15s%s\n", "floor", "nickname", "class");
+        for(RankInfo r : rankinfo) {
+            System.out.printf("%-10d%-15s%s\n", r.getFloor(), r.getName(), r.getJob());
         }
     }
 

@@ -1,2 +1,5 @@
-0 KDH Warrior
-1 IMIM Thief
+0 imthefirstman Warrior
+0 SECONDMAN Thief
+0 SIBAL Thief
+1 HAHA Thief
+0 noooo Warrior

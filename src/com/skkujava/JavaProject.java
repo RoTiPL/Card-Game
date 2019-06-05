@@ -1,7 +1,6 @@
 package com.skkujava;
 
 import java.util.Scanner;
-import java.io.IOException;
 
 public class JavaProject {
 
@@ -13,9 +12,11 @@ public class JavaProject {
         System.out.println("4. Exit Game");
         Scanner input = new Scanner(System.in);
         Game game;
+
+        Ranking.loadRanking();
+
         String userInput = input.next();
         do {
-
             if (userInput.trim().equals("1")) {
                 game = new SinglePlay();
                 ((SinglePlay) game).Play();
