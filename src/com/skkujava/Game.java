@@ -35,14 +35,11 @@ public class Game {
         return 0;
     }
 
-    int TurnEnd(Player player, HumanObject enemy, boolean poisonFlag){
+    int TurnEnd(Player player, HumanObject enemy){
         player.grave.addAll(player.hand);
         player.hand.clear();
-        if(enemy.isPoisoned() && poisonFlag) {
+        if(enemy.isPoisoned()) {
             enemy.TakePoisonDamage();
-        }
-        if(player.isPoisoned() && poisonFlag){
-            player.TakePoisonDamage();
         }
         player.setSuperpower(0);
         if(enemy.getHp() <= 0)return 1;

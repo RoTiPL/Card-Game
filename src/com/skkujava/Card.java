@@ -137,14 +137,14 @@ class Armaments extends Card {
         scanner = new Scanner( System.in );
         player.setArmor(block + player.getArmor());
         if (reinforced){
-            for(int i=0; i<player.hand.size(); i++){
-                player.hand.get(i).reinforced = true;
+            for(Card card : player.hand){
+                card.reinforce();
             }
         }
         else {
             System.out.println("Input a index of card which will be reinforced.");
             int index = scanner.nextInt();
-            player.hand.get(index).reinforced = true;
+            player.hand.get(index).reinforce();
         }
 
     }
@@ -164,7 +164,7 @@ class Armaments extends Card {
         return object;
     }
     String cardDescription() {
-        if (reinforced) {
+        if (!reinforced) {
             return "Gain " + block + " Block. " + " Upgrade a card in your hand for the rest of combat.";
         }
         else {

@@ -96,11 +96,10 @@ public class DoublePlay extends Game {
                 if (input == 0) break;
 
                 if(PlayCard(p1, p2, --input) == 1){
-                    TurnEnd(p1, p2, false);
                     break;
                 }
             }while(true);
-            res = TurnEnd(p1, p2, false);
+            res = TurnEnd(p1, p2);
             if(res == 1){
                 flag = true;
                 break;
@@ -149,12 +148,11 @@ public class DoublePlay extends Game {
                 if (input == 0) break;
 
                 if(PlayCard(p2, p1, --input) == 1){
-                    TurnEnd(p2, p1, false);
                     break;
                 }
             }while(true);
 
-            res = TurnEnd(p2, p1, true);
+            res = TurnEnd(p2, p1);
             if(res == 1){
                 flag = false;
                 break;

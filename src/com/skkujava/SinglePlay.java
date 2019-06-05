@@ -142,7 +142,7 @@ class SinglePlay extends Game {
             return 1;
         }
         boss.setArmor(0);
-        int res = super.TurnEnd(player, boss, true);
+        int res = super.TurnEnd(player, boss);
         if(res == 1) {
             // Game Clear 시키기
             ++floor;
@@ -170,6 +170,7 @@ class SinglePlay extends Game {
         }
         else{
             boss.Action();
+            player.TakePoisonDamage();
             if(player.getHp() <= 0){
                 return 1;
             }
