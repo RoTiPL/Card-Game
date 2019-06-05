@@ -9,7 +9,6 @@ public class CardCollection {
                     new Strike(),
                     new Defend(),
                     new Anger(),
-                    new Armaments(),
                     new Body_Slam(),
                     new Clash(),
                     new Cleave(),

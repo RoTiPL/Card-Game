@@ -11,7 +11,7 @@ public class Player extends HumanObject {
     private int bonusMana;
     private int drawCount;
     private int dexterity;
-    private boolean superpower;
+    private int superpower;
 
     public Player() {
         setMaxMana(3);
@@ -22,7 +22,7 @@ public class Player extends HumanObject {
         setDexterity(0);
         setPoisoned(false);
         setPoisonDamage(0);
-        setSuperpower(false);
+        setSuperpower(0);
         drawCount = 5;
         deck = new ArrayList<>();
         hand = new ArrayList<>();
@@ -66,13 +66,16 @@ public class Player extends HumanObject {
     }
 
     public boolean isSuperpower() {
-        return superpower;
+        return superpower > 0;
     }
 
-    public void setSuperpower(boolean superpower) {
+    public int getSuperpower() { return superpower; }
+
+    public void setSuperpower(int superpower) {
         this.superpower = superpower;
     }
 
+    public void setArmor(int armor){ super.setArmor(armor + dexterity); }
     public void completeFloor() {
         // Thief: none
         // Warrior: hp +7
