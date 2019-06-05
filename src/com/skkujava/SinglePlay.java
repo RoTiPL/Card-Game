@@ -87,7 +87,6 @@ class SinglePlay extends Game {
                 if(input == 0)break;
 
                 if(PlayCard(player, boss, --input) == 1){
-                    TurnEnd();
                     break;
                 }
             } while (true);
