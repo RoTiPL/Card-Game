@@ -102,8 +102,6 @@ class SinglePlay extends Game {
         Ranking.loadRanking();
     }
 
-
-
     private int TurnEnd(){
         if(player.getHp() <= 0){
             return 1;
@@ -133,7 +131,8 @@ class SinglePlay extends Game {
                 return 1;
             }
             player.setArmor(0);
-            player.setMana(player.getMaxMana());
+            player.setMana(player.getMaxMana() + player.getBonusMana());
+            player.setBonusMana(0);
             return 0;
         }
     }

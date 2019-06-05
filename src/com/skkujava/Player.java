@@ -8,12 +8,14 @@ public class Player extends HumanObject {
     String name;
     private int maxMana;
     private int mana;
+    private int bonusMana;
     private int drawCount;
     private int dexterity;
 
     public Player() {
         setMaxMana(3);
         setMana(getMaxMana());
+        setBonusMana(0);
         setArmor(0);
         setStrength(0);
         setDexterity(0);
@@ -40,6 +42,10 @@ public class Player extends HumanObject {
     public void setMana(int mana) {
         this.mana = mana;
     }
+
+    public int getBonusMana() { return bonusMana; }
+
+    public void setBonusMana(int bonusMana) { this.bonusMana = bonusMana; }
 
     public int getDrawCount() {
         return drawCount;
