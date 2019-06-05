@@ -119,7 +119,7 @@ public class DoublePlay extends Game {
                 System.out.printf("%-8s%-7s%-8s%-7s\n",
                         "Armor :", p1.getArmor(), "Armor :", p2.getArmor());
                 System.out.printf("%-7s%s\n",
-                        "Mana :", p1.getMana() + "/" + p1.getMaxMana());
+                        "Mana :", p2.getMana() + "/" + p2.getMaxMana());
 
                 String debuff;
                 if (p1.isPoisoned())

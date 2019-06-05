@@ -481,12 +481,12 @@ class Pommel_Strike extends Card {
         this.name = "Pommel Strike";
         this.cost = 1;
         this.card_type = "Attack";
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy) {
         enemy.TakeDamage(damage + player.getStrength());
 
-        random = new Random();
         for(int i = 0; i < draw; i++){
             if(player.deck.size() == 0){
                 while(player.grave.size() != 0) {
@@ -532,12 +532,12 @@ class Shrug_It_Off extends Card {
         this.name = "Shrug_It_Off";
         this.cost = 1;
         this.card_type = "Skill";
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
         player.setArmor( player.getArmor() + block );
 
-        random = new Random();
         if(player.deck.size() == 0){
             while(player.grave.size() != 0) {
                 int randInt = random.nextInt(player.grave.size());
@@ -618,10 +618,10 @@ class Warcry extends Card {
         this.cost = 0;
         this.card_type = "Skill";
         this.be_exhaust = true;
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
-        random = new Random();
         if(player.deck.size() == 0){
             while(player.grave.size() != 0) {
                 int randInt = random.nextInt(player.grave.size());
@@ -705,6 +705,7 @@ class Burning_Pact extends Card {
         this.name = "Burning Pact";
         this.cost = 1;
         this.card_type = "Skill";
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
@@ -713,7 +714,6 @@ class Burning_Pact extends Card {
         int index = scanner.nextInt();
         player.hand.remove(index);
 
-        random = new Random();
         for(int i = 0; i < draw; i++) {
             if (player.deck.size() == 0) {
                 while (player.grave.size() != 0) {
@@ -1179,13 +1179,13 @@ class Offering extends Card {
         this.cost = 0;
         this.card_type = "Skill";
         this.be_exhaust = true;
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
         player.setHp( player.getHp() - 6 );
         player.setMana( player.getMana() + 2 );
 
-        random = new Random();
         for(int i = 0; i < draw; i++) {
             if (player.deck.size() == 0) {
                 while (player.grave.size() != 0) {
@@ -1273,10 +1273,10 @@ class Acrobatics extends Card {
         this.name = "Acrobatics";
         this.cost = 1;
         this.card_type = "Skill";
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
-        random = new Random();
         for(int i = 0; i < draw; i++) {
             if (player.deck.size() == 0) {
                 while (player.grave.size() != 0) {
@@ -1327,12 +1327,12 @@ class Backflip extends Card {
         this.name = "Backfilp";
         this.cost = 1;
         this.card_type = "Skill";
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
         player.setArmor( player.getArmor() + block );
 
-        random = new Random();
         for(int i = 0; i < 2; i++) {
             if (player.deck.size() == 0) {
                 while (player.grave.size() != 0) {
@@ -1494,12 +1494,12 @@ class Dagger_Throw extends Card {
         this.name = "Dagger Throw";
         this.cost = 1;
         this.card_type = "Attack";
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
         enemy.TakeDamage(damage + player.getStrength());
 
-        random = new Random();
         for(int i = 0; i < 2; i++) {
             if (player.deck.size() == 0) {
                 while (player.grave.size() != 0) {
@@ -1731,10 +1731,10 @@ class Prepared extends Card {
         this.name = "Prepared";
         this.cost = 0;
         this.card_type = "Skill";
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
-        random = new Random();
         for(int i = 0; i < draw; i++) {
             if (player.deck.size() == 0) {
                 while (player.grave.size() != 0) {
@@ -1787,12 +1787,12 @@ class Quick_Slash extends Card {
         this.name = "Quick Slash";
         this.cost = 1;
         this.card_type = "Attack";
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
         enemy.TakeDamage(damage + player.getStrength());
 
-        random = new Random();
         if (player.deck.size() == 0) {
             while (player.grave.size() != 0) {
                 int randInt = random.nextInt(player.grave.size());
@@ -1911,6 +1911,7 @@ class Calculated_Gamble extends Card {
         this.cost = 0;
         this.card_type = "Skill";
         this.be_exhaust = true;
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
@@ -2132,10 +2133,10 @@ class Escape_Plan extends Card {
         this.name = "Escape Plan";
         this.cost = 0;
         this.card_type = "Skill";
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
-        random = new Random();
         if (player.deck.size() == 0) {
             while (player.grave.size() != 0) {
                 int randInt = random.nextInt(player.grave.size());
@@ -2326,6 +2327,7 @@ class Adrenaline extends Card {
         this.cost = 0;
         this.card_type = "Skill";
         this.be_exhaust = true;
+        random = new Random();
     }
 
     void action(Player player, HumanObject enemy){
