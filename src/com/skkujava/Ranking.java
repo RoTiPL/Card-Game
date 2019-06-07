@@ -34,11 +34,14 @@ public class Ranking {
             return;
         }
         System.out.println(rankinfo.size());
-        System.out.println("========== RANKING ==========");
-        System.out.printf("%-10s%-15s%s\n", "floor", "nickname", "class");
+        // 가로 49(51)
+        System.out.println("┌─────────────────────────────────────────────────┐");
+        System.out.printf("%c%21s%7s%21s%c\n", '│', "", "RANKING", "", '│');
+        System.out.printf("%c%3s%5s%4s%5s%7s%8s%17s%c\n", '│', "", "floor", "", "class", "", "nickname", "", '│');
         for(RankInfo r : rankinfo) {
-            System.out.printf("%-10d%-15s%s\n", r.getFloor(), r.getName(), r.getJob());
+            System.out.printf("%c%4s%2d%6s%-12s%-25s%c\n", '│', "", r.getFloor(), "", r.getJob(), r.getName(), '│');
         }
+        System.out.println("└─────────────────────────────────────────────────┘");
     }
 
     public static void uploadRanking(String name, int floor, String job) {
