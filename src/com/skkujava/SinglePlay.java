@@ -111,9 +111,6 @@ class SinglePlay extends Game {
                     else if (input < 0 || input > player.hand.size()){
                         System.out.println("Invalid input! Please enter again");
                     }
-                    else if(player.getMana() < player.hand.get(input - 1).cost){
-                        System.out.println("Not enough mana.");
-                    }
                     else break;
                 } while(true);
 

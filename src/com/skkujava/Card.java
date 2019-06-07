@@ -1860,27 +1860,6 @@ class Prepared extends Card {
     }
 
     int action(Player player, HumanObject enemy){
-
-        for(int i=0; i<draw; i++){
-            System.out.println("Input a index number of card which will discard.");
-            PrintHand(player);
-            scanner = new Scanner( System.in );
-            int index;
-
-            do {
-                index = scanner.nextInt() - 1;
-                if (index < 0 || index >= player.hand.size()){
-                    System.out.println("Unable Input!");
-                    return 1;
-                }
-                else{
-                    break;
-                }
-            } while (true);
-
-            player.grave.add( player.hand.get(index) );
-            player.hand.remove( index ); // Card Discard
-        }
         for(int i = 0; i < draw; i++) {
             if (player.deck.size() == 0) {
                 while (player.grave.size() != 0) {
@@ -1895,6 +1874,27 @@ class Prepared extends Card {
             player.deck.remove(0);
             player.hand.add(card);
         } // Card Draw
+
+        for(int i=0; i<draw; i++){
+            System.out.println("Input a index number of card which will discard.");
+            PrintHand(player);
+            scanner = new Scanner( System.in );
+            int index;
+
+            do {
+                index = scanner.nextInt() - 1;
+                if (index < 0 || index >= player.hand.size()){
+                    System.out.println("Unable Input! Please re-input.");
+                }
+                else{
+                    break;
+                }
+            } while (true);
+
+            player.grave.add( player.hand.get(index) );
+            player.hand.remove( index ); // Card Discard
+        }
+
         return 0;
     }
 
@@ -2199,25 +2199,29 @@ class Concentrate extends Card {
     }
 
     int action(Player player, HumanObject enemy){
-        for(int i=0; i<dis_card; i++){
-            System.out.println("Input a index number of card which will discard.");
-            PrintHand(player);
-            scanner = new Scanner( System.in );
-            int index;
+        if(player.hand.size() >= dis_card) {
+            for (int i = 0; i < dis_card; i++) {
+                System.out.println("Input a index number of card which will discard.");
+                PrintHand(player);
+                scanner = new Scanner(System.in);
+                int index;
 
-            do {
-                index = scanner.nextInt() - 1;
-                if (index < 0 || index >= player.hand.size()){
-                    System.out.println("Unable Input!");
-                    return 1;
-                }
-                else{
-                    break;
-                }
-            } while (true);
+                do {
+                    index = scanner.nextInt() - 1;
+                    if (index < 0 || index >= player.hand.size()) {
+                        System.out.println("Unable Input! Please re-input.");
+                    } else {
+                        break;
+                    }
+                } while (true);
 
-            player.grave.add( player.hand.get(index) );
-            player.hand.remove( index ); // Card Discard
+                player.grave.add(player.hand.get(index));
+                player.hand.remove(index); // Card Discard
+            }
+        }
+        else {
+            System.out.println("You don't have " + dis_card + " or more cards");
+            return 1;
         }
 
         player.setMana( player.getMana() + energy );

@@ -119,8 +119,6 @@ public class DoublePlay extends Game {
                     if (input == 0) break;
                     else if (input < 0 || input > p1.hand.size()) {
                         System.out.println("Invalid input! Please enter again");
-                    } else if (p1.getMana() < p1.hand.get(input - 1).cost) {
-                        System.out.println("Not enough mana.");
                     } else break;
                 } while (true);
 
@@ -207,8 +205,6 @@ public class DoublePlay extends Game {
                     if (input == 0) break;
                     else if (input < 0 || input > p2.hand.size()) {
                         System.out.println("Invalid input! Please enter again");
-                    } else if (p2.getMana() < p2.hand.get(input - 1).cost) {
-                        System.out.println("Not enough mana.");
                     } else break;
                 } while (true);
 
