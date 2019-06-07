@@ -57,18 +57,18 @@ class SinglePlay extends Game {
                 // 가로 102(100)
                 // | 공백(5) 캐릭터(38) 공백(14) 캐릭터(38) 공백(5) |
                 System.out.println("┌────────────────────────────────────────────────────────────────────────────────────────────────────┐");
-                System.out.printf("%c%51s%2d%48c\n", '│', "Floor", floor, '│');
-                System.out.printf("%c%30s%48s%23c\n", '│', "Player", boss.name, '│');
-                System.out.printf("%c%29s%5s%41s%5s%21c\n",
-                        '│', "HP : ", player.getHp() + "/" + player.getMaxHp(), "HP : ", boss.getHp() + "/" + boss.getMaxHp(), '│');
+                System.out.printf("%c%51s%2d%48c\n", '│', "Floor", floor + 1, '│');
+                System.out.printf("%c%24s%-6s%39s%-8s%24c\n", '│', "", "Player", "", boss.name, '│');
+                System.out.printf("%c%24s%-5s%-7s%33s%-5s%-7s%20c\n",
+                        '│', "", "HP : ", player.getHp() + "/" + player.getMaxHp(), "", "HP : ", boss.getHp() + "/" + boss.getMaxHp(), '│');
 
-                System.out.printf("%c%32s%-2d%45s%d%21c\n",
-                        '│', "Armor : ", player.getArmor(), "Armor : ", boss.getArmor(), '│');
+                System.out.printf("%c%24s%-8s%-2d%35s%-8s%-2d%22c\n",
+                        '│', "", "Armor : ", player.getArmor(), "", "Armor : ", boss.getArmor(), '│');
 
                 System.out.printf("%c%101c\n", '│', '│');
 
                 for(int i = 0 ; i < 13; i++) {
-                    System.out.printf("%c%43s%14s%38s%6c\n", '│', player.getAsciiArt(i), "", boss.getAsciiArt(i), '│');
+                    System.out.printf("%c%5s%-38s%14s%-38s%6c\n", '│', "", player.getAsciiArt(i), "", boss.getAsciiArt(i), '│');
                 }
 
                 System.out.printf("%c%101c\n", '│', '│');
@@ -97,8 +97,9 @@ class SinglePlay extends Game {
                 else dexterity += String.format("%40s", "");
                 dexterity += String.format("%61c", '│');
                 System.out.println(dexterity);
-                System.out.println("└────────────────────────────────────────────────────────────────────────────────────────────────────┘");
-
+                System.out.println("├─────────┬──────────────────────────────────────────────────────────────────────────────────────────┘");
+                System.out.println("│ Mana: " + player.getMana() + " │");
+                System.out.println("└─────────┘");
 
                 System.out.println("Input the card number to use. 0: Turn end");
                 for(int i=0; i<player.hand.size(); i++){
@@ -133,7 +134,7 @@ class SinglePlay extends Game {
         System.out.print("Please input your nickname: ");
         scanner.nextLine();
         String nickname = scanner.nextLine();
-        Ranking.uploadRanking(nickname, floor, player.name);
+        Ranking.uploadRanking(nickname, floor + 1, player.name);
         Ranking.loadRanking();
     }
 
@@ -145,10 +146,10 @@ class SinglePlay extends Game {
         int res = super.TurnEnd(player, boss);
         if(res == 1) {
             // Game Clear 시키기
-            ++floor;
             boss = Boss.CreateBoss(player, floor);
             player.completeFloor();
             GetReward();
+            ++floor;
             player.setArmor(0);
             player.setPoisoned(false);
             player.setPoisonDamage(0);
@@ -185,7 +186,7 @@ class SinglePlay extends Game {
 
     private void GetReward(){
         boolean flag = true;
-        System.out.println("Congratulation! You cleared floor " + floor + "!");
+        System.out.println("Congratulation! You cleared floor " + (floor + 1) + "!");
         System.out.println("1: Add one random card to your deck.\n2: Remove one card from your deck.\n" +
                 "3: Heal perfectly.(You will heal 1/3 of your HP unless you select this one.)\n4: Reinforce one card of your deck.");
         String userInput = scanner.next();
