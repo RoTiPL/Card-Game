@@ -55,7 +55,7 @@ class SinglePlay extends Game {
                 // | 공백(5) 캐릭터(38) 공백(14) 캐릭터(38) 공백(5) |
                 System.out.println("┌────────────────────────────────────────────────────────────────────────────────────────────────────┐");
                 System.out.printf("%c%51s%2d%48c\n", '│', "Floor", floor + 1, '│');
-                System.out.printf("%c%24s%-6s%39s%-8s%24c\n", '│', "", "Player", "", boss.name, '│');
+                System.out.printf("%c%24s%-8s%37s%-8s%24c\n", '│', "", player.name, "", boss.name, '│');
                 System.out.printf("%c%24s%-5s%-7s%33s%-5s%-7s%20c\n",
                         '│', "", "HP : ", player.getHp() + "/" + player.getMaxHp(), "", "HP : ", boss.getHp() + "/" + boss.getMaxHp(), '│');
 

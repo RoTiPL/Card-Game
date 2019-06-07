@@ -77,21 +77,26 @@ class Poisoner extends Boss {
         int damage = 5 + floor;
         player.setPoisoned(true);
         player.setPoisonDamage(player.getPoisonDamage() + damage);
+        System.out.println("=======================================");
         System.out.println("Poisoner throws poison bottle!");
         System.out.println("You got " + damage + " poison.");
     }
 
     public void PoisonAmplification() {
         player.setPoisonDamage(player.getPoisonDamage() * 2);
+        System.out.println("=======================================");
         System.out.println("Poisoner amplifies your poison!");
         System.out.println("Your poison is amplified by x2.");
+        System.out.println("=======================================");
     }
 
     public void Defend() {
         int armor = 5 + floor;
         setArmor(getArmor() + armor);
+        System.out.println("=======================================");
         System.out.println("Poisoner takes guard action!");
         System.out.println("Poisoner got " + armor + " armor.");
+        System.out.println("=======================================");
     }
 
     public String getAsciiArt(int i) {
@@ -145,24 +150,25 @@ class Giant extends Boss {
 
     public void BigSwing() {
         int damage = 10 + 2 * floor + getStrength();
-        player.TakeDamage(damage);
+        System.out.println("=======================================");
         System.out.println("Giant swings his big bat!");
-        System.out.println("You got " + damage + " damage.");
+        player.TakeDamage(damage);
     }
 
     public void OverflowingStrength() {
         setStrength(getStrength() + 3);
+        System.out.println("=======================================");
         System.out.println("Giant is shouting!");
         System.out.println("Giant got 3 strength.");
+        System.out.println("=======================================");
     }
 
     public void DoubleSwing() {
         int damage = 5 + floor + getStrength();
-        player.TakeDamage(damage);
-        player.TakeDamage(damage);
+        System.out.println("=======================================");
         System.out.println("Giant swings his bat twice!");
-        System.out.println("You got " + damage + " damage.");
-        System.out.println("You got " + damage + " damage.");
+        player.TakeDamage(damage);
+        player.TakeDamage(damage);
     }
 
     public String getAsciiArt(int i) {
@@ -217,9 +223,9 @@ class Slime extends Boss {
 
     public void Attack() {
         int damage = 7 + floor + getStrength();
-        player.TakeDamage(damage);
+        System.out.println("=======================================");
         System.out.println("Slime is rushing to you!");
-        System.out.println("You got " + damage + " damage.");
+        player.TakeDamage(damage);
     }
 
     public void Heal() {
@@ -228,15 +234,19 @@ class Slime extends Boss {
             setHp(getMaxHp());
         else
             setHp(getHp() + heal);
+        System.out.println("=======================================");
         System.out.println("Slime heals itself!");
         System.out.println("Slime healed " + heal + " HP.");
+        System.out.println("=======================================");
     }
 
     public void Defend() {
         int armor = 5 + floor;
         setArmor(getArmor() + armor);
+        System.out.println("=======================================");
         System.out.println("Slime takes guard action!");
         System.out.println("Slime got " + armor + " armor.");
+        System.out.println("=======================================");
     }
 
     public String getAsciiArt(int i) {

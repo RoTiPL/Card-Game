@@ -68,6 +68,9 @@ public abstract class HumanObject {
             armor = 0;
             hp -= damage;
         }
+        System.out.println("=======================================");
+        System.out.println(name + " got " + damage + " damage.");
+        System.out.println("=======================================");
     }
 
     // 각 턴이 끝날 때 isPoisoned 이면 이 함수 실행
@@ -82,7 +85,9 @@ public abstract class HumanObject {
             armor = 0;
         }
 
+        System.out.println("=======================================");
         System.out.println(name + " got " + realDmg + " poison damage.");
+        System.out.println("=======================================");
         hp -= realDmg;
         if(poisonDamage > 0)
             poisonDamage--;
