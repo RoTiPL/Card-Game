@@ -148,6 +148,8 @@ class SinglePlay extends Game {
             GetReward();
             ++floor;
             player.setArmor(0);
+            player.setStrength(0);
+            player.setDexterity(0);
             player.setPoisoned(false);
             player.setPoisonDamage(0);
             player.setMana(player.getMaxMana());
