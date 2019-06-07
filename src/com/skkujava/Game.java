@@ -20,7 +20,7 @@ public class Game {
 
             player.setSuperpower(player.getSuperpower() - 1);
 
-            card.action(player, enemy);
+            card.action(player, enemy, index);
             player.hand.remove(index);
             if(!card.be_exhaust) {
                 player.grave.add(card);
