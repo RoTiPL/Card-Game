@@ -4,7 +4,7 @@ public class DoublePlay extends Game {
     private Player p1, p2;
     DoublePlay(){
         int temp;
-        System.out.println("Player 1을 설정합니다.\n직업을 선택해 주세요\n1. Warrior\n2. Thief");
+        System.out.println("Set Player 1.\nPlease Select Player 1's Class.\n1. Warrior\n2. Thief");
         do{
             temp = scanner.nextInt();
             if (temp == 1){
@@ -20,14 +20,14 @@ public class DoublePlay extends Game {
             }
         }while(true);
 
-        System.out.println("카드를 골라 주세요. 나오는 5장의 카드 중 한 장을 골라 덱에 넣습니다.");
+        System.out.println("Select one card to use among 5 cards. That card will be added to your deck.");
         for(int i = 1; i <= 10; i++){
             System.out.printf("%d/10\n", i);
             AddRandomCardToPlayer(p1, 5, p1.grave);
             System.out.println();
         }
         clear();
-        System.out.println("Player 2를 설정합니다.\n직업을 선택해 주세요\n1. Warrior\n2. Thief");
+        System.out.println("Set Player 2.\nPlease Select Player 2's Class.\n1. Warrior\n2. Thief");
         do{
             temp = scanner.nextInt();
             if (temp == 1){
@@ -43,7 +43,7 @@ public class DoublePlay extends Game {
             }
         }while(true);
 
-        System.out.println("카드를 골라 주세요. 나오는 5장의 카드 중 한 장을 골라 덱에 넣습니다.");
+        System.out.println("Select one card to use among 5 cards. That card will be added to your deck.");
         for(int i = 1; i <= 10; i++){
             System.out.printf("%d/10\n", i);
             AddRandomCardToPlayer(p2, 5, p2.grave);
@@ -106,7 +106,7 @@ public class DoublePlay extends Game {
                 System.out.println("├─────────┬──────────────────────────────────────────────────────────────────────────────────────────┘");
                 System.out.println("│ Mana: " + p1.getMana() + " │");
                 System.out.println("└─────────┘");
-                System.out.println("사용할 카드를 입력해 주세요, 0을 입력 시 턴을 종료합니다");
+                System.out.println("Input the card number to use.\n0 : Turn end");
                 for (int i = 0; i < p1.hand.size(); i++) {
                     System.out.printf("%d : Cost %d │ %-15s │ %s\n",
                             i + 1, p1.hand.get(i).cost, p1.hand.get(i).name, p1.hand.get(i).cardDescription());
@@ -119,7 +119,7 @@ public class DoublePlay extends Game {
                     else if (input < 0 || input > p1.hand.size()) {
                         System.out.println("Invalid input! Please enter again");
                     } else if (p1.getMana() < p1.hand.get(input - 1).cost) {
-                        System.out.println("마나가 부족합니다.");
+                        System.out.println("Not enough mana.");
                     } else break;
                 } while (true);
 
@@ -194,7 +194,7 @@ public class DoublePlay extends Game {
                 System.out.println("├─────────┬──────────────────────────────────────────────────────────────────────────────────────────┘");
                 System.out.println("│ Mana: " + p2.getMana() + " │");
                 System.out.println("└─────────┘");
-                System.out.println("사용할 카드를 입력해 주세요, 0을 입력 시 턴을 종료합니다");
+                System.out.println("Input the card number to use.\n0 : Turn end");
                 for (int i = 0; i < p2.hand.size(); i++) {
                     System.out.printf("%d : Cost %d │ %-15s │ %s\n",
                             i + 1, p2.hand.get(i).cost, p2.hand.get(i).name, p2.hand.get(i).cardDescription());
@@ -207,7 +207,7 @@ public class DoublePlay extends Game {
                     else if (input < 0 || input > p2.hand.size()) {
                         System.out.println("Invalid input! Please enter again");
                     } else if (p2.getMana() < p2.hand.get(input - 1).cost) {
-                        System.out.println("마나가 부족합니다.");
+                        System.out.println("Not enough mana.");
                     } else break;
                 } while (true);
 

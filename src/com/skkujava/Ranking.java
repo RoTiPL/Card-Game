@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Ranking {
-    /* TODO
-     * 1. 층수로 내림차순 정렬
-     */
     private static String filePath = "rank.txt";
     private static ArrayList<RankInfo> rankinfo = new ArrayList<>();
 
@@ -33,15 +30,14 @@ public class Ranking {
             System.out.println("There is no ranking information. Please play the game first!");
             return;
         }
-        System.out.println(rankinfo.size());
         // 가로 49(51)
-        System.out.println("┌─────────────────────────────────────────────────┐");
-        System.out.printf("%c%21s%7s%21s%c\n", '│', "", "RANKING", "", '│');
-        System.out.printf("%c%3s%5s%4s%5s%7s%8s%17s%c\n", '│', "", "floor", "", "class", "", "nickname", "", '│');
+        System.out.printf("%19s%s\n", "", "┌─────────────────────────────────────────────────┐");
+        System.out.printf("%19s%c%21s%7s%21s%c\n", "", '│', "", "RANKING", "", '│');
+        System.out.printf("%19s%c%3s%5s%4s%5s%7s%8s%17s%c\n", "", '│', "", "floor", "", "class", "", "nickname", "", '│');
         for(RankInfo r : rankinfo) {
-            System.out.printf("%c%4s%2d%6s%-12s%-25s%c\n", '│', "", r.getFloor(), "", r.getJob(), r.getName(), '│');
+            System.out.printf("%19s%c%4s%2d%6s%-12s%-25s%c\n", "", '│', "", r.getFloor(), "", r.getJob(), r.getName(), '│');
         }
-        System.out.println("└─────────────────────────────────────────────────┘");
+        System.out.printf("%19s%s\n", "", "└─────────────────────────────────────────────────┘");
     }
 
     public static void uploadRanking(String name, int floor, String job) {
