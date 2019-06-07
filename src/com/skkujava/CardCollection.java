@@ -61,6 +61,7 @@ public class CardCollection {
                     new Footwork(),
                     new Skewer(),
                     new Adrenaline(),
+                    new Bullet_Time(),
                     new Doppelganger(),
                     new Shiv()
             )

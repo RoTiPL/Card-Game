@@ -143,7 +143,18 @@ class Armaments extends Card {
         }
         else {
             System.out.println("Input a index of card which will be reinforced.");
-            int index = scanner.nextInt();
+            int index;
+
+            do {
+                index = scanner.nextInt() + 1;
+                if (index < 1 || index > player.hand.size()){
+                    System.out.println("Unable Input! Please input again.");
+                }
+                else{
+                    break;
+                }
+            } while (true);
+
             player.hand.get(index).reinforce();
         }
 
@@ -638,7 +649,18 @@ class Warcry extends Card {
 
         System.out.println("Insert an index of card which replace on the top of draw pile.");
         scanner = new Scanner( System.in );
-        int index = scanner.nextInt();
+        int index;
+
+        do {
+            index = scanner.nextInt() + 1;
+            if (index < 1 || index > player.hand.size()){
+                System.out.println("Unable Input! Please input again.");
+            }
+            else{
+                break;
+            }
+        } while (true);
+
         player.deck.add(0, player.hand.get(index));
     }
 
@@ -711,7 +733,18 @@ class Burning_Pact extends Card {
     void action(Player player, HumanObject enemy){
         System.out.println("Input a index which will be Exhaust.");
         scanner = new Scanner(System.in);
-        int index = scanner.nextInt();
+        int index;
+
+        do {
+            index = scanner.nextInt() + 1;
+            if (index < 1 || index > player.hand.size()){
+                System.out.println("Unable Input! Please input again.");
+            }
+            else{
+                break;
+            }
+        } while (true);
+
         player.hand.remove(index);
 
         for(int i = 0; i < draw; i++) {
@@ -1239,7 +1272,19 @@ class Survivor extends Card {
         player.setArmor( player.getArmor() + block );
 
         System.out.println("Input a index number of card which will discard.");
-        int index = scanner.nextInt();
+        scanner = new Scanner( System.in );
+        int index;
+
+        do {
+            index = scanner.nextInt() + 1;
+            if (index < 1 || index > player.hand.size()){
+                System.out.println("Unable Input! Please input again.");
+            }
+            else{
+                break;
+            }
+        } while (true);
+
         player.grave.add( player.hand.get(index) );
         player.hand.remove( index );
     }
@@ -1293,7 +1338,19 @@ class Acrobatics extends Card {
         }
 
         System.out.println("Input a index number of card which will discard.");
-        int index = scanner.nextInt();
+        scanner = new Scanner( System.in );
+        int index;
+
+        do {
+            index = scanner.nextInt() + 1;
+            if (index < 1 || index > player.hand.size()){
+                System.out.println("Unable Input! Please input again.");
+            }
+            else{
+                break;
+            }
+        } while (true);
+
         player.grave.add( player.hand.get(index) );
         player.hand.remove( index );
     }
@@ -1516,7 +1573,19 @@ class Dagger_Throw extends Card {
         } // Card Draw
 
         System.out.println("Input a index number of card which will discard.");
-        int index = scanner.nextInt();
+        scanner = new Scanner( System.in );
+        int index;
+
+        do {
+            index = scanner.nextInt() + 1;
+            if (index < 1 || index > player.hand.size()){
+                System.out.println("Unable Input! Please input again.");
+            }
+            else{
+                break;
+            }
+        } while (true);
+
         player.grave.add( player.hand.get(index) );
         player.hand.remove( index ); // Card Discard
     }
@@ -1752,7 +1821,19 @@ class Prepared extends Card {
 
         for(int i=0; i<draw; i++){
             System.out.println("Input a index number of card which will discard.");
-            int index = scanner.nextInt();
+            scanner = new Scanner( System.in );
+            int index;
+
+            do {
+                index = scanner.nextInt() + 1;
+                if (index < 1 || index > player.hand.size()){
+                    System.out.println("Unable Input! Please input again.");
+                }
+                else{
+                    break;
+                }
+            } while (true);
+
             player.grave.add( player.hand.get(index) );
             player.hand.remove( index ); // Card Discard
         }
@@ -2058,7 +2139,19 @@ class Concentrate extends Card {
     void action(Player player, HumanObject enemy){
         for(int i=0; i<dis_card; i++){
             System.out.println("Input a index number of card which will discard.");
-            int index = scanner.nextInt();
+            scanner = new Scanner( System.in );
+            int index;
+
+            do {
+                index = scanner.nextInt() + 1;
+                if (index < 1 || index > player.hand.size()){
+                    System.out.println("Unable Input! Please input again.");
+                }
+                else{
+                    break;
+                }
+            } while (true);
+
             player.grave.add( player.hand.get(index) );
             player.hand.remove( index ); // Card Discard
         }
@@ -2438,7 +2531,7 @@ class Bullet_Time extends Card {
     }
 
     String cardDescription() {
-        return "You can play 5 cards without consuming mana at this turn";
+        return "You can play 5 cards without consuming energy at this turn";
     }
 }
 /*
