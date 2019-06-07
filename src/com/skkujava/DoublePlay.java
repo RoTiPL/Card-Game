@@ -26,7 +26,6 @@ public class DoublePlay extends Game {
             AddRandomCardToPlayer(p1, 5, p1.grave);
             System.out.println();
         }
-        clear();
         System.out.println("Set Player 2.\nPlease Select Player 2's Class.\n1. Warrior\n2. Thief");
         do{
             temp = scanner.nextInt();

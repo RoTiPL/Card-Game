@@ -217,11 +217,11 @@ class SinglePlay extends Game {
 
                     do{
                         userInput = scanner.next();
-                        if(userInput.equals("Y")){
+                        if(userInput.equals("Y") || userInput.equals("y")){
                             store.remove(inp);
                             flag = false;
                             break;
-                        } else if(userInput.equals("N")){
+                        } else if(userInput.equals("N") || userInput.equals("n")){
                             break;
                         } else {
                             System.out.println("Invalid input! Please re-input!");
@@ -237,7 +237,7 @@ class SinglePlay extends Game {
             } else if (userInput.trim().equals("4")) {                  //카드 강화
                 Card card;
                 ArrayList<Card> temp = new ArrayList<>();
-                for(int i=0; i<store.size(); ++i){
+                for(int i=0; i<store.size(); ++i){                      //except reinforced cards
                     card = store.get(i);
                     if(card.reinforced){
                         store.remove(i);
@@ -273,12 +273,12 @@ class SinglePlay extends Game {
                     System.out.printf("%-7s│%s\n%-15s\n%-7s│%s\n", card.name, card.cardDescription(), "↓", clone.name, clone.cardDescription());
 
                     do{
-                        userInput = scanner.next();
-                        if(userInput.equals("Y")){
+                        userInput = scanner.next().trim();
+                        if(userInput.equals("Y") || userInput.equals("y")){
                             card.reinforce();
                             flag = false;
                             break;
-                        } else if(userInput.equals("N")){
+                        } else if(userInput.equals("N") || userInput.equals("n")){
                             break;
                         } else {
                             System.out.println("Invalid input! Please re-input!");
@@ -290,7 +290,7 @@ class SinglePlay extends Game {
             } else {
                 System.out.println("Invalid input! Please re-input!");
             }
-
+            if(!flag)break;
             userInput = scanner.next();
         }while(true);
 

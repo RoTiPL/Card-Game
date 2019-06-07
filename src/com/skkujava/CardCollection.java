@@ -6,8 +6,8 @@ import java.util.Arrays;
 public class CardCollection {
     public static final ArrayList<Card> warriorCollection = new ArrayList<>(
             Arrays.asList(
-                    new Strike(),
-                    new Defend(),
+                    //new Strike(),
+                    //new Defend(),
                     new Anger(),
                     new Armaments(),
                     new Body_Slam(),
@@ -37,8 +37,8 @@ public class CardCollection {
 
     public static final ArrayList<Card> thiefCollection = new ArrayList<>(
             Arrays.asList(
-                    new Strike(),
-                    new Defend(),
+                    //new Strike(),
+                    //new Defend(),
                     new Survivor(),
                     new Acrobatics(),
                     new Backflip(),
@@ -62,8 +62,8 @@ public class CardCollection {
                     new Skewer(),
                     new Adrenaline(),
                     new Bullet_Time(),
-                    new Doppelganger(),
-                    new Shiv()
+                    new Doppelganger()
+                    //new Shiv()
             )
     );
 }
