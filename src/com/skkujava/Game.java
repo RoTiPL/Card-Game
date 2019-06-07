@@ -30,7 +30,7 @@ public class Game {
             }
         }
         else{
-            System.out.println("마나가 부족합니다");
+            System.out.println("Not enough mana.");
         }
         return 0;
     }
@@ -87,7 +87,7 @@ public class Game {
             System.out.printf("%d: %-7s│%s\n", i + 1, collection.get(rand[i]).name, collection.get(rand[i]).cardDescription());
 
         }
-        System.out.println("추가할 카드를 선택하세요");
+        System.out.println("Select the card to add.");
         int inp;
         do {
             inp = scanner.nextInt();

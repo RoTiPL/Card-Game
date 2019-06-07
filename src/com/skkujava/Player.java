@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Player extends HumanObject {
     ArrayList<Card> deck, hand, grave;
-
-    String name;
     private int maxMana;
     private int mana;
     private int bonusMana;
@@ -76,8 +74,11 @@ public class Player extends HumanObject {
     }
 
     public void setArmor(int armor){
-        if(armor != 0){
+        if(armor != 0 && armor > getArmor()){
             super.setArmor(armor + dexterity);
+        }
+        else if(armor <= getArmor() || armor == 0){
+            super.setArmor(armor);
         }
     }
     public void completeFloor() {
