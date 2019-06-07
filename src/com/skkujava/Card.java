@@ -147,7 +147,7 @@ class Armaments extends Card {
 
             do {
                 index = scanner.nextInt() - 1;
-                if (index < 1 || index > player.hand.size()){
+                if (index < 0 || index >= player.hand.size()){
                     System.out.println("Unable Input! Please input again.");
                 }
                 else if (index == num){
@@ -658,7 +658,7 @@ class Warcry extends Card {
 
         do {
             index = scanner.nextInt() - 1;
-            if (index < 1 || index > player.hand.size()){
+            if (index < 0 || index >= player.hand.size()){
                 System.out.println("Unable Input! Please input again.");
             }
             else{
@@ -742,7 +742,7 @@ class Burning_Pact extends Card {
 
         do {
             index = scanner.nextInt() - 1;
-            if (index < 1 || index > player.hand.size()){
+            if (index < 0 || index >= player.hand.size()){
                 System.out.println("Unable Input! Please input again.");
             }
             else{
@@ -1282,7 +1282,7 @@ class Survivor extends Card {
 
         do {
             index = scanner.nextInt() - 1;
-            if (index < 1 || index > player.hand.size()){
+            if (index < 0 || index >= player.hand.size()){
                 System.out.println("Unable Input! Please input again.");
             }
             else{
@@ -1348,7 +1348,7 @@ class Acrobatics extends Card {
 
         do {
             index = scanner.nextInt() - 1;
-            if (index < 1 || index > player.hand.size()){
+            if (index < 0 || index >= player.hand.size()){
                 System.out.println("Unable Input! Please input again.");
             }
             else{
@@ -1583,7 +1583,7 @@ class Dagger_Throw extends Card {
 
         do {
             index = scanner.nextInt() - 1;
-            if (index < 1 || index > player.hand.size()){
+            if (index < 0 || index >= player.hand.size()){
                 System.out.println("Unable Input! Please input again.");
             }
             else{
@@ -1831,7 +1831,7 @@ class Prepared extends Card {
 
             do {
                 index = scanner.nextInt() - 1;
-                if (index < 1 || index > player.hand.size()){
+                if (index < 0 || index >= player.hand.size()){
                     System.out.println("Unable Input! Please input again.");
                 }
                 else{
@@ -2149,7 +2149,7 @@ class Concentrate extends Card {
 
             do {
                 index = scanner.nextInt() - 1;
-                if (index < 1 || index > player.hand.size()){
+                if (index < 0 || index >= player.hand.size()){
                     System.out.println("Unable Input! Please input again.");
                 }
                 else{
