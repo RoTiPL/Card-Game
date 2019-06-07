@@ -1,6 +1,8 @@
 package com.skkujava;
 
 public abstract class HumanObject {
+
+    String name;
     private int maxHp;
     private int hp;
     private int armor;
@@ -70,7 +72,18 @@ public abstract class HumanObject {
 
     // 각 턴이 끝날 때 isPoisoned 이면 이 함수 실행
     public void TakePoisonDamage() {
-        hp -= poisonDamage;
+        int realDmg;
+        if(armor >= poisonDamage) {
+            armor -= poisonDamage;
+            realDmg = 0;
+        }
+        else {
+            realDmg = poisonDamage - armor;
+            armor = 0;
+        }
+
+        System.out.println(name + " got " + realDmg + " poison damage.");
+        hp -= realDmg;
         if(poisonDamage > 0)
             poisonDamage--;
         if(poisonDamage == 0)

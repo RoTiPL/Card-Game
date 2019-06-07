@@ -1,6 +1,5 @@
 package com.skkujava;
 
-import javax.swing.text.Caret;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -171,7 +170,8 @@ class SinglePlay extends Game {
         }
         else{
             boss.Action();
-            player.TakePoisonDamage();
+            if(player.isPoisoned())
+                player.TakePoisonDamage();
             if(player.getHp() <= 0){
                 return 1;
             }
@@ -188,7 +188,7 @@ class SinglePlay extends Game {
         boolean flag = true;
         System.out.println("Congratulation! You cleared floor " + (floor + 1) + "!");
         System.out.println("1: Add one random card to your deck.\n2: Remove one card from your deck.\n" +
-                "3: Heal perfectly.(You will heal 1/3 of your HP unless you select this one.)\n4: Reinforce one card of your deck.");
+                "3: Heal perfectly. (You will heal 1/3 of your HP unless you select this one.)\n4: Reinforce one card of your deck.");
         String userInput = scanner.next();
         do {
             if (userInput.trim().equals("1")) {                 //카드 덱에 추가

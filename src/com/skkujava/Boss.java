@@ -5,13 +5,11 @@ abstract class Boss extends HumanObject{
 
     Player player;
     int floor;
-    String name;
 
     public static Boss CreateBoss(Player player, int floor) {
 
         Random random = new Random();
         Boss boss = null;
-        // 3으로 고치기
         int num = random.nextInt(3);
         switch(num) {
             case 0:

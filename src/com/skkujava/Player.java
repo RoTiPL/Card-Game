@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Player extends HumanObject {
     ArrayList<Card> deck, hand, grave;
-
-    String name;
     private int maxMana;
     private int mana;
     private int bonusMana;
