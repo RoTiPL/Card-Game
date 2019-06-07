@@ -49,6 +49,7 @@ public class DoublePlay extends Game {
             AddRandomCardToPlayer(p2, 5, p2.grave);
             System.out.println();
         }
+        clear();
     }
 
     void Play(){

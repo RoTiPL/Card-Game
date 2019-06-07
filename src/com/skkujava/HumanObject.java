@@ -68,6 +68,7 @@ public abstract class HumanObject {
             armor = 0;
             hp -= damage;
         }
+        if(damage < 0)damage = 0;
         System.out.println("=======================================");
         System.out.println(name + " got " + damage + " damage.");
         System.out.println("=======================================");

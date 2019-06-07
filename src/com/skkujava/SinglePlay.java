@@ -126,13 +126,14 @@ class SinglePlay extends Game {
             if(TurnEnd() == 1) break;
 
         } while(true);
-        //TODO: ranking
 
         System.out.print("Please input your nickname: ");
         scanner.nextLine();
         String nickname = scanner.nextLine();
         Ranking.uploadRanking(nickname, floor + 1, player.name);
         Ranking.loadRanking();
+        clear();
+        System.out.println("Ranking updated.");
     }
 
     private int TurnEnd(){

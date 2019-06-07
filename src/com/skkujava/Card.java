@@ -144,7 +144,6 @@ class Armaments extends Card {
 
     int action(Player player, HumanObject enemy){
         scanner = new Scanner( System.in );
-        player.setArmor(block + player.getArmor());
         if (reinforced){
             for(Card card : player.hand){
                 card.reinforce();
@@ -168,6 +167,7 @@ class Armaments extends Card {
 
             player.hand.get(index).reinforce();
         }
+        player.setArmor(block + player.getArmor());
         return 0;
     }
 
@@ -655,19 +655,6 @@ class Warcry extends Card {
     }
 
     int action(Player player, HumanObject enemy){
-        if(player.deck.size() == 0){
-            while(player.grave.size() != 0) {
-                int randInt = random.nextInt(player.grave.size());
-                Card card = player.grave.get(randInt);
-                player.grave.remove(randInt);
-                player.deck.add(card);
-            }
-        }
-        if(player.deck.size() != 0) {
-            Card card = player.deck.get(0);
-            player.deck.remove(0);
-            player.hand.add(card);
-        }
 
         System.out.println("Insert an index of card which replace on the top of draw pile.");
         PrintHand(player);
@@ -686,6 +673,20 @@ class Warcry extends Card {
         } while (true);
 
         player.deck.add(0, player.hand.get(index));
+
+        if(player.deck.size() == 0){
+            while(player.grave.size() != 0) {
+                int randInt = random.nextInt(player.grave.size());
+                Card card = player.grave.get(randInt);
+                player.grave.remove(randInt);
+                player.deck.add(card);
+            }
+        }
+        if(player.deck.size() != 0) {
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        }
         return 0;
     }
 
@@ -1307,8 +1308,6 @@ class Survivor extends Card {
     }
 
     int action(Player player, HumanObject enemy){
-        player.setArmor( player.getArmor() + block );
-
         System.out.println("Input a index number of card which will discard.");
         PrintHand(player);
         scanner = new Scanner( System.in );
@@ -1327,6 +1326,7 @@ class Survivor extends Card {
 
         player.grave.add( player.hand.get(index) );
         player.hand.remove( index );
+        player.setArmor( player.getArmor() + block );
         return index;
     }
 
@@ -1363,20 +1363,6 @@ class Acrobatics extends Card {
     }
 
     int action(Player player, HumanObject enemy){
-        for(int i = 0; i < draw; i++) {
-            if (player.deck.size() == 0) {
-                while (player.grave.size() != 0) {
-                    int randInt = random.nextInt(player.grave.size());
-                    Card card = player.grave.get(randInt);
-                    player.grave.remove(randInt);
-                    player.deck.add(card);
-                }
-            }
-            if (player.deck.size() == 0) break;
-            Card card = player.deck.get(0);
-            player.deck.remove(0);
-            player.hand.add(card);
-        }
 
         System.out.println("Input a index number of card which will discard.");
         PrintHand(player);
@@ -1396,6 +1382,21 @@ class Acrobatics extends Card {
 
         player.grave.add( player.hand.get(index) );
         player.hand.remove( index );
+
+        for(int i = 0; i < draw; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) break;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        }
         return index;
     }
 
@@ -1603,23 +1604,6 @@ class Dagger_Throw extends Card {
     }
 
     int action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage + player.getStrength());
-
-        for(int i = 0; i < 2; i++) {
-            if (player.deck.size() == 0) {
-                while (player.grave.size() != 0) {
-                    int randInt = random.nextInt(player.grave.size());
-                    Card card = player.grave.get(randInt);
-                    player.grave.remove(randInt);
-                    player.deck.add(card);
-                }
-            }
-            if (player.deck.size() == 0) break;
-            Card card = player.deck.get(0);
-            player.deck.remove(0);
-            player.hand.add(card);
-        } // Card Draw
-
         System.out.println("Input a index number of card which will discard.");
         PrintHand(player);
         scanner = new Scanner( System.in );
@@ -1638,6 +1622,22 @@ class Dagger_Throw extends Card {
 
         player.grave.add( player.hand.get(index) );
         player.hand.remove( index ); // Card Discard
+        enemy.TakeDamage(damage + player.getStrength());
+
+        for(int i = 0; i < 2; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) break;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        } // Card Draw
         return index;
     }
 
@@ -1860,20 +1860,6 @@ class Prepared extends Card {
     }
 
     int action(Player player, HumanObject enemy){
-        for(int i = 0; i < draw; i++) {
-            if (player.deck.size() == 0) {
-                while (player.grave.size() != 0) {
-                    int randInt = random.nextInt(player.grave.size());
-                    Card card = player.grave.get(randInt);
-                    player.grave.remove(randInt);
-                    player.deck.add(card);
-                }
-            }
-            if (player.deck.size() == 0) break;
-            Card card = player.deck.get(0);
-            player.deck.remove(0);
-            player.hand.add(card);
-        } // Card Draw
 
         for(int i=0; i<draw; i++){
             System.out.println("Input a index number of card which will discard.");
@@ -1895,6 +1881,20 @@ class Prepared extends Card {
             player.grave.add( player.hand.get(index) );
             player.hand.remove( index ); // Card Discard
         }
+        for(int i = 0; i < draw; i++) {
+            if (player.deck.size() == 0) {
+                while (player.grave.size() != 0) {
+                    int randInt = random.nextInt(player.grave.size());
+                    Card card = player.grave.get(randInt);
+                    player.grave.remove(randInt);
+                    player.deck.add(card);
+                }
+            }
+            if (player.deck.size() == 0) break;
+            Card card = player.deck.get(0);
+            player.deck.remove(0);
+            player.hand.add(card);
+        } // Card Draw
         return 0;
     }
 
