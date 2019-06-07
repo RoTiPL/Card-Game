@@ -48,8 +48,6 @@ class SinglePlay extends Game {
     }
 
     void Play(){
-
-
         do {
             DrawCard(player);
             do {
@@ -102,7 +100,7 @@ class SinglePlay extends Game {
 
                 System.out.println("Input the card number to use. 0: Turn end");
                 for(int i=0; i<player.hand.size(); i++){
-                    System.out.printf("%d : Cost %d │ %-15s │ %s\n",
+                    System.out.printf("%d : Cost %d │ %-18s │ %s\n",
                             i+1, player.hand.get(i).cost, player.hand.get(i).name, player.hand.get(i).cardDescription());
                 }
                 int input;
