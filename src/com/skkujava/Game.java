@@ -30,7 +30,7 @@ public class Game {
             if(!card.isBe_exhaust()) {
                 player.grave.add(card);
             }
-            if (enemy.getHp() <= 0) {
+            if (enemy.getHp() <= 0 || player.getHp() <= 0) {
                 return 1;
             }
         }
@@ -49,8 +49,8 @@ public class Game {
             enemy.TakePoisonDamage();
         }
         player.setSuperpower(0);
-        if(enemy.getHp() <= 0)return 1;
-        else if(player.getHp() <= 0)return 2;
+        if(player.getHp() <= 0)return 2;
+        else if(enemy.getHp() <= 0)return 1;
         return 0;
     }
 
