@@ -45,7 +45,7 @@ public class JavaProject {
             userInput = input.next();
         }while(true);
 
-
+        input.close();
     }
 
     public static void showLogo() {
