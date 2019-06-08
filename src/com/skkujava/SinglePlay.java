@@ -75,7 +75,7 @@ class SinglePlay extends Game {
                     debuff += String.format("%33s%-7d", "Poison : ", player.getPoisonDamage());
                 else debuff += String.format("%40s", "");
                 if (boss.isPoisoned())
-                    debuff += String.format("%49s%-7d%5c", "Poison : ", boss.getPoisonDamage(), '│');
+                    debuff += String.format("%38s%-7d%16c", "Poison : ", boss.getPoisonDamage(), '│');
                 else debuff += String.format("%61c", '│');
                 System.out.println(debuff);
 
@@ -84,13 +84,13 @@ class SinglePlay extends Game {
                     strength += String.format("%35s%-5d", "Strength : ", player.getStrength());
                 else strength += String.format("%40s", "");
                 if (boss.getStrength() > 0)
-                    strength += String.format("%51s%-5d%5c", "Strength : ", boss.getStrength(), '│');
+                    strength += String.format("%40s%-5d%16c", "Strength : ", boss.getStrength(), '│');
                 else strength += String.format("%61c", '│');
                 System.out.println(strength);
 
                 String dexterity = "│";
                 if (player.getDexterity() > 0)
-                    dexterity += String.format("%36s%-4d", "Dexterity : ", player.getStrength());
+                    dexterity += String.format("%36s%-4d", "Dexterity : ", player.getDexterity());
                 else dexterity += String.format("%40s", "");
                 dexterity += String.format("%61c", '│');
                 System.out.println(dexterity);
@@ -151,6 +151,7 @@ class SinglePlay extends Game {
             player.setPoisoned(false);
             player.setPoisonDamage(0);
             player.setMana(player.getMaxMana());
+            player.setBonusMana(0);
 
             player.hand.clear();
             player.deck.clear();

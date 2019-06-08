@@ -83,7 +83,7 @@ public class DoublePlay extends Game {
                     debuff += String.format("%33s%-7d", "Poison : ", p1.getPoisonDamage());
                 else debuff += String.format("%40s", "");
                 if (p2.isPoisoned())
-                    debuff += String.format("%49s%-7d%5c", "Poison : ", p2.getPoisonDamage(), '│');
+                    debuff += String.format("%38s%-7d%16c", "Poison : ", p2.getPoisonDamage(), '│');
                 else debuff += String.format("%61c", '│');
                 System.out.println(debuff);
 
@@ -92,16 +92,16 @@ public class DoublePlay extends Game {
                     strength += String.format("%35s%-5d", "Strength : ", p1.getStrength());
                 else strength += String.format("%40s", "");
                 if (p2.getStrength() > 0)
-                    strength += String.format("%51s%-5d%5c", "Strength : ", p2.getStrength(), '│');
+                    strength += String.format("%40s%-5d%16c", "Strength : ", p2.getStrength(), '│');
                 else strength += String.format("%61c", '│');
                 System.out.println(strength);
 
                 String dexterity = "│";
                 if (p1.getDexterity() > 0)
-                    dexterity += String.format("%36s%-4d", "Dexterity : ", p2.getStrength());
+                    dexterity += String.format("%36s%-4d", "Dexterity : ", p1.getDexterity());
                 else dexterity += String.format("%40s", "");
                 if (p2.getDexterity() > 0)
-                    dexterity += String.format("%51s%-5d%5c", "Dexterity : ", p2.getDexterity(), '│');
+                    dexterity += String.format("%40s%-5d%16c", "Dexterity : ", p2.getDexterity(), '│');
                 else dexterity += String.format("%61c", '│');
                 System.out.println(dexterity);
                 System.out.println("├─────────┬──────────────────────────────────────────────────────────────────────────────────────────┘");
@@ -109,7 +109,7 @@ public class DoublePlay extends Game {
                 System.out.println("└─────────┘");
                 System.out.println("Input the card number to use.\n0 : Turn end");
                 for (int i = 0; i < p1.hand.size(); i++) {
-                    System.out.printf("%d : Cost %d │ %-15s │ %s\n",
+                    System.out.printf("%d : Cost %d │ %-18s │ %s\n",
                             i + 1, p1.hand.get(i).cost, p1.hand.get(i).name, p1.hand.get(i).cardDescription());
                 }
                 int input;
@@ -169,7 +169,7 @@ public class DoublePlay extends Game {
                     debuff += String.format("%33s%-7d", "Poison : ", p1.getPoisonDamage());
                 else debuff += String.format("%40s", "");
                 if (p2.isPoisoned())
-                    debuff += String.format("%49s%-7d%5c", "Poison : ", p2.getPoisonDamage(), '│');
+                    debuff += String.format("%38s%-7d%16c", "Poison : ", p2.getPoisonDamage(), '│');
                 else debuff += String.format("%61c", '│');
                 System.out.println(debuff);
 
@@ -184,10 +184,10 @@ public class DoublePlay extends Game {
 
                 String dexterity = "│";
                 if (p1.getDexterity() > 0)
-                    dexterity += String.format("%36s%-4d", "Dexterity : ", p2.getStrength());
+                    dexterity += String.format("%36s%-4d", "Dexterity : ", p1.getDexterity());
                 else dexterity += String.format("%40s", "");
                 if (p2.getDexterity() > 0)
-                    dexterity += String.format("%51s%-5d%5c", "Dexterity : ", p2.getDexterity(), '│');
+                    dexterity += String.format("%40s%-5d%16c", "Dexterity : ", p2.getDexterity(), '│');
                 else dexterity += String.format("%61c", '│');
                 System.out.println(dexterity);
                 System.out.println("├─────────┬──────────────────────────────────────────────────────────────────────────────────────────┘");
@@ -195,7 +195,7 @@ public class DoublePlay extends Game {
                 System.out.println("└─────────┘");
                 System.out.println("Input the card number to use.\n0 : Turn end");
                 for (int i = 0; i < p2.hand.size(); i++) {
-                    System.out.printf("%d : Cost %d │ %-15s │ %s\n",
+                    System.out.printf("%d : Cost %d │ %-18s │ %s\n",
                             i + 1, p2.hand.get(i).cost, p2.hand.get(i).name, p2.hand.get(i).cardDescription());
                 }
                 int input;

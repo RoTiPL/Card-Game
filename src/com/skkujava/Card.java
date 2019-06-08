@@ -672,7 +672,6 @@ class Warcry extends Card {
             }
         } while (true);
 
-        player.deck.add(0, player.hand.get(index));
 
         if(player.deck.size() == 0){
             while(player.grave.size() != 0) {
@@ -687,6 +686,10 @@ class Warcry extends Card {
             player.deck.remove(0);
             player.hand.add(card);
         }
+
+        player.deck.add(0, player.hand.get(index));
+        player.hand.remove(index);
+
         return 0;
     }
 
@@ -2688,7 +2691,7 @@ class Doppelganger extends Card {
     }
 
     String cardDescription() {
-        if (reinforced) {
+        if (!reinforced) {
             return "Next turn, draw X cards and gain X Energy.";
         }
         else {

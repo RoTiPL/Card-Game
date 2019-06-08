@@ -229,7 +229,7 @@ class Slime extends Boss {
     }
 
     public void Heal() {
-        int heal = 20 + 2 * floor;
+        int heal = 10 + 1 * floor;
         if(getHp() + heal > getMaxHp())
             setHp(getMaxHp());
         else
