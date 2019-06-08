@@ -5,18 +5,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    Random random;
-    Scanner scanner;
+    private Random random;
+    private Scanner scanner;
     Game(){
-        random = new Random();
-        scanner = new Scanner(System.in);
+        setRandom(new Random());
+        setScanner(new Scanner(System.in));
     }
 
     int PlayCard(Player player, HumanObject enemy, int index){
         Card card = player.hand.get(index);
-        if(player.isSuperpower() || player.getMana() >= card.cost) {
+        if(player.isSuperpower() || player.getMana() >= card.getCost()) {
             if(!player.isSuperpower())
-                player.setMana(player.getMana() - card.cost);
+                player.setMana(player.getMana() - card.getCost());
 
             player.setSuperpower(player.getSuperpower() - 1);
 
@@ -27,7 +27,7 @@ public class Game {
                 return 0;
             }
 
-            if(!card.be_exhaust) {
+            if(!card.isBe_exhaust()) {
                 player.grave.add(card);
             }
             if (enemy.getHp() <= 0) {
@@ -35,7 +35,9 @@ public class Game {
             }
         }
         else{
-            System.out.println("Not enough mana.");
+            System.out.println("=====================");
+            System.out.println("!! Not enough mana !!");
+            System.out.println("=====================");
         }
         return 0;
     }
@@ -56,7 +58,7 @@ public class Game {
         for(int i = 0; i < player.getDrawCount(); i++){
             if(player.deck.size() == 0){
                 while(player.grave.size() != 0) {
-                    int randInt = random.nextInt(player.grave.size());
+                    int randInt = getRandom().nextInt(player.grave.size());
                     Card card = player.grave.get(randInt);
                     player.grave.remove(randInt);
                     player.deck.add(card);
@@ -84,20 +86,20 @@ public class Game {
             boolean flag;
             do {
                 flag = false;
-                rand[i] = random.nextInt(collection.size());
+                rand[i] = getRandom().nextInt(collection.size());
                 for(int j=0; j<i; j++)
                     if(rand[j] == rand[i])
                         flag = true;
             }while(flag);
             System.out.printf("%d : Cost %d │ %-18s │ %s\n",
-                    i+1, collection.get(rand[i]).cost, collection.get(rand[i]).name, collection.get(rand[i]).cardDescription());
+                    i+1, collection.get(rand[i]).getCost(), collection.get(rand[i]).getName(), collection.get(rand[i]).cardDescription());
             //System.out.printf("%d: %-7s│%s\n", i + 1, collection.get(rand[i]).name, collection.get(rand[i]).cardDescription());
 
         }
         System.out.println("Select the card to add.");
         int inp;
         do {
-            inp = scanner.nextInt();
+            inp = getScanner().nextInt();
             if (inp <= 0 || inp > rand.length) {
                 System.out.println("Invalid input! Please re-input!");
             } else break;
@@ -121,5 +123,21 @@ public class Game {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
     }
 }

@@ -6,7 +6,7 @@ public class DoublePlay extends Game {
         int temp;
         System.out.println("Set Player 1.\nPlease Select Player 1's Class.\n1. Warrior\n2. Thief");
         do{
-            temp = scanner.nextInt();
+            temp = getScanner().nextInt();
             if (temp == 1){
                 p1 = new Warrior();
                 break;
@@ -26,10 +26,9 @@ public class DoublePlay extends Game {
             AddRandomCardToPlayer(p1, 5, p1.grave);
             System.out.println();
         }
-        clear();
         System.out.println("Set Player 2.\nPlease Select Player 2's Class.\n1. Warrior\n2. Thief");
         do{
-            temp = scanner.nextInt();
+            temp = getScanner().nextInt();
             if (temp == 1){
                 p2 = new Warrior();
                 break;
@@ -49,7 +48,6 @@ public class DoublePlay extends Game {
             AddRandomCardToPlayer(p2, 5, p2.grave);
             System.out.println();
         }
-        clear();
     }
 
     void Play(){
@@ -110,11 +108,11 @@ public class DoublePlay extends Game {
                 System.out.println("Input the card number to use.\n0 : Turn end");
                 for (int i = 0; i < p1.hand.size(); i++) {
                     System.out.printf("%d : Cost %d │ %-18s │ %s\n",
-                            i + 1, p1.hand.get(i).cost, p1.hand.get(i).name, p1.hand.get(i).cardDescription());
+                            i + 1, p1.hand.get(i).getCost(), p1.hand.get(i).getName(), p1.hand.get(i).cardDescription());
                 }
                 int input;
                 do {
-                    input = scanner.nextInt();
+                    input = getScanner().nextInt();
 
                     if (input == 0) break;
                     else if (input < 0 || input > p1.hand.size()) {
@@ -196,11 +194,11 @@ public class DoublePlay extends Game {
                 System.out.println("Input the card number to use.\n0 : Turn end");
                 for (int i = 0; i < p2.hand.size(); i++) {
                     System.out.printf("%d : Cost %d │ %-18s │ %s\n",
-                            i + 1, p2.hand.get(i).cost, p2.hand.get(i).name, p2.hand.get(i).cardDescription());
+                            i + 1, p2.hand.get(i).getCost(), p2.hand.get(i).getName(), p2.hand.get(i).cardDescription());
                 }
                 int input;
                 do {
-                    input = scanner.nextInt();
+                    input = getScanner().nextInt();
 
                     if (input == 0) break;
                     else if (input < 0 || input > p2.hand.size()) {

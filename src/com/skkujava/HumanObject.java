@@ -2,7 +2,7 @@ package com.skkujava;
 
 public abstract class HumanObject {
 
-    String name;
+    private String name;
     private int maxHp;
     private int hp;
     private int armor;
@@ -10,7 +10,7 @@ public abstract class HumanObject {
     private boolean isPoisoned;
     private int poisonDamage;
 
-    String[] asciiArt = new String[13];
+    private String[] asciiArt = new String[13];
 
     public int getMaxHp() {
         return maxHp;
@@ -60,6 +60,14 @@ public abstract class HumanObject {
         this.poisonDamage = poisonDamage;
     }
 
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
+
+    public void setAsciiArt(int i, String str) { asciiArt[i] = str; }
+
+    public String getAsciiArt(int i) { return asciiArt[i]; }
+
     public void TakeDamage(int damage) {
         int temp = armor;
         armor -= damage;
@@ -70,7 +78,7 @@ public abstract class HumanObject {
         }
         if(damage < 0)damage = 0;
         System.out.println("=======================================");
-        System.out.println(name + " got " + damage + " damage.");
+        System.out.println(getName() + " got " + damage + " damage.");
         System.out.println("=======================================");
     }
 
@@ -87,7 +95,7 @@ public abstract class HumanObject {
         }
 
         System.out.println("=======================================");
-        System.out.println(name + " got " + realDmg + " poison damage.");
+        System.out.println(getName() + " got " + realDmg + " poison damage.");
         System.out.println("=======================================");
         hp -= realDmg;
         if(poisonDamage > 0)
@@ -95,6 +103,4 @@ public abstract class HumanObject {
         if(poisonDamage == 0)
             isPoisoned = false;
     }
-
-    public abstract String getAsciiArt(int i);
 }

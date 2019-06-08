@@ -3,28 +3,23 @@ package com.skkujava;
 public class Thief extends Player {
 
     public Thief() {
-        this.name = "Thief";
-        asciiArt[0]  = "          =:===:.           ";
-        asciiArt[1]  = "             .:+#+:         ";
-        asciiArt[2]  = "       :=++==:. .+==:.      ";
-        asciiArt[3]  = " :===+::.  .=++:::::=::.    ";
-        asciiArt[4]  = "             =#++:::.=.::   ";
-        asciiArt[5]  = "            +++*===#%=.::   ";
-        asciiArt[6]  = "          =++:**##*++===::  ";
-        asciiArt[7]  = "       =*+++*##++*###*:=:=. ";
-        asciiArt[8]  = "      :+*********#%##%+ :+# ";
-        asciiArt[9]  = ".     :+==+++***###*##*+    ";
-        asciiArt[10] = ":=.   :++++++*+*#******#+   ";
-        asciiArt[11] = "  =*  ++++++**+****++++**   ";
-        asciiArt[12] = "   .=*=++++********+++++**  ";
+        setName("Thief");
+        setAsciiArt(0, "          =:===:.           ");
+        setAsciiArt(1, "             .:+#+:         ");
+        setAsciiArt(2, "       :=++==:. .+==:.      ");
+        setAsciiArt(3, " :===+::.  .=++:::::=::.    ");
+        setAsciiArt(4, "             =#++:::.=.::   ");
+        setAsciiArt(5, "            +++*===#%=.::   ");
+        setAsciiArt(6, "          =++:**##*++===::  ");
+        setAsciiArt(7, "       =*+++*##++*###*:=:=. ");
+        setAsciiArt(8, "      :+*********#%##%+ :+# ");
+        setAsciiArt(9, ".     :+==+++***###*##*+    ");
+        setAsciiArt(10, ":=.   :++++++*+*#******#+   ");
+        setAsciiArt(11, "  =*  ++++++**+****++++**   ");
+        setAsciiArt(12, "   .=*=++++********+++++**  ");
         setMaxHp(70);
         setHp(getMaxHp());
         setDrawCount(7);
         // 카드 풀 처리
-    }
-
-    @Override
-    public String getAsciiArt(int i) {
-        return asciiArt[i];
     }
 }

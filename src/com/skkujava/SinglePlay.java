@@ -16,7 +16,7 @@ class SinglePlay extends Game {
         store = new ArrayList<>();
         do {
             System.out.println("Select your class.\n1. Warrior\n2. Thief");
-            temp = scanner.nextInt();
+            temp = getScanner().nextInt();
             if (temp == 1){
                 player = new Warrior();
                 break;
@@ -31,7 +31,7 @@ class SinglePlay extends Game {
         }while(true);
 
         boss = Boss.CreateBoss(player, floor);
-        random = new Random();
+        setRandom(new Random());
 
         for(int i=0; i<5; i++){
             store.add(new Strike());
@@ -55,7 +55,7 @@ class SinglePlay extends Game {
                 // | 공백(5) 캐릭터(38) 공백(14) 캐릭터(38) 공백(5) |
                 System.out.println("┌────────────────────────────────────────────────────────────────────────────────────────────────────┐");
                 System.out.printf("%c%51s%2d%48c\n", '│', "Floor", floor + 1, '│');
-                System.out.printf("%c%24s%-8s%37s%-8s%24c\n", '│', "", player.name, "", boss.name, '│');
+                System.out.printf("%c%24s%-8s%37s%-8s%24c\n", '│', "", player.getName(), "", boss.getName(), '│');
                 System.out.printf("%c%24s%-5s%-7s%33s%-5s%-7s%20c\n",
                         '│', "", "HP : ", player.getHp() + "/" + player.getMaxHp(), "", "HP : ", boss.getHp() + "/" + boss.getMaxHp(), '│');
 
@@ -101,11 +101,11 @@ class SinglePlay extends Game {
                 System.out.println("Input the card number to use.\n0 : Turn end");
                 for(int i=0; i<player.hand.size(); i++){
                     System.out.printf("%d : Cost %d │ %-18s │ %s\n",
-                            i+1, player.hand.get(i).cost, player.hand.get(i).name, player.hand.get(i).cardDescription());
+                            i+1, player.hand.get(i).getCost(), player.hand.get(i).getName(), player.hand.get(i).cardDescription());
                 }
                 int input;
                 do {
-                    input = scanner.nextInt();
+                    input = getScanner().nextInt();
 
                     if(input == 0)break;
                     else if (input < 0 || input > player.hand.size()){
@@ -125,9 +125,9 @@ class SinglePlay extends Game {
         } while(true);
 
         System.out.print("Please input your nickname: ");
-        scanner.nextLine();
-        String nickname = scanner.nextLine();
-        Ranking.uploadRanking(nickname, floor + 1, player.name);
+        getScanner().nextLine();
+        String nickname = getScanner().nextLine();
+        Ranking.uploadRanking(nickname, floor + 1, player.getName());
         Ranking.loadRanking();
         clear();
         System.out.println("Ranking updated.");
@@ -187,8 +187,8 @@ class SinglePlay extends Game {
         boolean flag = true;
         System.out.println("Congratulation! You cleared floor " + (floor + 1) + "!");
         System.out.println("1: Add one random card to your deck.\n2: Remove one card from your deck.\n" +
-                "3: Heal perfectly. (You will heal 1/3 of your HP unless you select this one.)\n4: Reinforce one card of your deck.");
-        String userInput = scanner.next();
+                "3: Heal perfectly and increase max HP by 5. (You will heal 1/3 of your HP unless you select this one.)\n4: Reinforce one card of your deck.");
+        String userInput = getScanner().next();
         do {
             if (userInput.trim().equals("1")) {                 //카드 덱에 추가
                 AddRandomCardToPlayer(player, 3, store);
@@ -199,11 +199,11 @@ class SinglePlay extends Game {
                     System.out.println("Select the card to remove.");
                     for (int i = 0; i < store.size(); i++) {
                         card = store.get(i);
-                        System.out.printf("%d: %-7s│%s\n", i + 1, card.name, card.cardDescription());
+                        System.out.printf("%d: %-7s│%s\n", i + 1, card.getName(), card.cardDescription());
                     }
                     int inp;
                     do {
-                        inp = scanner.nextInt();
+                        inp = getScanner().nextInt();
                         if (inp <= 0 || inp > store.size()) {
                             System.out.println("Invalid input! Please re-input!");
                         } else break;
@@ -212,10 +212,10 @@ class SinglePlay extends Game {
                     card = store.get(--inp);
 
                     System.out.println("Are you sure remove this card? (Y/N)");
-                    System.out.printf("%-7s│%s\n", card.name, card.cardDescription());
+                    System.out.printf("%-7s│%s\n", card.getName(), card.cardDescription());
 
                     do{
-                        userInput = scanner.next();
+                        userInput = getScanner().next();
                         if(userInput.equals("Y") || userInput.equals("y")){
                             store.remove(inp);
                             flag = false;
@@ -230,7 +230,8 @@ class SinglePlay extends Game {
                 }while(flag);
 
                 break;
-            } else if (userInput.trim().equals("3")) {                  //체력 회복
+            } else if (userInput.trim().equals("3")) {                  //체력 회복 + 최대 체력 5증가
+                player.setMaxHp(player.getMaxHp() + 5);
                 player.setHp(player.getMaxHp());
                 break;
             } else if (userInput.trim().equals("4")) {                  //카드 강화
@@ -238,7 +239,7 @@ class SinglePlay extends Game {
                 ArrayList<Card> temp = new ArrayList<>();
                 for(int i=0; i<store.size(); ++i){                      //except reinforced cards
                     card = store.get(i);
-                    if(card.reinforced){
+                    if(card.isReinforced()){
                         store.remove(i);
                         temp.add(card);
                         --i;
@@ -249,11 +250,11 @@ class SinglePlay extends Game {
 
                     for (int i = 0; i < store.size(); ++i) {
                         card = store.get(i);
-                        System.out.printf("%d: %-7s│%s\n", i + 1, card.name, card.cardDescription());
+                        System.out.printf("%d: %-7s│%s\n", i + 1, card.getName(), card.cardDescription());
                     }
                     int inp;
                     do {
-                        inp = scanner.nextInt();
+                        inp = getScanner().nextInt();
                         if (inp <= 0 || inp > store.size()) {
                             System.out.println("Invalid input! Please re-input!");
                         } else break;
@@ -269,10 +270,10 @@ class SinglePlay extends Game {
                     }
                     clone.reinforce();
                     System.out.println("Are you sure reinforce this card? (Y/N)");
-                    System.out.printf("%-7s│%s\n%-15s\n%-7s│%s\n", card.name, card.cardDescription(), "↓", clone.name, clone.cardDescription());
+                    System.out.printf("%-7s│%s\n%-15s\n%-7s│%s\n", card.getName(), card.cardDescription(), "↓", clone.getName(), clone.cardDescription());
 
                     do{
-                        userInput = scanner.next().trim();
+                        userInput = getScanner().next().trim();
                         if(userInput.equals("Y") || userInput.equals("y")){
                             card.reinforce();
                             flag = false;
@@ -290,7 +291,7 @@ class SinglePlay extends Game {
                 System.out.println("Invalid input! Please re-input!");
             }
             if(!flag)break;
-            userInput = scanner.next();
+            userInput = getScanner().next();
         }while(true);
 
         player.setHp((player.getMaxHp()/3 + player.getHp()) > player.getMaxHp() ? player.getMaxHp() : (player.getMaxHp()/3 + player.getHp()));
