@@ -16,9 +16,7 @@ public class HumanObject {
         return maxHp;
     }
 
-    public void setMaxHp(int maxHp) {
-        this.maxHp = maxHp;
-    }
+    public void setMaxHp(int maxHp) { this.maxHp = maxHp; }
 
     public int getHp() {
         return hp;

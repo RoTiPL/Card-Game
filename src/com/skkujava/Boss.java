@@ -203,7 +203,7 @@ class Slime extends Boss {
         setAsciiArt(12, "      ..::::::..    .=:====++===:.   ");
         this.setPlayer(player);
         this.setFloor(floor);
-        setMaxHp(80);
+        setMaxHp(80 + 5 * floor);
         setHp(getMaxHp());
         setArmor(0);
         setPoisoned(false);
