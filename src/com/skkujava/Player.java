@@ -73,6 +73,7 @@ public class Player extends HumanObject {
         this.superpower = superpower;
     }
 
+    @Override
     public void setArmor(int armor){
         if(armor != 0 && armor > getArmor()){
             super.setArmor(armor + dexterity);
@@ -81,6 +82,7 @@ public class Player extends HumanObject {
             super.setArmor(armor);
         }
     }
+
     public void completeFloor() {
         // Thief: none
         // Warrior: hp +7
