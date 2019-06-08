@@ -1,6 +1,6 @@
 package com.skkujava;
 
-public abstract class HumanObject {
+public class HumanObject {
 
     private String name;
     private int maxHp;
