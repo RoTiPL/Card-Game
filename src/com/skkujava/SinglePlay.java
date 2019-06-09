@@ -51,8 +51,6 @@ class SinglePlay extends Game {
         do {
             DrawCard(player);
             do {
-                // 가로 102(100)
-                // | 공백(5) 캐릭터(38) 공백(14) 캐릭터(38) 공백(5) |
                 System.out.println("┌────────────────────────────────────────────────────────────────────────────────────────────────────┐");
                 System.out.printf("%c%51s%2d%48c\n", '│', "Floor", floor + 1, '│');
                 System.out.printf("%c%24s%-8s%37s%-8s%24c\n", '│', "", player.getName(), "", boss.getName(), '│');
@@ -140,7 +138,6 @@ class SinglePlay extends Game {
         boss.setArmor(0);
         int res = super.TurnEnd(player, boss);
         if(res == 1) {
-            // Game Clear 시키기
             boss = Boss.CreateBoss(player, floor);
             player.completeFloor();
             GetReward();
@@ -190,10 +187,10 @@ class SinglePlay extends Game {
                 "3: Heal perfectly and increase max HP by 5. (You will heal 1/3 of your HP unless you select this one.)\n4: Reinforce one card of your deck.");
         String userInput = getScanner().next();
         do {
-            if (userInput.trim().equals("1")) {                 //카드 덱에 추가
+            if (userInput.trim().equals("1")) {
                 AddRandomCardToPlayer(player, 3, store);
                 break;
-            } else if (userInput.trim().equals("2")) {              //카드 버리기
+            } else if (userInput.trim().equals("2")) {
                 Card card;
                 do {
                     System.out.println("Select the card to remove.");
@@ -230,14 +227,14 @@ class SinglePlay extends Game {
                 }while(flag);
 
                 break;
-            } else if (userInput.trim().equals("3")) {                  //체력 회복 + 최대 체력 5증가
+            } else if (userInput.trim().equals("3")) {
                 player.setMaxHp(player.getMaxHp() + 5);
                 player.setHp(player.getMaxHp());
                 break;
-            } else if (userInput.trim().equals("4")) {                  //카드 강화
+            } else if (userInput.trim().equals("4")) {
                 Card card;
                 ArrayList<Card> temp = new ArrayList<>();
-                for(int i=0; i<store.size(); ++i){                      //except reinforced cards
+                for(int i=0; i<store.size(); ++i){
                     card = store.get(i);
                     if(card.isReinforced()){
                         store.remove(i);

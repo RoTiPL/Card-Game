@@ -93,7 +93,6 @@ public class Game {
             }while(flag);
             System.out.printf("%d : Cost %d │ %-18s │ %s\n",
                     i+1, collection.get(rand[i]).getCost(), collection.get(rand[i]).getName(), collection.get(rand[i]).cardDescription());
-            //System.out.printf("%d: %-7s│%s\n", i + 1, collection.get(rand[i]).name, collection.get(rand[i]).cardDescription());
 
         }
         System.out.println("Select the card to add.");

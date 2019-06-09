@@ -85,6 +85,6 @@ public class Player extends HumanObject {
 
     public void completeFloor() {
         // Thief: none
-        // Warrior: hp +7
+        // Warrior: hp + 7
     }
 }

@@ -80,7 +80,6 @@ public class HumanObject {
         System.out.println("=======================================");
     }
 
-    // 각 턴이 끝날 때 isPoisoned 이면 이 함수 실행
     public void TakePoisonDamage() {
         int realDmg;
         if(armor >= poisonDamage) {

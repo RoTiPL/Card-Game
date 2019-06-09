@@ -6,14 +6,14 @@ abstract public class Card implements Cloneable{
     private Random random;
     private Scanner scanner;
 
-    private String name; // 카드의 이름
-    private int cost; // 카드를 사용하기 위한 비용
-    private String card_type; // 카드의 타입 설정
-    private boolean reinforced = false; // 카드가 강화되었는지 확인
-    private boolean be_exhaust = false; // 소멸되는 카드인지 확인하기
-    abstract int action(Player player, HumanObject enemy); // 플레이어와 적 간의 상호작용을 나타내는 메소드
-    abstract void reinforce(); // 카드를 강화시키기 위한 메소드
-    abstract String cardDescription(); // 카드의 설명
+    private String name;
+    private int cost;
+    private String card_type;
+    private boolean reinforced = false;
+    private boolean be_exhaust = false;
+    abstract int action(Player player, HumanObject enemy);
+    abstract void reinforce();
+    abstract String cardDescription();
     static void PrintHand(Player player){
         for(int i=0; i<player.hand.size(); i++){
             System.out.printf("%d : Cost %d │ %-18s │ %s\n",
@@ -81,8 +81,7 @@ abstract public class Card implements Cloneable{
         this.be_exhaust = be_exhaust;
     }
 }
-// https://slay-the-spire.fandom.com/wiki/Ironclad_Cards 참조
-// 31 Cards.
+
 class Defend extends Card {
     private int block = 5;
 
@@ -395,43 +394,6 @@ class Flex extends Card {
         return "Gain " + strength + " Strength. ";
     }
 }
-
-
-/*
-class Headbutt extends Card {
-    int damage = 9;
-
-    Headbutt() {
-        this.name = "Headbutt";
-        this.cost = 1;
-        this.card_type = "Attack";
-    }
-
-    void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
-        // 보류
-    }
-
-    void reinforce() {
-        damage = 12;
-        reinforced = true;
-    }
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "Deal " + damage + " damage. " + "Place a card from your discard pile on top of your draw pile.";
-    }
-}*/
 
 class Heavy_Blade extends Card {
     int damage = 14;
@@ -978,41 +940,6 @@ class Inflame extends Card {
         return "Gain " + strength + " Strength.";
     }
 }
-/*
-class Metallicize extends Card {
-    int block = 3;
-
-    Metallicize() {
-        this.name = "Metallicize";
-        this.cost = 1;
-        this.card_type = "Power";
-    }
-
-    void action(Player player, HumanObject enemy){
-        // 보류
-    }
-
-    void reinforce() {
-        block = 4;
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "At the end of your turn, gain " + block + " Block.";
-    }
-}*/
 
 class Rampage extends Card {
     int damage = 8;
@@ -1086,39 +1013,6 @@ class Seeing_Red extends Card {
         return "Gain 2 energy. " + "Exhaust.";
     }
 }
-/*
-class Barricade extends Card {
-    Barricade() {
-        this.name = "Barricade";
-        this.cost = 3;
-        this.card_type = "Power";
-    }
-
-    void action(Player player, HumanObject enemy){
-        //보류
-    }
-
-    void reinforce() {
-        this.cost = 2;
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "Block no longer expires at the start of your turn.";
-    }
-}*/
 
 class Bludgeon extends Card {
     int damage = 32;
@@ -1154,77 +1048,6 @@ class Bludgeon extends Card {
         return "Deal " + damage + " damage.";
     }
 }
-/*
-class Demon_Form extends Card {
-    int add_strength = 2;
-    Demon_Form() {
-        this.name = "Demon Form";
-        this.cost = 3;
-        this.card_type = "Power";
-    }
-
-    void action(Player player, HumanObject enemy){
-        //보류
-    }
-
-    void reinforce() {
-        add_strength = 3;
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "At the start of each turn, gain " + add_strength + " Strength.";
-    }
-}*/
-/*
-class Double_Tap extends Card {
-    Double_Tap() {
-        this.name = "Double Tap";
-        this.cost = 1;
-        this.card_type = "Skill";
-    }
-
-    void action(Player player, HumanObject enemy){
-        // 보류
-    }
-
-    void reinforce() {
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        if (reinforced) {
-            return "This turn, your next 2 Attacks are played twice.";
-        }
-        else {
-            return "This turn, your next Attack is played twice.";
-        }
-    }
-}*/
 
 class Impervious extends Card {
     int block = 30;
@@ -1355,8 +1178,6 @@ class Offering extends Card {
     }
 }
 
-// https://slay-the-spire.fandom.com/wiki/Silent_Cards
-// 35 Cards.
 class Survivor extends Card {
     int block = 8;
 
@@ -1680,7 +1501,7 @@ class Dagger_Throw extends Card {
         } while (true);
 
         player.grave.add( player.hand.get(index) );
-        player.hand.remove( index ); // Card Discard
+        player.hand.remove( index );
         enemy.TakeDamage(damage + player.getStrength());
 
         for(int i = 0; i < 2; i++) {
@@ -1696,7 +1517,7 @@ class Dagger_Throw extends Card {
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
-        } // Card Draw
+        }
         return index;
     }
 
@@ -1932,7 +1753,7 @@ class Prepared extends Card {
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
-        } // Card Draw
+        }
 
         for(int i=0; i<draw; i++){
             System.out.println("Input a index number of card which will discard.");
@@ -1951,7 +1772,7 @@ class Prepared extends Card {
             } while (true);
 
             player.grave.add( player.hand.get(index) );
-            player.hand.remove( index ); // Card Discard
+            player.hand.remove( index );
         }
 
         return 0;
@@ -2029,81 +1850,6 @@ class Quick_Slash extends Card {
         return "Deal " + damage + " damage. " + "Draw 1 card.";
     }
 }
-/*
-class Sneaky_Strike extends Card {
-    int damage = 10;
-
-    Sneaky_Strike() {
-        this.name = "Sneaky Strike";
-        this.cost = 2;
-        this.card_type = "Attack";
-    }
-
-    void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
-        // 보류
-    }
-
-    void reinforce() {
-        damage = 14;
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "Deal " + damage + " damage. " + "If you have discarded a card this turn, gain 2 Energy.";
-    }
-}*/
-/*
-class Accuracy extends Card {
-    int add_damage = 3;
-
-    Accuracy() {
-        this.name = "Accuracy";
-        this.cost = 1;
-        this.card_type = "Power";
-    }
-
-    void action(Player player, HumanObject enemy){
-        for(int i=0; i<player.deck.size(); i++){
-            if (player.deck.get(i).name == "Shiv"){
-
-            }
-        }
-    }
-
-    void reinforce() {
-        add_damage = 5;
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "Shivs deal " + add_damage + " additional damage.";
-    }
-}*/
 
 class Calculated_Gamble extends Card {
     Calculated_Gamble() {
@@ -2133,7 +1879,7 @@ class Calculated_Gamble extends Card {
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
-        } // Card Draw
+        }
         return numOfcards;
     }
 
@@ -2209,43 +1955,6 @@ class Catalyst extends Card {
         }
     }
 }
-/*
-class Choke extends Card {
-    int damage = 12;
-    int add_damage = 3;
-
-    Choke() {
-        this.name = "Choke";
-        this.cost = 2;
-        this.card_type = "Attack";
-    }
-
-    void action(Player player, HumanObject enemy){
-        enemy.TakeDamage(damage);
-        //
-    }
-
-    void reinforce() {
-        add_damage = 5;
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "Deal 12 damage. " + "Whenever you play a card this turn, the enemy loses " + add_damage + " HP.";
-    }
-}*/
 
 class Concentrate extends Card {
     int energy = 2;
@@ -2275,7 +1984,7 @@ class Concentrate extends Card {
                 } while (true);
 
                 player.grave.add(player.hand.get(index));
-                player.hand.remove(index); // Card Discard
+                player.hand.remove(index);
             }
         }
         else {
@@ -2436,74 +2145,6 @@ class Footwork extends Card {
         return "Gain " + dexterity + " Dexterity.";
     }
 }
-/*
-class Infinite_Blades extends Card {
-    Infinite_Blades() {
-        this.name = "Infinite Blades";
-        this.cost = 1;
-        this.card_type = "Power";
-    }
-
-    void action(Player player, HumanObject enemy){
-        //
-    }
-
-    void reinforce() {
-        this.reinforced = true;
-        this.cost = 0;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "At the start of your turn, add a Shiv into your hand";
-    }
-}*/
-/*
-class Noxious_Fumes extends Card {
-    int poison = 2;
-
-    Noxious_Fumes() {
-        this.name = "Noxious Fumes";
-        this.cost = 1;
-        this.card_type = "Power";
-    }
-
-    void action(Player player, HumanObject enemy){
-//
-    }
-
-    void reinforce() {
-        poison = 3;
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "At the start of your turn, apply " + poison + " Poison to enemy";
-    }
-}*/
 
 class Skewer extends Card {
     int damage = 7;
@@ -2571,7 +2212,7 @@ class Adrenaline extends Card {
             Card card = player.deck.get(0);
             player.deck.remove(0);
             player.hand.add(card);
-        } // Card Draw
+        }
         return 0;
     }
 
@@ -2596,44 +2237,6 @@ class Adrenaline extends Card {
         return "Gain " + energy + " Energy " + "Draw 2 cards. " + "Exhaust.";
     }
 }
-/*
-class After_Image extends Card {
-    After_Image() {
-        this.name = "After Image";
-        this.cost = 1;
-        this.card_type = "Power";
-    }
-
-    void action(Player player, HumanObject enemy){
-
-    }
-
-    void reinforce() {
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        if (reinforced) {
-            return "Whenever you play a card, gain 1 Block. " + "Innate.";
-        }
-        else {
-            return "Whenever you play a card, gain 1 Block.";
-        }
-
-    }
-}*/
 
 class Bullet_Time extends Card {
     Bullet_Time() {
@@ -2668,46 +2271,6 @@ class Bullet_Time extends Card {
         return "You can play 5 cards without consuming energy at this turn";
     }
 }
-/*
-class Burst extends Card {
-    int skill = 1;
-
-    Burst() {
-        this.name = "Burst";
-        this.cost = 1;
-        this.card_type = "Skill";
-    }
-
-    void action(Player player, HumanObject enemy){
-//
-    }
-
-    void reinforce() {
-        skill = 2;
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        if (reinforced) {
-            return "This turn your next 1 Skill is played twice.";
-        }
-        else {
-            return "This turn your next 2 Skills are played twice.";
-        }
-    }
-}*/
 
 class Doppelganger extends Card {
     Doppelganger() {
@@ -2755,72 +2318,6 @@ class Doppelganger extends Card {
         }
     }
 }
-/*
-class Phantasmal_Killer extends Card {
-    Phantasmal_Killer() {
-        this.name = "Phantasmal Killer";
-        this.cost = 2;
-        this.card_type = "Skill";
-    }
-
-    void action(Player player, HumanObject enemy){
-
-    }
-
-    void reinforce() {
-        this.cost = 1;
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "Next turn, your Attacks deal double damage.";
-    }
-}*/
-/*
-class Tools_of_the_Trade extends Card {
-    Tools_of_the_Trade() {
-        this.name = "Tools of the Trade";
-        this.cost = 1;
-        this.card_type = "Power";
-    }
-
-    void action(Player player, HumanObject enemy){
-
-    }
-
-    void reinforce() {
-        this.cost = 0;
-        reinforced = true;
-    }
-
-
-    public Object clone(){
-        Card object;
-        try{
-            object = (Card)super.clone();
-        }
-        catch (CloneNotSupportedException e){
-            throw new InternalError();
-        }
-        return object;
-    }
-
-    String cardDescription() {
-        return "At the start of your turn, draw 1 card and discard 1 card.";
-    }
-}*/
 
 class Shiv extends Card {
     int damage = 4;

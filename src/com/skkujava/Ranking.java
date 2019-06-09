@@ -30,7 +30,7 @@ public class Ranking {
             System.out.println("There is no ranking information. Please play the game first!");
             return;
         }
-        // 가로 49(51)
+
         System.out.printf("%19s%s\n", "", "┌─────────────────────────────────────────────────┐");
         System.out.printf("%19s%c%21s%7s%21s%c\n", "", '│', "", "RANKING", "", '│');
         System.out.printf("%19s%c%3s%5s%4s%5s%7s%8s%17s%c\n", "", '│', "", "floor", "", "class", "", "nickname", "", '│');
