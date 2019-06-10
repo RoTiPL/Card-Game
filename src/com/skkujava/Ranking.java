@@ -10,6 +10,10 @@ public class Ranking {
 
     public static void loadRanking() {
         try {
+            File f = new File("rank.txt");
+            if(!f.exists()) {
+                f.createNewFile();
+            }
             rankinfo.clear();
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             while(true) {
